@@ -7,10 +7,10 @@
      }" class="row g-0">
       <ng-container *ngIf="licznik !== 5; else siemaTemplate">
         <ng-container *ngIf="licznik % 2 === 0; else majorTemplate">
-          <div class="col-sm konon frame">
+          <div class="col-lg konon frame">
             <img [src]="krzycho">
           </div>
-          <div class="col-sm major frame">
+          <div class="col-lg major frame">
             <img [src]="major">
           </div>
         </ng-container>
@@ -20,16 +20,16 @@
 </div>
 
 <ng-template #majorTemplate>
-  <div class="col-sm konon frame">
+  <div class="col-lg konon frame">
     <img [src]="major">
   </div>
-  <div class="col-sm major frame">
+  <div class="col-lg major frame">
     <img [src]="krzycho">
   </div>
 </ng-template>
 
 <ng-template #siemaTemplate>
-  <div class="col-sm wyskakuje">
+  <div class="col-lg wyskakuje">
     <img [src]="siema">
   </div>
 </ng-template>

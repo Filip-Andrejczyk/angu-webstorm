@@ -6,6 +6,8 @@ import { ButtonLicznikComponent } from './button-licznik/button-licznik.componen
 import { WyswietlanieLicznikaComponent } from './wyswietlanie-licznika/wyswietlanie-licznika.component';
 import { ObrazkiComponent } from './obrazki/obrazki.component';
 import { LetDirective } from './let.directive';
+import { StronakononaComponent } from './stronakonona/stronakonona.component';
+import { StronamajoraComponent } from './stronamajora/stronamajora.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import { LetDirective } from './let.directive';
     ButtonLicznikComponent,
     WyswietlanieLicznikaComponent,
     ObrazkiComponent,
-    LetDirective
+    LetDirective,
+    StronakononaComponent,
+    StronamajoraComponent
   ],
   imports: [
     BrowserModule
