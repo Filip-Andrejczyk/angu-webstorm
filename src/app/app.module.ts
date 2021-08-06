@@ -8,6 +8,7 @@ import { ObrazkiComponent } from './obrazki/obrazki.component';
 import { LetDirective } from './let.directive';
 import { StronakononaComponent } from './stronakonona/stronakonona.component';
 import { StronamajoraComponent } from './stronamajora/stronamajora.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,11 @@ import { StronamajoraComponent } from './stronamajora/stronamajora.component';
     StronamajoraComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot([
+      {path: 'krzysztof', component: StronakononaComponent},
+      {path: 'fufuwojtas', component: StronamajoraComponent},
+    ]),
   ],
   providers: [],
   bootstrap: [AppComponent]
