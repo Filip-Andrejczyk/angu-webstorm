@@ -1,1 +1,5 @@
 @import "~bootstrap/dist/css/bootstrap.css";
+$background-color: red;
+body{
+  background-color: $background-color;
+}

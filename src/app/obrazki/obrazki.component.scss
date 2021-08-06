@@ -32,7 +32,10 @@ img{
   display: flex;
   justify-content: center;
   margin-top: 10px;
-  width: auto;
-
+  width: 850px;
+  height: 600px;
+}
+div.frame:nth-child(1){
+  border-right: none;
 }
 
