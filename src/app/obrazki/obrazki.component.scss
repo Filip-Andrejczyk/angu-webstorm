@@ -4,13 +4,14 @@ $row-color:blue;
 $col-color: green;
 
 .obrazki{
-  border: 4px solid $col-color;
+  //border: 4px solid $col-color;
   display: flex;
   justify-content: center;
   margin-top: 10px;
   width: auto;
   position: relative;
   visibility: visible;
+
 }
 .konon{
   //flex:50%;
@@ -25,5 +26,13 @@ $col-color: green;
 img{
   width: 100%;
   height: 100%;
+}
+.wyskakuje{
+  border: 4px solid $col-color;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  width: auto;
+
 }
 

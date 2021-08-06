@@ -1,3 +1,16 @@
-<div class="srodek">
-  Zmieniono {{wyswietlany$ | async}} razy
+<div *let="let wyswietlany = wyswietlany;
+     of: {
+       wyswietlany: wyswietlany$ | async
+     }" class="row g-0">
+    <ng-container *ngIf="wyswietlany === 5; else iTemplate">
+        <div class="srodek trzcionka">
+          iiiii????
+        </div>
+    </ng-container>
 </div>
+
+<ng-template #iTemplate>
+  <div class="srodek trzcionka">
+  Zmieniono {{wyswietlany$ | async}} razy
+  </div>
+</ng-template>

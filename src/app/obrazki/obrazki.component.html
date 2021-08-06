@@ -4,24 +4,32 @@
     <div *let="let licznik = licznik;
      of: {
        licznik: licznik$ | async
-     }" class="row no-gutters">
-      <ng-container *ngIf="licznik % 2 === 0; else majorTemplate">
-      <div  class="col-sm konon" >
-        <img  [src]="krzycho">
-      </div>
-        <div  class="col-sm major">
-          <img  [src]="major">
-        </div>
+     }" class="row g-0">
+      <ng-container *ngIf="licznik !== 5; else siemaTemplate">
+        <ng-container *ngIf="licznik % 2 === 0; else majorTemplate">
+          <div class="col-sm konon">
+            <img [src]="krzycho">
+          </div>
+          <div class="col-sm major">
+            <img [src]="major">
+          </div>
+        </ng-container>
       </ng-container>
-
-      <ng-template #majorTemplate>
-        <div  class="col-sm konon">
-          <img  [src]="major">
-        </div>
-        <div  class="col-sm major">
-          <img  [src]="krzycho">
-        </div>
-      </ng-template>
     </div>
   </div>
 </div>
+
+<ng-template #majorTemplate>
+  <div class="col-sm konon">
+    <img [src]="major">
+  </div>
+  <div class="col-sm major">
+    <img [src]="krzycho">
+  </div>
+</ng-template>
+
+<ng-template #siemaTemplate>
+  <div class="col-sm wyskakuje">
+    <img [src]="siema">
+  </div>
+</ng-template>
