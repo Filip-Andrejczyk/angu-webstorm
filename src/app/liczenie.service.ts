@@ -6,9 +6,8 @@ import {BehaviorSubject, Subject} from "rxjs";
 })
 export class LiczenieService {
 
-  //counter: number = 0;
+
   public counter = new BehaviorSubject<number>(0);
-  //sharedMessage = this.counter.asObservable();
 
   constructor() { }
 

@@ -9,32 +9,22 @@ import {delay} from "rxjs/operators";
   styleUrls: ['./wyswietlanie-licznika.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WyswietlanieLicznikaComponent implements OnInit, OnDestroy {
+export class WyswietlanieLicznikaComponent implements OnInit {
 
   wyswietlany$: Observable<number>;
-  wyswietlany: number = 0;
 
-  private sub: Subscription = new Subscription();
+  //private sub: Subscription = new Subscription();
 
   constructor(private liczenieService: LiczenieService, private cdRef: ChangeDetectorRef) {
     this.wyswietlany$ = this.liczenieService.counter.asObservable();
   }
 
   ngOnInit(): void {
-    //this.wyswietlany$ = this.liczenieService.getNumber();
-    let dupa = {a: {b:10}};
-    console.log(JSON.stringify(dupa))
-    this.sub.add(this.wyswietlany$.pipe().subscribe((val)=>{
-      this.wyswietlany = val
-      dupa.a.b = 20;
-      dupa = {...dupa}
-      // this.cdRef.detectChanges();
-      // this.cdRef.markForCheck();
-    }))
   }
 
-  ngOnDestroy() {
+
+  /*ngOnDestroy() {
     this.sub.unsubscribe()
   }
-
+  */
 }

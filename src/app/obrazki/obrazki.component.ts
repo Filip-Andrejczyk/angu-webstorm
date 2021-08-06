@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Observable} from "rxjs";
+import {LiczenieService} from "../liczenie.service";
 
 @Component({
   selector: 'app-obrazki',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ObrazkiComponent implements OnInit {
 
-  constructor() { }
+  licznik$: Observable<number>;
+
+  constructor(private liczenieService: LiczenieService) {
+    this.licznik$ = this.liczenieService.counter.asObservable();
+  }
 
   ngOnInit(): void {
   }
