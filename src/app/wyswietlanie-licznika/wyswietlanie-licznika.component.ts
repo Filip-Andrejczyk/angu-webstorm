@@ -6,7 +6,7 @@ import {delay} from "rxjs/operators";
 @Component({
   selector: 'app-wyswietlanie-licznika',
   templateUrl: './wyswietlanie-licznika.component.html',
-  styleUrls: ['./wyswietlanie-licznika.component.css'],
+  styleUrls: ['./wyswietlanie-licznika.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WyswietlanieLicznikaComponent implements OnInit {

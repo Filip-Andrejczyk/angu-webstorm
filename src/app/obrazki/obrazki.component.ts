@@ -5,7 +5,7 @@ import {LiczenieService} from "../liczenie.service";
 @Component({
   selector: 'app-obrazki',
   templateUrl: './obrazki.component.html',
-  styleUrls: ['./obrazki.component.css']
+  styleUrls: ['./obrazki.component.scss']
 })
 export class ObrazkiComponent implements OnInit {
 
