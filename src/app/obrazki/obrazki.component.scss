@@ -5,27 +5,12 @@ $col-color: green;
 
 .obrazki{
   border: 4px solid $col-color;
-  //padding: 10px;
   display: flex;
   justify-content: center;
   margin-top: 10px;
   width: auto;
   position: relative;
   visibility: visible;
-
-  &--hide {
-    #majoro {
-      display: none;
-    }
-    #konono{
-      display: none;
-    }
-  }
-  &--hidesiema{
-    #theImg{
-      display: none;
-    }
-  }
 }
 .konon{
   //flex:50%;

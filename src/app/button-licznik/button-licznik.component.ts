@@ -21,6 +21,7 @@ export class ButtonLicznikComponent implements OnInit {
 
   buttonClicked(){
     this.liczenieService.incrementNumber();
+
   }
 
 }

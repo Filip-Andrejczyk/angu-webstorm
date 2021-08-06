@@ -11,11 +11,19 @@ export class ObrazkiComponent implements OnInit {
 
   licznik$: Observable<number>;
 
+  public url: string[] = [
+    './assets/pan-krzysztof.jpg',
+    './assets/pan-major.jpg'
+  ]
+
+  public krzycho = this.url[0];
+  public major = this.url[1];
+
   constructor(private liczenieService: LiczenieService) {
     this.licznik$ = this.liczenieService.counter.asObservable();
   }
 
   ngOnInit(): void {
-  }
 
+  }
 }
