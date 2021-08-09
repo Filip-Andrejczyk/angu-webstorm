@@ -9,8 +9,9 @@ import { LetDirective } from './let.directive';
 import { StronakononaComponent } from './stronakonona/stronakonona.component';
 import { StronamajoraComponent } from './stronamajora/stronamajora.component';
 import { StartComponent } from './start/start.component';
-import {AppRoutingModule} from "./app-routing.module";
+import { AppRoutingModule } from "./app-routing.module";
 import { KalkulatorComponent } from './kalkulator/kalkulator.component';
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -24,10 +25,11 @@ import { KalkulatorComponent } from './kalkulator/kalkulator.component';
     StartComponent,
     KalkulatorComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

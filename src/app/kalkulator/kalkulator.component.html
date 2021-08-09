@@ -1,1 +1,16 @@
-<p>kalkulator works!</p>
+<p style="font-size: 20px; font-weight: bold">Kalkulator Borzy Spaniałych Wiadomosci<p>
+<form >
+  <label>
+    Podaj ilość rozpuszczalnika w litrach:
+    <input style="width: 90px" type="number" placeholder="required">
+  </label>
+  <br>
+  <label style="margin-top: 10px">
+    Podaj rodzaj rozpuszczalnika:
+    <select>
+      <option *ngFor="let rodzaj of rodzaje" [ngValue]="rodzaj">{{rodzaj}}
+      </option>
+    </select>
+  </label>
+
+</form>
