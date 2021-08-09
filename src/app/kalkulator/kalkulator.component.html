@@ -1,16 +1,17 @@
 <p style="font-size: 20px; font-weight: bold">Kalkulator Borzy Spaniałych Wiadomosci<p>
-<form >
-  <label>
+<form [formGroup]="myForm">
+  <label for="ilosc">
     Podaj ilość rozpuszczalnika w litrach:
-    <input style="width: 90px" type="number" placeholder="required">
+    <input id="ilosc" style="width: 90px" type="number" placeholder="required" [formControlName]="'iloscLitrow'" >
   </label>
   <br>
-  <label style="margin-top: 10px">
+  <label for="rodzaj" style="margin-top: 10px">
     Podaj rodzaj rozpuszczalnika:
-    <select>
-      <option *ngFor="let rodzaj of rodzaje" [ngValue]="rodzaj">{{rodzaj}}
-      </option>
+    <select [formControlName]="'rodzajRozpuszczalnika'" id="rodzaj" >
+      <option *ngFor="let rodzaj of rodzaje" >{{rodzaj}}</option>
     </select>
   </label>
+  <br>
+  <button class="btn btn-primary" type="submit" style="margin-top: 14px">Policz oguem</button>
 
 </form>

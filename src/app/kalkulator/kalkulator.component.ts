@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from "@angular/forms";
+import {Component, OnInit} from "@angular/core";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-kalkulator',
@@ -7,8 +7,11 @@ import { FormGroup, FormBuilder } from "@angular/forms";
   styleUrls: ['./kalkulator.component.scss']
 })
 export class KalkulatorComponent implements OnInit {
-  myForm: FormGroup | undefined;
+
+  public myForm: FormGroup = this.fb.group({});
   rodzaje: string[] = ["Nitro", "Denaturat", "Dragon"];
+  //ilosc = this.formBu
+  //myForm = new FormBuilder();
 
   constructor(private fb: FormBuilder) { }
   // KalkulatorComponent = new FormGroup('');

@@ -11,7 +11,8 @@ import { StronamajoraComponent } from './stronamajora/stronamajora.component';
 import { StartComponent } from './start/start.component';
 import { AppRoutingModule } from "./app-routing.module";
 import { KalkulatorComponent } from './kalkulator/kalkulator.component';
-import { ReactiveFormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ReactiveFormsModule } from "@angular/forms";
     imports: [
         BrowserModule,
         AppRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        FormsModule
     ],
   providers: [],
   bootstrap: [AppComponent]
