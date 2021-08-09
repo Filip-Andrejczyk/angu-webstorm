@@ -59,6 +59,8 @@ export class KalkulatorComponent implements OnInit {
       })
     if (wy === 'ideolo'){
       this.showPic = true;
+    }else{
+      this.showPic = false;
     }
     this.nr++;
   }
