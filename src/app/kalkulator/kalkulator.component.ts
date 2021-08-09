@@ -8,7 +8,6 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 })
 export class KalkulatorComponent implements OnInit {
 
-
   public myForm: FormGroup = this.fb.group({});
   public denaturatHistory: {
     nrpor: number,
@@ -17,6 +16,8 @@ export class KalkulatorComponent implements OnInit {
     wynik: string
   }[]= [];
   rodzaje: string[] = ["Nitro", "Denaturat", "Dragon"];
+  public showPic: boolean = false;
+
 
   constructor(private fb: FormBuilder) { }
 
@@ -56,6 +57,9 @@ export class KalkulatorComponent implements OnInit {
         ilosc: qu,
         wynik: wy
       })
+    if (wy === 'ideolo'){
+      this.showPic = true;
+    }
     this.nr++;
   }
 }

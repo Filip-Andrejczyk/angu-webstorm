@@ -1,8 +1,8 @@
-<p style="font-size: 20px; font-weight: bold">Kalkulator Borzy Spaniałych Wiadomosci<p>
+<p class="fw-bold fs-4">Kalkulator Borzy Spaniałych Wiadomosci</p>
 <form [formGroup]="myForm" (ngSubmit)="submit()">
   <label for="ilosc">
     Podaj ilość rozpuszczalnika w litrach:
-    <input id="ilosc" style="width: 90px" type="number" placeholder="required" [formControlName]="'iloscLitrow'" >
+    <input id="ilosc" style="width: 90px" type="number" min="0" placeholder="required" [formControlName]="'iloscLitrow'">
   </label>
   <br>
   <label for="rodzaj" style="margin-top: 10px">
@@ -30,3 +30,7 @@
     </table>
   </div>
 </form>
+<div *ngIf="showPic">
+  <img src="./assets/nitro.jpg">
+</div>
+

@@ -12,6 +12,7 @@ import { StartComponent } from './start/start.component';
 import { AppRoutingModule } from "./app-routing.module";
 import { KalkulatorComponent } from './kalkulator/kalkulator.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
         BrowserModule,
         AppRoutingModule,
         ReactiveFormsModule,
-        FormsModule
+        FormsModule,
+        NgbModule
     ],
   providers: [],
   bootstrap: [AppComponent]
