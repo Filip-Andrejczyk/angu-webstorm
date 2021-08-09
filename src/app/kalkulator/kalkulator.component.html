@@ -1,5 +1,5 @@
 <p style="font-size: 20px; font-weight: bold">Kalkulator Borzy Spaniałych Wiadomosci<p>
-<form [formGroup]="myForm">
+<form [formGroup]="myForm" (ngSubmit)="submit()">
   <label for="ilosc">
     Podaj ilość rozpuszczalnika w litrach:
     <input id="ilosc" style="width: 90px" type="number" placeholder="required" [formControlName]="'iloscLitrow'" >
@@ -13,5 +13,18 @@
   </label>
   <br>
   <button class="btn btn-primary" type="submit" style="margin-top: 14px">Policz oguem</button>
-
+  <div>
+    <table style="width: 300px">
+      <tr>
+        <th>Ilość</th>
+        <th>Rodzaj</th>
+        <th>Wynik</th>
+      </tr>
+      <tr *ngFor="let i of denaturatHistory">
+        <th>{{i.ilosc}}</th>
+        <th>{{i.rodzaj}}</th>
+        <th>{{i.wynik}}</th>
+      </tr>
+    </table>
+  </div>
 </form>

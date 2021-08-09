@@ -8,13 +8,16 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 })
 export class KalkulatorComponent implements OnInit {
 
+
   public myForm: FormGroup = this.fb.group({});
+  public denaturatHistory: {
+    ilosc: number,
+    rodzaj: string,
+    wynik: string
+  }[]= [];
   rodzaje: string[] = ["Nitro", "Denaturat", "Dragon"];
-  //ilosc = this.formBu
-  //myForm = new FormBuilder();
 
   constructor(private fb: FormBuilder) { }
-  // KalkulatorComponent = new FormGroup('');
 
   ngOnInit(): void {
     this.initializeForm();
@@ -23,9 +26,32 @@ export class KalkulatorComponent implements OnInit {
   initializeForm(): void{
     this.myForm = this.fb.group({
       iloscLitrow: '',
-      rodzajRozpuszczalnika: ''
+      rodzajRozpuszczalnika: this.rodzaje[0]
     });
     this.myForm.valueChanges.subscribe(console.log);
   }
 
+  submit(){
+    //console.log("dziaa");
+    const qu = this.myForm.get('iloscLitrow')?.value;
+    const ki = this.myForm.get('rodzajRozpuszczalnika')?.value;
+    let wy = '';
+
+    if (ki === 'Nitro'){
+      wy = (qu >= 3) ? 'ideolo' : 'mao';
+    }
+    if (ki === 'Denaturat'){
+      wy = (qu >= 5) ? 'ideolo' : 'mao';
+    }
+    if (ki === 'Dragon'){
+      wy = (qu >= 4) ? 'ideolo' : 'mao';
+    }
+
+
+    this.denaturatHistory.push({
+        rodzaj: ki,
+        ilosc: qu,
+        wynik: wy
+      })
+  }
 }
