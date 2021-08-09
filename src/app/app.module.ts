@@ -10,6 +10,7 @@ import { StronakononaComponent } from './stronakonona/stronakonona.component';
 import { StronamajoraComponent } from './stronamajora/stronamajora.component';
 import { StartComponent } from './start/start.component';
 import {AppRoutingModule} from "./app-routing.module";
+import { KalkulatorComponent } from './kalkulator/kalkulator.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {AppRoutingModule} from "./app-routing.module";
     LetDirective,
     StronakononaComponent,
     StronamajoraComponent,
-    StartComponent
+    StartComponent,
+    KalkulatorComponent
   ],
   imports: [
     BrowserModule,
