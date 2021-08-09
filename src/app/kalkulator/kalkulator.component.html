@@ -16,11 +16,13 @@
   <div>
     <table style="width: 300px">
       <tr>
-        <th>Ilość</th>
+        <th>Nr</th>
+        <th>Ilość [L]</th>
         <th>Rodzaj</th>
         <th>Wynik</th>
       </tr>
       <tr *ngFor="let i of denaturatHistory">
+        <th>{{i.nrpor}}</th>
         <th>{{i.ilosc}}</th>
         <th>{{i.rodzaj}}</th>
         <th>{{i.wynik}}</th>

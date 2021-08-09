@@ -11,6 +11,7 @@ export class KalkulatorComponent implements OnInit {
 
   public myForm: FormGroup = this.fb.group({});
   public denaturatHistory: {
+    nrpor: number,
     ilosc: number,
     rodzaj: string,
     wynik: string
@@ -31,6 +32,8 @@ export class KalkulatorComponent implements OnInit {
     this.myForm.valueChanges.subscribe(console.log);
   }
 
+  public nr = 1;
+
   submit(){
     //console.log("dziaa");
     const qu = this.myForm.get('iloscLitrow')?.value;
@@ -47,11 +50,12 @@ export class KalkulatorComponent implements OnInit {
       wy = (qu >= 4) ? 'ideolo' : 'mao';
     }
 
-
     this.denaturatHistory.push({
+        nrpor: this.nr,
         rodzaj: ki,
         ilosc: qu,
         wynik: wy
       })
+    this.nr++;
   }
 }
