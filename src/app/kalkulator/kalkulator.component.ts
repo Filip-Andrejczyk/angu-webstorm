@@ -13,11 +13,11 @@ export class KalkulatorComponent implements OnInit {
     nrpor: number,
     ilosc: number,
     rodzaj: string,
-    wynik: string
+    wynik: number
   }[]= [];
   rodzaje: string[] = ["Nitro", "Denaturat", "Dragon"];
   public showPic: boolean = false;
-  public pokaFaka: boolean = false;
+  public licznikChwil: number = 0;
 
 
   constructor(private fb: FormBuilder) { }
@@ -43,19 +43,22 @@ export class KalkulatorComponent implements OnInit {
 
     if (ki === 'Nitro'){
       wy = (qu >= 3) ? 'ideolo' : 'mao';
+      this.licznikChwil = 5*qu;
     }
     if (ki === 'Denaturat'){
       wy = (qu >= 5) ? 'ideolo' : 'mao';
+      this.licznikChwil = 2*qu;
     }
     if (ki === 'Dragon'){
       wy = (qu >= 4) ? 'ideolo' : 'mao';
+      this.licznikChwil = 3.5*qu;
     }
 
     this.denaturatHistory.push({
         nrpor: this.nr,
         rodzaj: ki,
         ilosc: qu,
-        wynik: wy
+        wynik: this.licznikChwil
       })
     if (wy === 'ideolo'){
       this.showPic = true;
