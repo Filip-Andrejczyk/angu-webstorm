@@ -17,6 +17,7 @@ export class KalkulatorComponent implements OnInit {
   }[]= [];
   rodzaje: string[] = ["Nitro", "Denaturat", "Dragon"];
   public showPic: boolean = false;
+  public pokaFaka: boolean = false;
 
 
   constructor(private fb: FormBuilder) { }
@@ -36,7 +37,6 @@ export class KalkulatorComponent implements OnInit {
   public nr = 1;
 
   submit(){
-    //console.log("dziaa");
     const qu = this.myForm.get('iloscLitrow')?.value;
     const ki = this.myForm.get('rodzajRozpuszczalnika')?.value;
     let wy = '';

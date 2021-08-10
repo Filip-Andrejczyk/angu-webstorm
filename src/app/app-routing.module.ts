@@ -22,7 +22,6 @@ const routes: Routes = [
     path: 'niuchniuch',
     component: KalkulatorComponent
   },
-
 ]
 
 @NgModule({
