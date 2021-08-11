@@ -15,7 +15,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MenubarComponent } from './menubar/menubar.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +26,7 @@ import { MenubarComponent } from './menubar/menubar.component';
     StronamajoraComponent,
     StartComponent,
     KalkulatorComponent,
-    MenubarComponent
+    MenubarComponent,
   ],
     imports: [
         BrowserModule,
