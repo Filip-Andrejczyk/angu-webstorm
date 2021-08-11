@@ -15,6 +15,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MenubarComponent } from './menubar/menubar.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,7 @@ import { MenubarComponent } from './menubar/menubar.component';
         AppRoutingModule,
         ReactiveFormsModule,
         FormsModule,
-        NgbModule
+        NgbModule,
     ],
   providers: [],
   bootstrap: [AppComponent]
