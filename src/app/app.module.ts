@@ -13,7 +13,6 @@ import { AppRoutingModule } from "./app-routing.module";
 import { KalkulatorComponent } from './kalkulator/kalkulator.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MenubarComponent } from './menubar/menubar.component';
 
 
 @NgModule({
@@ -27,7 +26,6 @@ import { MenubarComponent } from './menubar/menubar.component';
     StronamajoraComponent,
     StartComponent,
     KalkulatorComponent,
-    MenubarComponent
   ],
     imports: [
         BrowserModule,
