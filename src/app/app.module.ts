@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MenubarComponent } from './menubar/menubar.component';
 import { HttpClientModule } from "@angular/common/http";
+import { InfoZApiComponent } from './info-z-api/info-z-api.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { HttpClientModule } from "@angular/common/http";
     StartComponent,
     KalkulatorComponent,
     MenubarComponent,
+    InfoZApiComponent,
   ],
     imports: [
         BrowserModule,
