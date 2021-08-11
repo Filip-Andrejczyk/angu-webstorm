@@ -1,1 +1,12 @@
-<p>info-z-api works!</p>
+<ng-container>
+    <div class="obrazekpieska mt-3 border border-success" *ngIf="scierzka != ''; else brakTemplate">
+      <img [src]="scierzka"/>
+      <button class="btn-success shadow-none" (click)="nextPieselek()">Kolejny Pieselek</button>
+    </div>
+</ng-container>
+
+<ng-template #brakTemplate>
+  <div>
+    <button class="btn-success shadow-none" (click)="nextPieselek()">Przerwa</button>
+  </div>
+</ng-template>
