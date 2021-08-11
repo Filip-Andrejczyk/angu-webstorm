@@ -11,9 +11,10 @@ import { StronamajoraComponent } from './stronamajora/stronamajora.component';
 import { StartComponent } from './start/start.component';
 import { AppRoutingModule } from "./app-routing.module";
 import { KalkulatorComponent } from './kalkulator/kalkulator.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MenubarComponent } from './menubar/menubar.component';
+import { HttpClientModule } from "@angular/common/http";
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { MenubarComponent } from './menubar/menubar.component';
         ReactiveFormsModule,
         FormsModule,
         NgbModule,
+        HttpClientModule
     ],
   providers: [],
   bootstrap: [AppComponent]
