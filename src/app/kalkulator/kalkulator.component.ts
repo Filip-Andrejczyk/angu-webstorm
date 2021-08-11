@@ -15,6 +15,7 @@ export class KalkulatorComponent implements OnInit {
     rodzaj: string,
     wynik: number
   }[]= [];
+
   rodzaje: string[] = ["Nitro", "Denaturat", "Dragon"];
   public showPic: boolean = false;
   public licznikChwil: number = 0;
