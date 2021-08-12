@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {GetApiService} from '../get-api.service';
+import {Observable, Subject} from "rxjs";
+import {map, shareReplay, switchMap} from "rxjs/operators";
 
 @Component({
   selector: 'app-info-z-api',
@@ -8,27 +10,31 @@ import {GetApiService} from '../get-api.service';
 })
 export class InfoZApiComponent implements OnInit {
 
-  scierzka = "";
-  //public picPath: String = "";
+  scierzka$: Observable<string> | undefined;
+  rasa$: Observable<any> | undefined;
 
+  clickAction: Subject<void> = new Subject<void>();
 
   constructor(private api: GetApiService) { }
 
   ngOnInit(): void {
-    //this.getPicPieska();
+  this.scierzka$ = this.clickAction.pipe(
+    switchMap(() => this.api.apiCall().pipe(map((dog) => dog.message))),
+    shareReplay(1)
+  )
+
+  this.rasa$ = this.scierzka$.pipe(
+    map((dog) => {
+      const rasa = dog.match(/(breeds\/)(.*)(?=\/)/);
+      console.log(rasa);
+      return rasa ? rasa[2] : null;
+    }
+  ));
   }
 
   nextPieselek(): void{
-    this.getPicPieska();
-  }
-
-  getPicPieska(): void{
-    this.api.apiCall()
-      .subscribe( data => {
-        this.scierzka = data.message;
-    });
+    this.clickAction.next();
   }
 }
 
-//ja chce wziac wartosc z jsona z message jako nowa sciezka
 

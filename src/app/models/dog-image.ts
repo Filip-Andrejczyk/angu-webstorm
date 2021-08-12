@@ -1,4 +1,4 @@
 export interface DogImage{
-  message: string,
-  status: string
+  message: string;
+  status: string;
 }
