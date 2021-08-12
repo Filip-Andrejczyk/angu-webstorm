@@ -1,7 +1,7 @@
 <ng-container>
-  <div class="srodkowa" *ngIf="(scierzka$ | async); else brakTemplate">
+  <div class="srodkowa" *ngIf="(doggoImgPath$ | async); else brakTemplate">
     <div class="obrazekpieska mt-3 border border-success">
-          <img [src]="(scierzka$ | async)"/>
+          <img [src]="(doggoImgPath$ | async)"/>
           <button class="przycisk btn-success shadow-none" (click)="nextPieselek()">Kolejny Piesełek</button>
           <div>
             to jest rasa {{rasa$ | async}}

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {GetApiService} from '../get-api.service';
 import {Observable, Subject} from "rxjs";
 import {map, shareReplay, switchMap} from "rxjs/operators";
+import {DogRasa} from "../models/rasy";
 
 @Component({
   selector: 'app-info-z-api',
@@ -10,26 +11,38 @@ import {map, shareReplay, switchMap} from "rxjs/operators";
 })
 export class InfoZApiComponent implements OnInit {
 
-  scierzka$: Observable<string> | undefined;
+  doggoImgPath$: Observable<string> | undefined;
   rasa$: Observable<any> | undefined;
+  allBreeds$: Observable<DogRasa[]> | undefined;
+
 
   clickAction: Subject<void> = new Subject<void>();
 
   constructor(private api: GetApiService) { }
 
   ngOnInit(): void {
-  this.scierzka$ = this.clickAction.pipe(
-    switchMap(() => this.api.apiCall().pipe(map((dog) => dog.message))),
+
+  this.doggoImgPath$ = this.clickAction.pipe(
+    switchMap(() => this.api.getRandomDoggo().pipe(map((dog) => dog.message))),
     shareReplay(1)
   )
 
-  this.rasa$ = this.scierzka$.pipe(
+  this.allBreeds$ = this.api.allBreeds().pipe(map((rasy) => rasy.message),
+    map(breeds => {
+      const notFlattenBreeds = Object.entries(breeds).map(([breed, subBreeds])=>{
+        return subBreeds.length === 0 ? breed : subBreeds.map(subBreed => `${breed}-${subBreed}`)
+      });
+      const allBreeds = [].concat(...notFlattenBreeds)
+      //const allBreeds = notFlattenBreeds.flat();
+    }));
+
+  this.rasa$ = this.doggoImgPath$.pipe(
     map((dog) => {
       const rasa = dog.match(/(breeds\/)(.*)(?=\/)/);
-      console.log(rasa);
       return rasa ? rasa[2] : null;
     }
   ));
+
   }
 
   nextPieselek(): void{
