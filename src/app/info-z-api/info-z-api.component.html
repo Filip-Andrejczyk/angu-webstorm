@@ -1,14 +1,14 @@
 <ng-container>
-  <div class="srodkowa">
-    <div class="obrazekpieska mt-3 border border-success" *ngIf="scierzka != ''; else brakTemplate">
-        <img [src]="scierzka"/>
-        <button class="przycisk btn-success shadow-none" (click)="nextPieselek()">Kolejny Pieselek</button>
+  <div class="srodkowa" *ngIf="scierzka != ''; else brakTemplate">
+    <div class="obrazekpieska mt-3 border border-success">
+          <img [src]="scierzka"/>
+          <button class="przycisk btn-success shadow-none" (click)="nextPieselek()">Kolejny Piesełek</button>
     </div>
   </div>
 </ng-container>
 
 <ng-template #brakTemplate>
-  <div>
-    <button class="przycisk btn-success shadow-none" (click)="nextPieselek()">Przerwa</button>
+  <div class="margino">
+    <button class="przycisk btn-success shadow-none btn-lg" (click)="nextPieselek()">Przerwa</button>
   </div>
 </ng-template>
