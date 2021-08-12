@@ -9,12 +9,12 @@ import {DogImage} from "./models/dog-image";
 export class GetApiService {
 
   private urlpisekowy = 'https://dog.ceo/api/breeds/image/random';
+  //private listaRas = 'https://dog.ceo/api/breeds/list/all';
 
   constructor( private http:HttpClient ) { }
 
   apiCall(){
     return this.http.get<DogImage>(this.urlpisekowy);
   }
-
 
 }
