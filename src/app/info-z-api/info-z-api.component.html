@@ -4,7 +4,11 @@
           <img [src]="(doggoImgPath$ | async)"/>
           <button class="przycisk btn-success shadow-none" (click)="nextPieselek()">Kolejny Piesełek</button>
           <div>
-            to jest rasa {{rasa$ | async}}
+            to jest rasa {{rasa$ | async}}<br>
+<!--            to jest pierwszy random: {{threeRando}}<br>-->
+<!--            to jest drugi random: {{threeRandomBreeds$[2] | async}}<br>-->
+<!--            to jest trzeci random: {{threeRandomBreeds$[1] | async}}-->
+            a to sa trzy rasy :) {{threeRandomBreeds$ | async}}
           </div>
     </div>
   </div>
