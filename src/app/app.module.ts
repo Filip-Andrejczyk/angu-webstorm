@@ -16,6 +16,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MenubarComponent } from './menubar/menubar.component';
 import { HttpClientModule } from "@angular/common/http";
 import { InfoZApiComponent } from './info-z-api/info-z-api.component';
+import { QuizComponent } from './quiz/quiz.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { InfoZApiComponent } from './info-z-api/info-z-api.component';
     KalkulatorComponent,
     MenubarComponent,
     InfoZApiComponent,
+    QuizComponent,
   ],
     imports: [
         BrowserModule,

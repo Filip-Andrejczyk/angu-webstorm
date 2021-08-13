@@ -1,15 +1,16 @@
 <ng-container>
-  <div class="srodkowa" *ngIf="(doggoImgPath$ | async); else brakTemplate">
-    <div class="obrazekpieska mt-3 border border-success">
-          <img [src]="(doggoImgPath$ | async)"/>
-          <button class="przycisk btn-success shadow-none" (click)="nextPieselek()">Kolejny Piesełek</button>
-          <div>
-            to jest rasa {{rasa$ | async}}<br>
-<!--            to jest pierwszy random: {{threeRando}}<br>-->
-<!--            to jest drugi random: {{threeRandomBreeds$[2] | async}}<br>-->
-<!--            to jest trzeci random: {{threeRandomBreeds$[1] | async}}-->
-            a to sa trzy rasy :) {{threeRandomBreeds$ | async}}
-          </div>
+  <div class="row srodkowa" *ngIf="(doggoImgPath$ | async); else brakTemplate">
+    <div class="col-4"></div>
+    <div class="col-4 d-flex justify-content-center">
+      <div class="obrazekpieska mt-3 border border-success">
+      <img [src]="(doggoImgPath$ | async)"/>
+      <button class="przycisk btn-success shadow-none" (click)="nextPieselek()">Kolejny Piesełek</button>
+      </div>
+    </div>
+    <div class="col-4 d-flex justify-content-start">
+      <div class="tlo-quizu">
+        <div class="mt-3 fw-bold fs-5">Co to za piesełek?</div>
+      </div>
     </div>
   </div>
 </ng-container>
