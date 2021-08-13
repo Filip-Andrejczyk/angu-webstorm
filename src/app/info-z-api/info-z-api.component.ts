@@ -31,8 +31,10 @@ export class InfoZApiComponent implements OnInit {
       }));
 
     this.threeRandomBreeds$ = this.drawDogs.pipe(switchMap(() => this.allBreeds$.pipe(
-      map((allBreeds) => this.getThreeRandom(allBreeds))
-    )))
+      map((allBreeds) =>
+        this.getThreeRandom(allBreeds),
+      )
+    )));
 
   }
 
@@ -68,6 +70,7 @@ export class InfoZApiComponent implements OnInit {
     }
     return threeRandomDogs;
   }
+
 
 }
 
