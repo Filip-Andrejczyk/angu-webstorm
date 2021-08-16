@@ -11,12 +11,13 @@ export class DogsRandomService {
   public wszystkieRasy$: Observable<string[]>;
   public trzylosowe$: Observable<string[]>;
 
-  refreshAnswerSrc: ReplaySubject<void> = new ReplaySubject(1);
+  refreshAnswerSrc: ReplaySubject<{ except: string }> = new ReplaySubject(1);
 
   constructor(private api: GetApiService)
   {
     this.wszystkieRasy$ = this.getBreeds();
     this.trzylosowe$ = this.wylosujDogs();
+    this.refreshAnswers();
   }
 
   getBreeds(): Observable<string[]>
@@ -32,7 +33,11 @@ export class DogsRandomService {
 
   wylosujDogs(): Observable<string[]>
   {
-    return this.wszystkieRasy$.pipe(map((rasy) => this.chooseThreedogz(rasy, 3)));
+    //return this.wszystkieRasy$.pipe(map((rasy) => this.chooseThreedogz(rasy, 3)));
+    return this.refreshAnswerSrc.pipe(
+      switchMap(()=>this.wszystkieRasy$),
+      map(allBreeds => this.chooseThreedogz(allBreeds))
+    );
   }
 
   public refreshAnswers(): void
@@ -40,7 +45,8 @@ export class DogsRandomService {
     this.refreshAnswerSrc.next();
   }
 
-  chooseThreedogz(array: string[], n: number): string[]{
+  chooseThreedogz(array: string[]): string[]{
+    let n=3
     let threeRandomDogs = new Array(n)
     let len = array.length;
     let taken = new Array(len);
