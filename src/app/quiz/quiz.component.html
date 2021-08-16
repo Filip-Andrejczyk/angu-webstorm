@@ -1,1 +1,29 @@
-<p>quiz works!</p>
+<div class="tlo-quizu">
+  <div class="mt-3 fw-bold fs-5">
+    Zgadnij rase piesełka
+  </div>
+
+  <form [formGroup]="formu" (ngSubmit)="submit()">
+
+    <div class="mt-3 form-group" *let="let allObservable = allObservable;
+     of: {
+       allObservable: allObservable$ | async
+     }">
+      <div>
+        <input id="male" type="radio" value="{{goodAnswerBreed$ | async}}" name="gender" formControlName="gender">
+        <label for="male">{{goodAnswerBreed$ | async}}</label>
+      </div>
+
+      <div *ngFor="let doge of threeRandoms">
+        <input id="female" type="radio" value="sex" name="gender" formControlName="gender">
+        <label for="female">{{doge}}</label>
+      </div>
+
+      <div *ngIf="f.gender.touched && f.gender.invalid" class="alert alert-danger">
+      </div>
+    </div>
+
+    <button class="mt-3 btn btn-primary" type="submit" [disabled]="!formu.valid">Submit</button>
+  </form>
+
+</div>

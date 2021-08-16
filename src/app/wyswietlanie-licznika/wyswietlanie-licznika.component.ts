@@ -1,7 +1,6 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {LiczenieService} from "../liczenie.service";
-import {Observable, Subscription} from "rxjs";
-import {delay} from "rxjs/operators";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-wyswietlanie-licznika',
@@ -13,8 +12,6 @@ export class WyswietlanieLicznikaComponent implements OnInit {
 
   wyswietlany$: Observable<number>;
 
-  //private sub: Subscription = new Subscription();
-
   constructor(private liczenieService: LiczenieService, private cdRef: ChangeDetectorRef) {
     this.wyswietlany$ = this.liczenieService.counter.asObservable();
   }
@@ -22,9 +19,4 @@ export class WyswietlanieLicznikaComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
-  /*ngOnDestroy() {
-    this.sub.unsubscribe()
-  }
-  */
 }

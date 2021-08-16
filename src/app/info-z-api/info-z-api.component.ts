@@ -36,6 +36,7 @@ export class InfoZApiComponent implements OnInit {
       )
     )));
 
+
   }
 
   ngOnInit(): void {
