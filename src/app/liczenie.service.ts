@@ -10,10 +10,6 @@ export class LiczenieService {
 
   constructor() { }
 
-  // getNumber(){
-  //   return this.counter; //nie potrzeba tego skoro uzywam getValue() wbudowanej
-  // }
-
   incrementNumber(){
     this.counter.next(this.counter.getValue() + 1);
   }
