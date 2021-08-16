@@ -59,7 +59,7 @@ export class InfoZApiComponent implements AfterViewInit {
 
   nextPieselek(): void{
     this.clickAction.next();
-    this.child?.wylosujPieski();
+    this.dogsRandomService.refreshAnswers();
   }
 
 }

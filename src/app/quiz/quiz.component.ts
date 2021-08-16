@@ -95,7 +95,6 @@ export class QuizComponent implements OnInit {
     //this.goodAnswerBreed$?.subscribe(res => console.log("A to jest poprawna rasa: ", res))
     //this.wylosujPieski();
     //this.dogsRandomService.wylosujDogs();
-    this.losowe$ = this.dogsRandomService.trzylosowe$;
     console.log("poprawny", this.poprawny);
     console.log("wybrany", this.formu.value.gender);
     this.infozapicomponent.nextPieselek();
