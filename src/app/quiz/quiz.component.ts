@@ -50,20 +50,20 @@ export class QuizComponent implements OnInit {
     //var poprawny: string = '';
     //this.goodAnswerBreed$?.subscribe(ta => this.poprawny = ta); //przypisuje se zmienna observable do normalnej zeby jej tu uzyc w funkcji
 
-    // if (this.formu.value.gender == this.poprawny){
-    //   console.log("dobrzee")
-    //   this.infozapicomponent.nextPieselek();
-    // }else{
-    //   console.log("zleeeee")
-    // }
+    if (this.formu.value.gender == this.poprawny){
+      console.log("dobrzee")
+      setTimeout(() => this.infozapicomponent.nextPieselek(), 3000);
+    }else{
+      console.log("zleeeee")
+    }
     //console.log("to je wybrany: ", this.formu.value.gender)
     // console.log("A to jest poprawna rasa: ", this.goodAnswerBreed$?.subscribe(res => res))
     //this.goodAnswerBreed$?.subscribe(res => console.log("A to jest poprawna rasa: ", res))
     //this.wylosujPieski();
     //this.dogsRandomService.wylosujDogs();
-    console.log("poprawny", this.poprawny);
-    console.log("wybrany", this.formu.value.gender);
-    this.infozapicomponent.nextPieselek();
+    //console.log("poprawny", this.poprawny);
+    //console.log("wybrany", this.formu.value.gender);
+    //this.infozapicomponent.nextPieselek();
     this.formu.reset();
   }
 
