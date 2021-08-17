@@ -17,6 +17,7 @@ import { MenubarComponent } from './menubar/menubar.component';
 import { HttpClientModule } from "@angular/common/http";
 import { InfoZApiComponent } from './info-z-api/info-z-api.component';
 import { QuizComponent } from './quiz/quiz.component';
+import {NgParticlesModule} from "ng-particles";
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { QuizComponent } from './quiz/quiz.component';
         ReactiveFormsModule,
         FormsModule,
         NgbModule,
-        HttpClientModule
+        HttpClientModule,
+        NgParticlesModule
     ],
   providers: [],
   bootstrap: [AppComponent]

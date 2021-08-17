@@ -17,8 +17,9 @@ export class QuizComponent implements OnInit {
   losowe$: Observable<string[]> | undefined;
   czteryodp$: Observable<string[]> | undefined;
 
-  public poprawny: string = "";
 
+  public poprawny: string = "";
+  public liczdobre: number = 0;
   public dogForm: FormGroup = this.fb.group({});
 
   constructor(private infozapicomponent: InfoZApiComponent,
@@ -46,24 +47,17 @@ export class QuizComponent implements OnInit {
   }
 
   submit(){
-    //console.log(this.formu.value.gender);
-    //var poprawny: string = '';
-    //this.goodAnswerBreed$?.subscribe(ta => this.poprawny = ta); //przypisuje se zmienna observable do normalnej zeby jej tu uzyc w funkcji
 
     if (this.formu.value.gender == this.poprawny){
       console.log("dobrzee");
-      setTimeout(() => this.infozapicomponent.nextPieselek(), 3000);
+      setTimeout(() => this.infozapicomponent.nextPieselek(), 500);
+      this.liczdobre++;
     }else{
       console.log("zleeeee")
+      this.liczdobre = 0;
     }
-    //console.log("to je wybrany: ", this.formu.value.gender)
-    // console.log("A to jest poprawna rasa: ", this.goodAnswerBreed$?.subscribe(res => res))
-    //this.goodAnswerBreed$?.subscribe(res => console.log("A to jest poprawna rasa: ", res))
-    //this.wylosujPieski();
-    //this.dogsRandomService.wylosujDogs();
     //console.log("poprawny", this.poprawny);
     //console.log("wybrany", this.formu.value.gender);
-    //this.infozapicomponent.nextPieselek();
     this.formu.reset();
   }
 

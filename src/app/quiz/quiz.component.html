@@ -7,21 +7,17 @@
 
     <div class="mt-4 form-group" *let="let odp = odp; of: {odp: czteryodp$ | async}">
       <ng-container>
-<!--      <div class="row">-->
-<!--        <input class="col-4" id="male" type="radio" value="{{goodAnswerBreed$ | async}}" name="gender" formControlName="gender">-->
-<!--        <label class="col-8 d-flex justify-content-start fw-bold fs-5" for="male">{{goodAnswerBreed$ | async}}</label>-->
-<!--      </div>-->
-
-      <div class="row" *ngFor="let doge of odp"> <!--*ngFor="let doge of threeRandoms"-->
-        <input class="col-4" id="female" type="radio" value="{{doge}}" name="gender" formControlName="gender">
-        <label class="col-8 d-flex justify-content-start fw-bold fs-5" for="female">{{doge}}</label>
-      </div>
+        <div class="row" *ngFor="let doge of odp">
+          <input class="col-4" id="female" type="radio" value="{{doge}}" name="gender" formControlName="gender">
+          <label class="col-8 d-flex justify-content-start fw-bold fs-5" for="female">{{doge}}</label>
+        </div>
       </ng-container>
       <div *ngIf="f.gender.touched && f.gender.invalid" class="alert alert-danger">
       </div>
     </div>
-
     <button class="mt-4 btn btn-primary" type="submit" [disabled]="!formu.valid">Submit</button>
   </form>
-
+</div>
+<div>
+wynik: {{liczdobre}}
 </div>
