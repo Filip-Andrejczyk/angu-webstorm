@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {GetApiService} from "./get-api.service";
-import {map, switchMap} from "rxjs/operators";
-import {Observable, ReplaySubject, Subject} from "rxjs";
+import {map, switchMap, tap} from "rxjs/operators";
+import {combineLatest, Observable, ReplaySubject} from "rxjs";
+import {JedenWybranyPiesService} from "./jeden-wybrany-pies.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +11,17 @@ export class DogsRandomService {
 
   public wszystkieRasy$: Observable<string[]>;
   public trzylosowe$: Observable<string[]>;
+  public tenjedenjedyny$: Observable<string>;
+  public odpowiedzi$: Observable<string[]>;
 
   refreshAnswerSrc: ReplaySubject<{ except: string }> = new ReplaySubject(1);
 
-  constructor(private api: GetApiService)
+  constructor(private api: GetApiService, private jedenWybranyPiesService: JedenWybranyPiesService)
   {
     this.wszystkieRasy$ = this.getBreeds();
     this.trzylosowe$ = this.wylosujDogs();
+    this.tenjedenjedyny$ = this.jedenWybranyPiesService.breed$;
+    this.odpowiedzi$ = this.appendAndShuffle();
     this.refreshAnswers();
   }
 
@@ -33,10 +38,16 @@ export class DogsRandomService {
 
   wylosujDogs(): Observable<string[]>
   {
-    //return this.wszystkieRasy$.pipe(map((rasy) => this.chooseThreedogz(rasy, 3)));
     return this.refreshAnswerSrc.pipe(
       switchMap(()=>this.wszystkieRasy$),
       map(allBreeds => this.chooseThreedogz(allBreeds))
+    );
+  }
+
+  appendAndShuffle(): Observable<string[]>
+  {
+    return combineLatest([this.trzylosowe$, this.tenjedenjedyny$]).pipe(
+      map(([trzylosowe, jedenwlasciwy]) => this.shuffleArray([...trzylosowe, jedenwlasciwy]))
     );
   }
 
@@ -45,7 +56,8 @@ export class DogsRandomService {
     this.refreshAnswerSrc.next();
   }
 
-  chooseThreedogz(array: string[]): string[]{
+  chooseThreedogz(array: string[]): string[]
+  {
     let n=3
     let threeRandomDogs = new Array(n)
     let len = array.length;
@@ -57,6 +69,23 @@ export class DogsRandomService {
     }
     return threeRandomDogs;
   }
+
+  shuffleArray(array: string[]): string[]
+  {
+    var currentIndex = array.length,  randomIndex;
+
+    while (currentIndex != 0) {
+
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+  }
+
 }
 
 
