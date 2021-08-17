@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ElementRef, Renderer2} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {InfoZApiComponent} from "../info-z-api/info-z-api.component";
 import {Observable} from "rxjs";
@@ -51,7 +51,7 @@ export class QuizComponent implements OnInit {
     //this.goodAnswerBreed$?.subscribe(ta => this.poprawny = ta); //przypisuje se zmienna observable do normalnej zeby jej tu uzyc w funkcji
 
     if (this.formu.value.gender == this.poprawny){
-      console.log("dobrzee")
+      console.log("dobrzee");
       setTimeout(() => this.infozapicomponent.nextPieselek(), 3000);
     }else{
       console.log("zleeeee")
