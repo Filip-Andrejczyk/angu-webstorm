@@ -11,11 +11,11 @@ export class JedenWybranyPiesService {
   dogeImgPath$: Observable<string> | undefined;
   breed$: Observable<string>;
 
-  clickAc: Subject<void> = new Subject();
+  changeRandomDog: Subject<void> = new Subject();
 
   constructor(private api: GetApiService)
   {
-    this.dogeImgPath$ = this.clickAc.pipe(
+    this.dogeImgPath$ = this.changeRandomDog.pipe(
       switchMap(() => this.api.getRandomDoggo().pipe(
         map((dog) => dog.message))),
         shareReplay(1)

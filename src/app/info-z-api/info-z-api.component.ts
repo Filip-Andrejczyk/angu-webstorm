@@ -52,8 +52,8 @@ export class InfoZApiComponent implements AfterViewInit {
 
   nextPieselek(): void
   {
-    this.jedenWybranyPiesService.clickAc.next();
-    this.dogsRandomService.refreshAnswers();
+    this.jedenWybranyPiesService.changeRandomDog.next();
+    // this.dogsRandomService.refreshAnswers();
   }
 
 }

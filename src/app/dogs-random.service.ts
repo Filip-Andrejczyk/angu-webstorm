@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {GetApiService} from "./get-api.service";
-import {map, switchMap, tap} from "rxjs/operators";
+import {map, switchMap, tap, withLatestFrom} from "rxjs/operators";
 import {combineLatest, Observable, ReplaySubject} from "rxjs";
 import {JedenWybranyPiesService} from "./jeden-wybrany-pies.service";
 
@@ -18,9 +18,9 @@ export class DogsRandomService {
 
   constructor(private api: GetApiService, private jedenWybranyPiesService: JedenWybranyPiesService)
   {
+    this.tenjedenjedyny$ = this.jedenWybranyPiesService.breed$;
     this.wszystkieRasy$ = this.getBreeds();
     this.trzylosowe$ = this.wylosujDogs();
-    this.tenjedenjedyny$ = this.jedenWybranyPiesService.breed$;
     this.odpowiedzi$ = this.appendAndShuffle();
     this.refreshAnswers();
   }
@@ -46,8 +46,11 @@ export class DogsRandomService {
 
   appendAndShuffle(): Observable<string[]>
   {
-    return combineLatest([this.trzylosowe$, this.tenjedenjedyny$]).pipe(
-      map(([trzylosowe, jedenwlasciwy]) => this.shuffleArray([...trzylosowe, jedenwlasciwy]))
+    return this.tenjedenjedyny$.pipe(
+      // withLatestFrom(this.trzylosowe$),
+      switchMap(jeden=>this.trzylosowe$.pipe(map(trzylosowe=>([...trzylosowe, jeden])))),
+      // map(([jedenwlasciwy, trzylosowe ]) => this.shuffleArray([...trzylosowe, jedenwlasciwy]))
+      map((czteryOdp) => this.shuffleArray(czteryOdp))
     );
   }
 
