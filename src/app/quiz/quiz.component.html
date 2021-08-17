@@ -5,14 +5,14 @@
 
   <form [formGroup]="formu" (ngSubmit)="submit()">
 
-    <div class="mt-4 form-group" *let="let losowe = losowe; of: {losowe: losowe$ | async}">
+    <div class="mt-4 form-group" *let="let odp = odp; of: {odp: czteryodp$ | async}">
       <ng-container>
-      <div class="row">
-        <input class="col-4" id="male" type="radio" value="{{goodAnswerBreed$ | async}}" name="gender" formControlName="gender">
-        <label class="col-8 d-flex justify-content-start fw-bold fs-5" for="male">{{goodAnswerBreed$ | async}}</label>
-      </div>
+<!--      <div class="row">-->
+<!--        <input class="col-4" id="male" type="radio" value="{{goodAnswerBreed$ | async}}" name="gender" formControlName="gender">-->
+<!--        <label class="col-8 d-flex justify-content-start fw-bold fs-5" for="male">{{goodAnswerBreed$ | async}}</label>-->
+<!--      </div>-->
 
-      <div class="row" *ngFor="let doge of losowe"> <!--*ngFor="let doge of threeRandoms"-->
+      <div class="row" *ngFor="let doge of odp"> <!--*ngFor="let doge of threeRandoms"-->
         <input class="col-4" id="female" type="radio" value="{{doge}}" name="gender" formControlName="gender">
         <label class="col-8 d-flex justify-content-start fw-bold fs-5" for="female">{{doge}}</label>
       </div>

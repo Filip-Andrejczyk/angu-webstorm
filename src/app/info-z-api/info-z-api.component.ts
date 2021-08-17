@@ -6,6 +6,7 @@ import {DogRasa} from "../models/rasy";
 import {observableToBeFn} from "rxjs/internal/testing/TestScheduler";
 import {DogsRandomService} from "../dogs-random.service";
 import {QuizComponent} from "../quiz/quiz.component";
+import {JedenWybranyPiesService} from "../jeden-wybrany-pies.service";
 
 @Component({
   selector: 'app-info-z-api',
@@ -17,12 +18,14 @@ export class InfoZApiComponent implements AfterViewInit {
   doggoImgPath$: Observable<string> | undefined;
   rasa$: Observable<any> | undefined;
 
-  clickAction: Subject<void> = new Subject();
-  drawDogs: Subject<void> = new Subject();
+  //clickAction: Subject<void> = new Subject();
+  //drawDogs: Subject<void> = new Subject();
+
   @ViewChild(QuizComponent) child: { wylosujPieski: () => any; } | undefined;
 
   constructor(private api: GetApiService,
               private dogsRandomService: DogsRandomService,
+              private jedenWybranyPiesService: JedenWybranyPiesService
               ) {
 
     // this.allBreeds$ = this.api.allBreeds().pipe(map((rasy) => rasy.message),
@@ -41,24 +44,15 @@ export class InfoZApiComponent implements AfterViewInit {
 
   }
 
-  ngAfterViewInit(): void {
-
-  this.doggoImgPath$ = this.clickAction.pipe(
-    switchMap(() => this.api.getRandomDoggo().pipe(map((dog) => dog.message))),
-    shareReplay(1)
-  )
-
-  this.rasa$ = this.doggoImgPath$.pipe(
-    map((dog) => {
-      const rasa = dog.match(/(breeds\/)(.*)(?=\/)/);
-      return rasa ? rasa[2] : null;
-    }
-  ));
-
+  ngAfterViewInit(): void
+  {
+    this.doggoImgPath$ = this.jedenWybranyPiesService.dogeImgPath$;
+    this.rasa$ = this.jedenWybranyPiesService.breed$;
   }
 
-  nextPieselek(): void{
-    this.clickAction.next();
+  nextPieselek(): void
+  {
+    this.jedenWybranyPiesService.clickAc.next();
     this.dogsRandomService.refreshAnswers();
   }
 
