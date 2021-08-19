@@ -3,16 +3,20 @@
     Zgadnij rase piesełka
   </div>
 
-  <form [formGroup]="formu" (ngSubmit)="submit()">
+  <form [formGroup]="formu" (ngSubmit)="submit()" *let="let dobraodp = dobraodp;
+    of: {dobraodp: goodAnswerBreed$ | async}">
 
-    <div class="mt-4 form-group" *let="let odp = odp; of: {odp: czteryodp$ | async}">
+    <div class="mt-4 form-group" *let="let odp = odp; of: {odp: czteryodp$ | async};">
       <ng-container>
-        <div *ngFor="let doge of odp; let i = index">
+        <div *ngFor="let doge of odp; let i = index;">
 
-          <label class="row">
+          <label [ngClass]="{
+          'row': true,
+          'btn-change': (doge === dobraodp && dogSelected)
+          }">
 
             <div class="col-3">
-              <input type="radio" value="{{doge}}" name="gender" formControlName="gender">
+              <input type="radio" value="{{doge}}" name="gender" [readOnly]="dogSelected" formControlName="gender">
             </div>
 
             <div class="col-9 d-flex justify-content-start fw-bold fs-5" [ngClass] = "'odp-' + i">
@@ -32,3 +36,6 @@
 <div class="fw-bold mt-3 fs-4">
 wynik: {{liczdobre}}
 </div>
+
+<!--'btn-default': (doge === this.formu.get('gender')?.value && this.formu.get('gender')?.value != dobraodp && dogSelected )
+dodac ewentualnie do zmiany zlej/zlych odp na czerwony kolor-->

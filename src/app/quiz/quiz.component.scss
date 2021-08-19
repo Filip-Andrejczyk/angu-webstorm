@@ -6,14 +6,15 @@
   margin-top: 40px;
 }
 input[type="radio"] {
-  margin-top: +9px;
+  margin-top: +6px;
   vertical-align: middle;
   height: 1.25em;
 }
+
 .btn-change{
   color: forestgreen;
 }
-.btn-default{
-  color: black;
+.btn-default:not(.btn-change){
+  color: red;
 }
 
