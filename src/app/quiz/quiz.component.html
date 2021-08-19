@@ -7,9 +7,20 @@
 
     <div class="mt-4 form-group" *let="let odp = odp; of: {odp: czteryodp$ | async}">
       <ng-container>
-        <div class="row" *ngFor="let doge of odp">
-          <input class="col-4" id="female" type="radio" value="{{doge}}" name="gender" formControlName="gender">
-          <label class="col-8 d-flex justify-content-start fw-bold fs-5" for="female">{{doge}}</label>
+        <div *ngFor="let doge of odp; let i = index">
+
+          <label class="row">
+
+            <div class="col-3">
+              <input type="radio" value="{{doge}}" name="gender" formControlName="gender">
+            </div>
+
+            <div class="col-9 d-flex justify-content-start fw-bold fs-5" [ngClass] = "'odp-' + i">
+              {{doge}}
+            </div>
+
+          </label>
+
         </div>
       </ng-container>
       <div *ngIf="f.gender.touched && f.gender.invalid" class="alert alert-danger">

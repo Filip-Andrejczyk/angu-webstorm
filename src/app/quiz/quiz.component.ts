@@ -21,6 +21,8 @@ export class QuizComponent implements OnInit {
   public poprawny: string = "";
   public liczdobre: number = 0;
   public dogForm: FormGroup = this.fb.group({});
+  public stringStyle: string = "btn-default";
+  public div: string = "";
 
   constructor(private infozapicomponent: InfoZApiComponent,
               private cdRef: ChangeDetectorRef,
@@ -47,17 +49,28 @@ export class QuizComponent implements OnInit {
   }
 
   submit(){
+    //this.div = document.getElementById('piez').innerHTML.valueOf();
 
     if (this.formu.value.gender == this.poprawny){
+
       console.log("dobrzee");
-      setTimeout(() => this.infozapicomponent.nextPieselek(), 500);
       this.liczdobre++;
+      // if(this.stringStyle == 'btn-default') {
+      //   this.stringStyle = 'btn-change';
+      // } else {
+      //   this.stringStyle = 'btn-default';
+      // }
+
+      //{
+
+      //}
+      setTimeout(() => this.infozapicomponent.nextPieselek(), 5000);
     }else{
       console.log("zleeeee")
       this.liczdobre = 0;
     }
-    //console.log("poprawny", this.poprawny);
-    //console.log("wybrany", this.formu.value.gender);
+    console.log("zaznaczyłem: ", this.formu.value.gender);
+    console.log("poprawny to: ", this.poprawny);
     this.formu.reset();
   }
 
