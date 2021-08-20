@@ -1,18 +1,22 @@
 <ng-container>
   <div class="row srodkowa" *ngIf="(doggoImgPath$ | async); else brakTemplate">
+
     <div class="col-4">
 <!-- miejsce na moja tabele z localstorage all rasy: {{allBreeds$ | async}}-->
     </div>
+
     <div class="col-4 d-flex justify-content-center">
       <div class="obrazekpieska mt-3 border border-success">
       <img [src]="(doggoImgPath$ | async)"/>
       <button class="przycisk btn-success shadow-none" (click)="nextPieselek()">Kolejny Piesełek</button>
       </div>
     </div>
+
     <div class="col-4 d-flex justify-content-start">
       <app-quiz></app-quiz>
     </div>
   </div>
+
 </ng-container>
 
 <ng-template #brakTemplate>

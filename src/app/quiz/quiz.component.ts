@@ -18,7 +18,10 @@ export class QuizComponent implements OnInit {
   czteryodp$: Observable<string[]> | undefined;
 
   public poprawny: string = "";
+
   public liczdobre: number = 0;
+  public personalBest: number = 0;
+
   public dogForm: FormGroup = this.fb.group({});
   public stringStyle: string = "btn-default";
   public div: string = "";
@@ -64,6 +67,7 @@ export class QuizComponent implements OnInit {
   newUser(){
     this.przegrana = false;
     this.isuserName = false;
+    this.infozapicomponent.nextPieselek();
   }
   tryAgain(){
     this.przegrana = false;
@@ -77,6 +81,7 @@ export class QuizComponent implements OnInit {
 
       console.log("dobrzee");
       this.liczdobre++;
+      this.personalBest = this.liczdobre;
 
       setTimeout(() => {
         this.dogSelected = false;
@@ -97,7 +102,7 @@ export class QuizComponent implements OnInit {
     //console.log("poprawny to: ", this.poprawny);
 
     this.objIndex = this.yourScore.findIndex((obj => obj.name == this.login.value.username));
-    this.yourScore[this.objIndex].score = this.liczdobre;
+    this.yourScore[this.objIndex].score = this.personalBest;
 
     localStorage.setItem("wynik", JSON.stringify(this.yourScore));
     this.formu.reset();

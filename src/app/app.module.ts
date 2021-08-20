@@ -18,6 +18,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { InfoZApiComponent } from './info-z-api/info-z-api.component';
 import { QuizComponent } from './quiz/quiz.component';
 import {NgParticlesModule} from "ng-particles";
+import { TablicaRekordowComponent } from './tablica-rekordow/tablica-rekordow.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import {NgParticlesModule} from "ng-particles";
     MenubarComponent,
     InfoZApiComponent,
     QuizComponent,
+    TablicaRekordowComponent,
   ],
     imports: [
         BrowserModule,
