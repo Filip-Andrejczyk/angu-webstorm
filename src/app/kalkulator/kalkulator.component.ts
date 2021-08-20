@@ -32,7 +32,7 @@ export class KalkulatorComponent implements OnInit {
       iloscLitrow: '',
       rodzajRozpuszczalnika: this.rodzaje[0]
     });
-    this.myForm.valueChanges.subscribe(console.log);
+    //this.myForm.valueChanges.subscribe(console.log);
   }
 
   public nr = 1;

@@ -1,6 +1,7 @@
-<div class="tlo-quizu">
+<ng-container>
+<div class="tlo-quizu" *ngIf="(isuserName); else podajNazweTemplate">
   <div class="mt-2 fw-bold fs-4">
-    Zgadnij rase piesełka
+    Zgadnij rase piesełka, {{this.login.get('username')?.value}}
   </div>
 
   <form [formGroup]="formu" (ngSubmit)="submit()" *let="let dobraodp = dobraodp;
@@ -32,10 +33,22 @@
     </div>
     <button class="mt-4 btn btn-primary" type="submit" [disabled]="!formu.valid">Submit</button>
   </form>
+  <div class="fw-bold mt-5 fs-4">
+    wynik: {{liczdobre}}
+  </div>
 </div>
-<div class="fw-bold mt-3 fs-4">
-wynik: {{liczdobre}}
-</div>
+</ng-container>
 
+<ng-template #podajNazweTemplate>
+  <div class="podaj-uzytkownika">
+    <div class="fw-bold mt-3">
+    Wpisz nazwę użytkownika:
+    </div>
+  <form [formGroup]="login" (ngSubmit)="submit2()">
+    <input class="mt-3" type="text" value="" name="username" formControlName="username"><br>
+    <button class="mt-3 btn btn-primary" type="submit">Zapisz</button>
+  </form>
+  </div>
+</ng-template>
 <!--'btn-default': (doge === this.formu.get('gender')?.value && this.formu.get('gender')?.value != dobraodp && dogSelected )
 dodac ewentualnie do zmiany zlej/zlych odp na czerwony kolor-->

@@ -23,6 +23,12 @@ export class QuizComponent implements OnInit {
   public stringStyle: string = "btn-default";
   public div: string = "";
   public dogSelected: boolean = false;
+  public isuserName: boolean = false;
+
+  public yourScore: {
+    name: string,
+    score: number
+  }[]= [];
 
   constructor(private infozapicomponent: InfoZApiComponent,
               private cdRef: ChangeDetectorRef,
@@ -44,28 +50,30 @@ export class QuizComponent implements OnInit {
     gender: new FormControl('', Validators.required)
   });
 
+  login = new FormGroup({
+    username: new FormControl('', Validators.required)
+  });
+
   get f(){
     return this.formu.controls;
   }
 
-  submit(){
-
+  submit()
+  {
     this.dogSelected = true;
     if (this.formu.value.gender == this.poprawny){
 
       console.log("dobrzee");
       this.liczdobre++;
-      // if(this.stringStyle == 'btn-default') {
-      //   this.stringStyle = 'btn-change';
-      // } else {
-      //   this.stringStyle = 'btn-default';
-      // }
 
       setTimeout(() => {
         this.dogSelected = false;
         this.infozapicomponent.nextPieselek();
         }, 2000);
-    }else{
+
+    }
+    else
+    {
       setTimeout(
         () =>
         {
@@ -74,9 +82,20 @@ export class QuizComponent implements OnInit {
         }, 2000);
       this.liczdobre = 0;
     }
-   //console.log("zaznaczyłem: ", this.formu.value.gender);
+    //console.log("zaznaczyłem: ", this.formu.value.gender);
     //console.log("poprawny to: ", this.poprawny);
+    this.yourScore.push({
+      name: this.login.value.username,
+      score: this.liczdobre,
+    });
+    localStorage.setItem("wynik", JSON.stringify(this.yourScore));
     this.formu.reset();
+  }
+
+  submit2()
+  {
+    this.isuserName = true;
+    //console.log(this.login.get('username')?.value);
   }
 
 }
