@@ -1,47 +1,51 @@
 <ng-container>
-<div class="tlo-quizu" *ngIf="(isuserName); else podajNazweTemplate">
-  <div class="mt-2 fw-bold fs-4">
-    Zgadnij rase piesełka, {{this.login.get('username')?.value}}
-  </div>
+<div *ngIf="(!przegrana); else przegranyTemplate">
+  <div class="tlo-quizu" *ngIf="(isuserName); else podajNazweTemplate">
+    <div>
+      <div class="mt-2 fw-bold fs-4">
+        Zgadnij rase piesełka, {{this.login.get('username')?.value}}
+      </div>
 
-  <form [formGroup]="formu" (ngSubmit)="submit()" *let="let dobraodp = dobraodp;
-    of: {dobraodp: goodAnswerBreed$ | async}">
+      <form [formGroup]="formu" (ngSubmit)="submit()" *let="let dobraodp = dobraodp;
+        of: {dobraodp: goodAnswerBreed$ | async}">
 
-    <div class="mt-4 form-group" *let="let odp = odp; of: {odp: czteryodp$ | async};">
-      <ng-container>
-        <div *ngFor="let doge of odp; let i = index;">
+        <div class="mt-4 form-group" *let="let odp = odp; of: {odp: czteryodp$ | async};">
+          <ng-container>
+            <div *ngFor="let doge of odp; let i = index;">
 
-          <label [ngClass]="{
-          'row': true,
-          'btn-change': (doge === dobraodp && dogSelected)
-          }">
+              <label [ngClass]="{
+              'row': true,
+              'btn-change': (doge === dobraodp && dogSelected)
+              }">
 
-            <div class="col-3">
-              <input type="radio" value="{{doge}}" name="gender" [readOnly]="dogSelected" formControlName="gender">
+                <div class="col-3">
+                  <input type="radio" value="{{doge}}" name="gender" [readOnly]="dogSelected" formControlName="gender">
+                </div>
+
+                <div class="col-9 d-flex justify-content-start fw-bold fs-5" [ngClass] = "'odp-' + i">
+                  {{doge}}
+                </div>
+
+              </label>
+
             </div>
-
-            <div class="col-9 d-flex justify-content-start fw-bold fs-5" [ngClass] = "'odp-' + i">
-              {{doge}}
-            </div>
-
-          </label>
-
+          </ng-container>
+          <div *ngIf="f.gender.touched && f.gender.invalid" class="alert alert-danger">
+          </div>
         </div>
-      </ng-container>
-      <div *ngIf="f.gender.touched && f.gender.invalid" class="alert alert-danger">
+        <button class="mt-4 btn btn-primary" type="submit" [disabled]="!formu.valid">Submit</button>
+      </form>
+      <div class="fw-bold mt-5 fs-4">
+        wynik: {{liczdobre}}
       </div>
     </div>
-    <button class="mt-4 btn btn-primary" type="submit" [disabled]="!formu.valid">Submit</button>
-  </form>
-  <div class="fw-bold mt-5 fs-4">
-    wynik: {{liczdobre}}
   </div>
 </div>
 </ng-container>
 
 <ng-template #podajNazweTemplate>
   <div class="podaj-uzytkownika">
-    <div class="fw-bold mt-3">
+    <div class="fw-bold">
     Wpisz nazwę użytkownika:
     </div>
   <form [formGroup]="login" (ngSubmit)="submit2()">
@@ -50,5 +54,23 @@
   </form>
   </div>
 </ng-template>
+
+<ng-template #przegranyTemplate>
+  <div class="przegrany">
+    <div class="fw-bold fs-4">
+      PRZEGRALES
+    </div>
+    <div class="row">
+      <div class="col">
+        <button (click)="newUser()">New Player</button>
+      </div>
+      <div class="col">
+        <button (click)="tryAgain()">Try Again</button>
+      </div>
+    </div>
+
+  </div>
+</ng-template>
 <!--'btn-default': (doge === this.formu.get('gender')?.value && this.formu.get('gender')?.value != dobraodp && dogSelected )
 dodac ewentualnie do zmiany zlej/zlych odp na czerwony kolor-->
+`

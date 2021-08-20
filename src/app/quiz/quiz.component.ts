@@ -24,18 +24,17 @@ export class QuizComponent implements OnInit {
   public div: string = "";
   public dogSelected: boolean = false;
   public isuserName: boolean = false;
+  public przegrana: boolean = false;
+  public objIndex: number = 0;
 
-  public yourScore: {
-    name: string,
-    score: number
-  }[]= [];
+
+  public yourScore: { name: string, score: number }[] = [];
 
   constructor(private infozapicomponent: InfoZApiComponent,
               private cdRef: ChangeDetectorRef,
               private fb: FormBuilder,
               private dogsRandomService: DogsRandomService,
-              private jedenWybranyPiesService: JedenWybranyPiesService)
-  {
+              private jedenWybranyPiesService: JedenWybranyPiesService) {
     this.goodAnswerBreed$ = this.jedenWybranyPiesService.breed$;
     this.allObservable$ = this.dogsRandomService.wszystkieRasy$;
   }
@@ -54,14 +53,27 @@ export class QuizComponent implements OnInit {
     username: new FormControl('', Validators.required)
   });
 
-  get f(){
+  //public nazwaGracza: string = this.login.get('username')?.value;
+  //update score:
+
+
+  get f() {
     return this.formu.controls;
   }
 
-  submit()
-  {
+  newUser(){
+    this.przegrana = false;
+    this.isuserName = false;
+  }
+  tryAgain(){
+    this.przegrana = false;
+    this.infozapicomponent.nextPieselek();
+  }
+
+  submit() {
     this.dogSelected = true;
-    if (this.formu.value.gender == this.poprawny){
+
+    if (this.formu.value.gender == this.poprawny) {
 
       console.log("dobrzee");
       this.liczdobre++;
@@ -69,33 +81,39 @@ export class QuizComponent implements OnInit {
       setTimeout(() => {
         this.dogSelected = false;
         this.infozapicomponent.nextPieselek();
-        }, 2000);
+      }, 2000);
 
-    }
-    else
-    {
+    } else {
       setTimeout(
-        () =>
-        {
-        this.dogSelected = false;
-        this.infozapicomponent.nextPieselek();
-        }, 2000);
+        () => {
+          this.dogSelected = false;
+          this.przegrana = true;
+          //this.infozapicomponent.nextPieselek();
+        }, 1000);
       this.liczdobre = 0;
+
     }
     //console.log("zaznaczyłem: ", this.formu.value.gender);
     //console.log("poprawny to: ", this.poprawny);
-    this.yourScore.push({
-      name: this.login.value.username,
-      score: this.liczdobre,
-    });
+
+    this.objIndex = this.yourScore.findIndex((obj => obj.name == this.login.value.username));
+    this.yourScore[this.objIndex].score = this.liczdobre;
+
     localStorage.setItem("wynik", JSON.stringify(this.yourScore));
     this.formu.reset();
   }
 
-  submit2()
-  {
+  submit2() {
     this.isuserName = true;
+
+    this.yourScore.push({
+      name: this.login.value.username,
+      score: this.liczdobre,
+    });
     //console.log(this.login.get('username')?.value);
   }
 
 }
+
+
+
