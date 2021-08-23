@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit, ElementRef, Renderer2} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {InfoZApiComponent} from "../info-z-api/info-z-api.component";
 import {Observable} from "rxjs";
@@ -33,11 +33,6 @@ export class QuizComponent implements OnInit {
   public localStore = JSON.parse(<string>localStorage.getItem('wynik')) as Rekord[];
 
   public yourScore = this.localStore;
-  // public yourScore:
-  //   {
-  //   name: string,
-  //   score: number
-  //   }[] = [];
 
   constructor(private infozapicomponent: InfoZApiComponent,
               private cdRef: ChangeDetectorRef,
@@ -129,6 +124,9 @@ export class QuizComponent implements OnInit {
       name: this.login.value.username,
       score: this.liczdobre,
     });
+
+    localStorage.setItem("wynik", JSON.stringify(this.yourScore));
+
     //this.yourScore = this.localStore;
     // let wyniki = JSON.parse(<string>localStorage.getItem('wynik'));
     // this.objIndex = wyniki.findIndex(((obj: { name: string; score: number }) => obj.name == this.login.value.username));
