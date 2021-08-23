@@ -1,1 +1,14 @@
-<p>tablica-rekordow works!</p>
+<div>
+  <table>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Score</th>
+    </tr>
+    <tr *ngFor="let i of myData; let y = index">
+      <th>{{y}}</th>
+      <th>{{i.name}}</th>
+      <th>{{i.score}}</th>
+    </tr>
+  </table>
+</div>

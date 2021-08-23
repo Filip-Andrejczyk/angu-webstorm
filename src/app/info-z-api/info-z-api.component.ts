@@ -50,14 +50,9 @@ export class InfoZApiComponent implements AfterViewInit {
     this.rasa$ = this.jedenWybranyPiesService.breed$;
   }
 
-  public myData = JSON.parse(<string>localStorage.getItem('wynik'));
-
-
   nextPieselek(): void
   {
     this.jedenWybranyPiesService.changeRandomDog.next();
-    // this.dogsRandomService.refreshAnswers();
-    console.log(this.myData)
   }
 
 }

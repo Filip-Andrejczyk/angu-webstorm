@@ -31,7 +31,11 @@ export class QuizComponent implements OnInit {
   public objIndex: number = 0;
 
 
-  public yourScore: { name: string, score: number }[] = [];
+  public yourScore:
+    {
+    name: string,
+    score: number
+    }[] = [];
 
   constructor(private infozapicomponent: InfoZApiComponent,
               private cdRef: ChangeDetectorRef,
@@ -55,9 +59,6 @@ export class QuizComponent implements OnInit {
   login = new FormGroup({
     username: new FormControl('', Validators.required)
   });
-
-  //public nazwaGracza: string = this.login.get('username')?.value;
-  //update score:
 
 
   get f() {
@@ -110,7 +111,7 @@ export class QuizComponent implements OnInit {
 
   submit2() {
     this.isuserName = true;
-
+    this.liczdobre = 0;
     this.yourScore.push({
       name: this.login.value.username,
       score: this.liczdobre,

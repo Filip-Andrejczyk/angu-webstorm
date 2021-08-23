@@ -1,8 +1,8 @@
 <ng-container>
   <div class="row srodkowa" *ngIf="(doggoImgPath$ | async); else brakTemplate">
 
-    <div class="col-4">
-<!-- miejsce na moja tabele z localstorage all rasy: {{allBreeds$ | async}}-->
+    <div class="col-4 d-flex justify-content-center">
+    <app-tablica-rekordow></app-tablica-rekordow>
     </div>
 
     <div class="col-4 d-flex justify-content-center">
