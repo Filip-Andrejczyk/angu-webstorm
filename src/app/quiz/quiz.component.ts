@@ -4,6 +4,7 @@ import {InfoZApiComponent} from "../info-z-api/info-z-api.component";
 import {Observable} from "rxjs";
 import {DogsRandomService} from "../dogs-random.service";
 import {JedenWybranyPiesService} from "../jeden-wybrany-pies.service";
+import {Rekord} from "../models/rekordy";
 
 @Component({
   selector: 'app-quiz',
@@ -29,13 +30,14 @@ export class QuizComponent implements OnInit {
   public isuserName: boolean = false;
   public przegrana: boolean = false;
   public objIndex: number = 0;
+  public localStore = JSON.parse(<string>localStorage.getItem('wynik')) as Rekord[];
 
-
-  public yourScore:
-    {
-    name: string,
-    score: number
-    }[] = [];
+  public yourScore = this.localStore;
+  // public yourScore:
+  //   {
+  //   name: string,
+  //   score: number
+  //   }[] = [];
 
   constructor(private infozapicomponent: InfoZApiComponent,
               private cdRef: ChangeDetectorRef,
@@ -74,13 +76,16 @@ export class QuizComponent implements OnInit {
     this.przegrana = false;
     this.infozapicomponent.nextPieselek();
   }
+  koniecGry(){
+    this.isuserName = false;
+    this.przegrana = false;
+  }
 
   submit() {
     this.dogSelected = true;
 
-    if (this.formu.value.gender == this.poprawny) {
-
-      console.log("dobrzee");
+    if (this.formu.value.gender == this.poprawny)
+    {
       this.liczdobre++;
       this.personalBest = this.liczdobre;
 
@@ -88,35 +93,54 @@ export class QuizComponent implements OnInit {
         this.dogSelected = false;
         this.infozapicomponent.nextPieselek();
       }, 2000);
+    }
+    else
+    {
+      this.liczdobre = 0;
 
-    } else {
       setTimeout(
         () => {
           this.dogSelected = false;
           this.przegrana = true;
-          //this.infozapicomponent.nextPieselek();
         }, 1000);
-      this.liczdobre = 0;
-
     }
-    //console.log("zaznaczyłem: ", this.formu.value.gender);
-    //console.log("poprawny to: ", this.poprawny);
 
+    //aktualizowanie wyniku dla teraźniejszego gracza
     this.objIndex = this.yourScore.findIndex((obj => obj.name == this.login.value.username));
     this.yourScore[this.objIndex].score = this.personalBest;
 
+    //sortowanie tablicy malejąco wzgledem wyniku
+    this.yourScore.sort((a, b) => {
+      return b.score - a.score;
+    });
+
+    //Wyslanie tablicy na localstorage
     localStorage.setItem("wynik", JSON.stringify(this.yourScore));
+
+    //resecik formularza aby zlikwidować zaznaczenie
     this.formu.reset();
   }
 
   submit2() {
     this.isuserName = true;
     this.liczdobre = 0;
+
     this.yourScore.push({
       name: this.login.value.username,
       score: this.liczdobre,
     });
-    //console.log(this.login.get('username')?.value);
+    //this.yourScore = this.localStore;
+    // let wyniki = JSON.parse(<string>localStorage.getItem('wynik'));
+    // this.objIndex = wyniki.findIndex(((obj: { name: string; score: number }) => obj.name == this.login.value.username));
+    // let personalBest = this.yourScore[this.objIndex].score
+    //
+    // if(personalBest > 0) {
+    //
+    // }
+    // else {
+    //
+    // }
+    // localStorage.setItem("wynik", JSON.stringify(this.yourScore));
   }
 
 }

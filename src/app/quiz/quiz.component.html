@@ -37,6 +37,7 @@
       </form>
       <div class="fw-bold mt-5 fs-4">
         wynik: {{liczdobre}}
+        <button routerLink="" (click)="koniecGry()">Zakończ</button>
       </div>
     </div>
   </div>
@@ -61,11 +62,17 @@
       PRZEGRALES
     </div>
     <div class="row mt-5">
+
       <div class="col">
         <button class="btn btn-primary" (click)="newUser()">New Player</button>
       </div>
+
       <div class="col">
         <button class="btn btn-primary" (click)="tryAgain()">Try Again</button>
+      </div>
+
+      <div class="col">
+        <button class="btn btn-primary" routerLink="" (click)="koniecGry()">Koniec Gry</button>
       </div>
     </div>
 

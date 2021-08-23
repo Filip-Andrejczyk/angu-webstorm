@@ -8,7 +8,7 @@ import { Rekord } from "../models/rekordy";
 })
 export class TablicaRekordowComponent implements OnInit {
 
-  public myData = JSON.parse(<string>localStorage.getItem('wynik'));
+  public myData = JSON.parse(<string>localStorage.getItem('wynik')) as Rekord[];
 
   constructor() { }
 
