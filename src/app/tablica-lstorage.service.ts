@@ -10,16 +10,25 @@ export class TablicaLstorageService {
   //public localStore = JSON.parse(<string>localStorage.getItem('wynik')) as Rekord[];
   public tablicaRekordow = (JSON.parse(<string>localStorage.getItem('wynik'))) as Rekord[];
 
+  public brak = [
+    { "name": "Filip", "score": 0 },
+    { "name": "Wojtek", "score": 0 },
+  ];
+
   public objIndx: number = 0;
+  public perIndx: number = 0;
 
   constructor() {}
 
   getRecords(): Observable<Rekord[]>{
-    if (this.tablicaRekordow.length > 0){
+    if (this.tablicaRekordow != null){
       this.sortTab();
       return of(this.tablicaRekordow);
     }
     else{
+      // return of(this.tablicaRekordow);
+      this.tablicaRekordow = this.brak
+      this.sendData(this.tablicaRekordow);
       return of(this.tablicaRekordow);
     }
   }
@@ -33,16 +42,22 @@ export class TablicaLstorageService {
 
   }
   findUser(name: string): boolean{
-    if (this.tablicaRekordow.findIndex((obj => obj.name == name)) > 0)
+    if (this.tablicaRekordow.findIndex((obj => obj.name == name)) == -1) // -1 nie ma 0, 1 tip jest
     {
-      return true;
+      console.log("nie znaleziono");
+      return false;
     }
     else
     {
-      return false;
+      console.log("znaleziono");
+      return true;
     }
   }
 
+  PersonalBest(name: string): number{
+    this.perIndx = this.tablicaRekordow.findIndex((obj => obj.name == name));
+    return this.tablicaRekordow[this.objIndx].score;
+  }
 
   addRecord(name: string, score: number): Rekord[]{
     this.tablicaRekordow.push(({

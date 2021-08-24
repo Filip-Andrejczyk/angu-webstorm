@@ -21,11 +21,6 @@ export class TablicaRekordowComponent implements OnInit {
       this.myData$ =this.refreshUsers$.pipe(switchMap(_ => this.tablicaLStorageServive.getRecords()));
   }
 
-  ref(){
-    this.refreshUsers$.next(false);
-    console.log("poszło");
-  }
-
 }
 
 

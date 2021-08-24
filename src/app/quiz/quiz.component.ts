@@ -57,6 +57,7 @@ export class QuizComponent implements OnInit {
     this.goodAnswerBreed$?.subscribe(ta => this.poprawny = ta);
     this.losowe$ = this.dogsRandomService.trzylosowe$;
     this.czteryodp$ = this.dogsRandomService.odpowiedzi$;
+
     //localStorage.setItem("wynik", JSON.stringify(this.testowa))
   }
 
@@ -93,7 +94,6 @@ export class QuizComponent implements OnInit {
     if (this.formu.value.gender == this.poprawny)
     {
       this.liczdobre++;
-      this.personalBest = this.liczdobre;
 
       setTimeout(() => {
         this.dogSelected = false;
@@ -111,24 +111,32 @@ export class QuizComponent implements OnInit {
         }, 1000);
     }
 
-    //aktualizowanie wyniku dla teraźniejszego gracza i wysłanie do localstorage
-    this.tablicaLStorageService.sendData(this.tablicaLStorageService.updateRecord(this.login.value.username, this.personalBest));
+    if (this.liczdobre > this.personalBest)
+    {
+    this.tablicaLStorageService.sendData(this.tablicaLStorageService.updateRecord(this.login.value.username, this.liczdobre));
+    }
 
-    //resecik formularza aby zlikwidować zaznaczenie
     this.formu.reset();
   }
 
   submit2() {
     this.isuserName = true;
     this.liczdobre = 0;
-    if (!this.tablicaLStorageService.findUser(this.login.value.username)){
-      //jezeli uzytkownik nie istnieje w bazie
-      this.tablicaLStorageService.sendData(this.tablicaLStorageService.addRecord(this.login.value.username, this.liczdobre));
+
+    if (!this.tablicaLStorageService.findUser(this.login.value.username))
+    {
+
+      //this.tablicaLStorageService.sendData(this.tablicaLStorageService.addRecord(this.login.value.username, this.liczdobre));
+      //this.personalBest = this.tablicaLStorageService.PersonalBest(this.formu.value.gender);
+      console.log("nie znaleziono - component")
+      console.log(this.login.value.username, "personal best is:", this.personalBest);
     }
-    //A jeżeli istnieje to nic nie dodaje do bazy
-
+    else
+    {
+      console.log("uzytkownik", this.login.value.username, "juz istnieje");
+      console.log(this.login.value.username, "personal best is:", this.tablicaLStorageService.PersonalBest(this.login.value.username));
+    }
   }
-
 }
 
 
