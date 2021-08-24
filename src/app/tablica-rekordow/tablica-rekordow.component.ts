@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Rekord } from "../models/rekordy";
+import { TablicaLstorageService } from "../tablica-lstorage.service";
+import {map, switchMap} from "rxjs/operators";
+import {BehaviorSubject, Observable} from "rxjs";
+
 
 @Component({
   selector: 'app-tablica-rekordow',
@@ -8,11 +12,18 @@ import { Rekord } from "../models/rekordy";
 })
 export class TablicaRekordowComponent implements OnInit {
 
-  public myData = JSON.parse(<string>localStorage.getItem('wynik')) as Rekord[];
+  myData$: Observable<Rekord[]> | undefined
+  refreshUsers$ = new BehaviorSubject<boolean>(true);
 
-  constructor() { }
+  constructor(private tablicaLStorageServive: TablicaLstorageService) { }
 
   ngOnInit(): void {
+      this.myData$ =this.refreshUsers$.pipe(switchMap(_ => this.tablicaLStorageServive.getRecords()));
+  }
+
+  ref(){
+    this.refreshUsers$.next(false);
+    console.log("poszło");
   }
 
 }

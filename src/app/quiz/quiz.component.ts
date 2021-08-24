@@ -5,6 +5,10 @@ import {Observable} from "rxjs";
 import {DogsRandomService} from "../dogs-random.service";
 import {JedenWybranyPiesService} from "../jeden-wybrany-pies.service";
 import {Rekord} from "../models/rekordy";
+import {TablicaLstorageService} from "../tablica-lstorage.service";
+import {TablicaRekordowComponent} from "../tablica-rekordow/tablica-rekordow.component";
+import {map} from "rxjs/operators";
+
 
 @Component({
   selector: 'app-quiz',
@@ -29,16 +33,22 @@ export class QuizComponent implements OnInit {
   public dogSelected: boolean = false;
   public isuserName: boolean = false;
   public przegrana: boolean = false;
-  public objIndex: number = 0;
-  public localStore = JSON.parse(<string>localStorage.getItem('wynik')) as Rekord[];
+  //public objIndex: Observable<number> = 0;
+  public tab: Rekord[] | undefined;
+
+  public localStore = this.tablicaLStorageService.getRecords();
 
   public yourScore = this.localStore;
 
-  constructor(private infozapicomponent: InfoZApiComponent,
+  constructor(
+              private infozapicomponent: InfoZApiComponent,
               private cdRef: ChangeDetectorRef,
               private fb: FormBuilder,
               private dogsRandomService: DogsRandomService,
-              private jedenWybranyPiesService: JedenWybranyPiesService) {
+              private jedenWybranyPiesService: JedenWybranyPiesService,
+              private tablicaLStorageService: TablicaLstorageService,
+              )
+  {
     this.goodAnswerBreed$ = this.jedenWybranyPiesService.breed$;
     this.allObservable$ = this.dogsRandomService.wszystkieRasy$;
   }
@@ -101,16 +111,19 @@ export class QuizComponent implements OnInit {
     }
 
     //aktualizowanie wyniku dla teraźniejszego gracza
-    this.objIndex = this.yourScore.findIndex((obj => obj.name == this.login.value.username));
-    this.yourScore[this.objIndex].score = this.personalBest;
+    //this.objIndex = this.yourScore.pipe(map(rekord => rekord.findIndex((obj => obj.name == this.login.value.username))));
+    //this.objIndex = this.yourScore.pipe(map((tab) => tab.findIndex((obj => obj.name == this.login.value.username))));
+    //this.yourScore[this.objIndex].score = this.personalBest;
+    //this.yourScore = this.yourScore.pipe(map((tab) => tab.findIndex(this.objIndex)))
 
     //sortowanie tablicy malejąco wzgledem wyniku
-    this.yourScore.sort((a, b) => {
-      return b.score - a.score;
-    });
+    //this.yourScore.sort((a, b) => {
+      //return b.score - a.score;
+    //});
 
     //Wyslanie tablicy na localstorage
     localStorage.setItem("wynik", JSON.stringify(this.yourScore));
+
 
     //resecik formularza aby zlikwidować zaznaczenie
     this.formu.reset();
@@ -120,25 +133,16 @@ export class QuizComponent implements OnInit {
     this.isuserName = true;
     this.liczdobre = 0;
 
-    this.yourScore.push({
-      name: this.login.value.username,
-      score: this.liczdobre,
-    });
+    // this.yourScore.pipe(map((tab) => tab.push({
+    //   name: ,
+    //   score: this.liczdobre,
+    // })));
+    this.tab = this.tablicaLStorageService.addRecord(this.login.value.username, this.liczdobre);
+    this.tablicaLStorageService.sendData(this.tab);
 
-    localStorage.setItem("wynik", JSON.stringify(this.yourScore));
 
-    //this.yourScore = this.localStore;
-    // let wyniki = JSON.parse(<string>localStorage.getItem('wynik'));
-    // this.objIndex = wyniki.findIndex(((obj: { name: string; score: number }) => obj.name == this.login.value.username));
-    // let personalBest = this.yourScore[this.objIndex].score
-    //
-    // if(personalBest > 0) {
-    //
-    // }
-    // else {
-    //
-    // }
-    // localStorage.setItem("wynik", JSON.stringify(this.yourScore));
+    //localStorage.setItem("wynik", JSON.stringify(this.yourScore));
+
   }
 
 }
