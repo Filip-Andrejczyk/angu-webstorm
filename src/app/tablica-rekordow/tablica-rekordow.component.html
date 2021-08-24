@@ -1,19 +1,16 @@
 <div>
-<!--  <table>-->
-<!--    <tr>-->
-<!--      <th>#</th>-->
-<!--      <th>Name</th>-->
-<!--      <th>Score</th>-->
-<!--    </tr>-->
+  <table>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Score</th>
+    </tr>
 
-<!--    <tr *ngFor="let i of tab; let y = index">-->
-<!--      <th>{{y + 1}}</th>-->
-<!--      <th>{{i.name}}</th>-->
-<!--      <th>{{i.score}}</th>-->
-<!--    </tr>-->
+    <tr *ngFor="let y = index; let gracz of myData$ | async">
+      <th>{{y + 1}}</th>
+      <th>{{gracz.name}}</th>
+      <th>{{gracz.score}}</th>
+    </tr>
 
-<!--  </table>-->
-<!--  {{myData | async}}-->
-  <div *ngFor="let gracz of myData$ | async">{{gracz.name}} pkt: {{gracz.score}}</div>
-<!--  <button (click)="ref()">DODAJ</button>-->
+  </table>
 </div>

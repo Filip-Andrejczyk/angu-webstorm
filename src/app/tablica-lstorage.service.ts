@@ -9,7 +9,8 @@ export class TablicaLstorageService {
 
   //public localStore = JSON.parse(<string>localStorage.getItem('wynik')) as Rekord[];
   public tablicaRekordow = (JSON.parse(<string>localStorage.getItem('wynik'))) as Rekord[];
-  public ObjIndx: number = 0;
+
+  public objIndx: number = 0;
 
   constructor() {}
 
@@ -22,6 +23,26 @@ export class TablicaLstorageService {
       return of(this.tablicaRekordow);
     }
   }
+
+  updateRecord(name: string, newscore: number){
+
+    this.objIndx = this.tablicaRekordow.findIndex((obj => obj.name == name));
+    this.tablicaRekordow[this.objIndx].score = newscore;
+    this.sortTab();
+    return this.tablicaRekordow;
+
+  }
+  findUser(name: string): boolean{
+    if (this.tablicaRekordow.findIndex((obj => obj.name == name)) > 0)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
 
   addRecord(name: string, score: number): Rekord[]{
     this.tablicaRekordow.push(({

@@ -36,9 +36,9 @@ export class QuizComponent implements OnInit {
   //public objIndex: Observable<number> = 0;
   public tab: Rekord[] | undefined;
 
-  public localStore = this.tablicaLStorageService.getRecords();
+  //public localStore = this.tablicaLStorageService.getRecords();
 
-  public yourScore = this.localStore;
+  //public yourScore = this.localStore;
 
   constructor(
               private infozapicomponent: InfoZApiComponent,
@@ -57,6 +57,7 @@ export class QuizComponent implements OnInit {
     this.goodAnswerBreed$?.subscribe(ta => this.poprawny = ta);
     this.losowe$ = this.dogsRandomService.trzylosowe$;
     this.czteryodp$ = this.dogsRandomService.odpowiedzi$;
+    //localStorage.setItem("wynik", JSON.stringify(this.testowa))
   }
 
   formu = new FormGroup({
@@ -110,20 +111,8 @@ export class QuizComponent implements OnInit {
         }, 1000);
     }
 
-    //aktualizowanie wyniku dla teraźniejszego gracza
-    //this.objIndex = this.yourScore.pipe(map(rekord => rekord.findIndex((obj => obj.name == this.login.value.username))));
-    //this.objIndex = this.yourScore.pipe(map((tab) => tab.findIndex((obj => obj.name == this.login.value.username))));
-    //this.yourScore[this.objIndex].score = this.personalBest;
-    //this.yourScore = this.yourScore.pipe(map((tab) => tab.findIndex(this.objIndex)))
-
-    //sortowanie tablicy malejąco wzgledem wyniku
-    //this.yourScore.sort((a, b) => {
-      //return b.score - a.score;
-    //});
-
-    //Wyslanie tablicy na localstorage
-    localStorage.setItem("wynik", JSON.stringify(this.yourScore));
-
+    //aktualizowanie wyniku dla teraźniejszego gracza i wysłanie do localstorage
+    this.tablicaLStorageService.sendData(this.tablicaLStorageService.updateRecord(this.login.value.username, this.personalBest));
 
     //resecik formularza aby zlikwidować zaznaczenie
     this.formu.reset();
@@ -132,16 +121,11 @@ export class QuizComponent implements OnInit {
   submit2() {
     this.isuserName = true;
     this.liczdobre = 0;
-
-    // this.yourScore.pipe(map((tab) => tab.push({
-    //   name: ,
-    //   score: this.liczdobre,
-    // })));
-    this.tab = this.tablicaLStorageService.addRecord(this.login.value.username, this.liczdobre);
-    this.tablicaLStorageService.sendData(this.tab);
-
-
-    //localStorage.setItem("wynik", JSON.stringify(this.yourScore));
+    if (!this.tablicaLStorageService.findUser(this.login.value.username)){
+      //jezeli uzytkownik nie istnieje w bazie
+      this.tablicaLStorageService.sendData(this.tablicaLStorageService.addRecord(this.login.value.username, this.liczdobre));
+    }
+    //A jeżeli istnieje to nic nie dodaje do bazy
 
   }
 
