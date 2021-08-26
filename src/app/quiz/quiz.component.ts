@@ -4,10 +4,7 @@ import {InfoZApiComponent} from "../info-z-api/info-z-api.component";
 import {Observable} from "rxjs";
 import {DogsRandomService} from "../dogs-random.service";
 import {JedenWybranyPiesService} from "../jeden-wybrany-pies.service";
-import {Rekord} from "../models/rekordy";
 import {TablicaLstorageService} from "../tablica-lstorage.service";
-import {TablicaRekordowComponent} from "../tablica-rekordow/tablica-rekordow.component";
-import {map} from "rxjs/operators";
 
 
 @Component({
@@ -33,12 +30,6 @@ export class QuizComponent implements OnInit {
   public dogSelected: boolean = false;
   public isuserName: boolean = false;
   public przegrana: boolean = false;
-  //public objIndex: Observable<number> = 0;
-  public tab: Rekord[] | undefined;
-
-  //public localStore = this.tablicaLStorageService.getRecords();
-
-  //public yourScore = this.localStore;
 
   constructor(
               private infozapicomponent: InfoZApiComponent,
@@ -57,8 +48,6 @@ export class QuizComponent implements OnInit {
     this.goodAnswerBreed$?.subscribe(ta => this.poprawny = ta);
     this.losowe$ = this.dogsRandomService.trzylosowe$;
     this.czteryodp$ = this.dogsRandomService.odpowiedzi$;
-
-    //localStorage.setItem("wynik", JSON.stringify(this.testowa))
   }
 
   formu = new FormGroup({
@@ -79,10 +68,12 @@ export class QuizComponent implements OnInit {
     this.isuserName = false;
     this.infozapicomponent.nextPieselek();
   }
+
   tryAgain(){
     this.przegrana = false;
     this.infozapicomponent.nextPieselek();
   }
+
   koniecGry(){
     this.isuserName = false;
     this.przegrana = false;
