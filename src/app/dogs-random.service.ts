@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {GetApiService} from "./get-api.service";
-import {map, switchMap, tap, withLatestFrom} from "rxjs/operators";
-import {combineLatest, Observable, ReplaySubject} from "rxjs";
+import {map, switchMap} from "rxjs/operators";
+import {Observable, ReplaySubject} from "rxjs";
 import {JedenWybranyPiesService} from "./jeden-wybrany-pies.service";
 
 @Injectable({
@@ -32,6 +32,7 @@ export class DogsRandomService {
         const notFlattenBreeds = Object.entries(breeds).map(([breed, subBreeds])=>{
           return subBreeds.length === 0 ? breed : subBreeds.map(subBreed => `${breed}-${subBreed}`)
         });
+        console.log(JSON.stringify(([] as string[]).concat(...notFlattenBreeds)));
         return ([] as string[]).concat(...notFlattenBreeds);
       }));
   }
