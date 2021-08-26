@@ -32,7 +32,6 @@ export class DogsRandomService {
         const notFlattenBreeds = Object.entries(breeds).map(([breed, subBreeds])=>{
           return subBreeds.length === 0 ? breed : subBreeds.map(subBreed => `${breed}-${subBreed}`)
         });
-        console.log(JSON.stringify(([] as string[]).concat(...notFlattenBreeds)));
         return ([] as string[]).concat(...notFlattenBreeds);
       }));
   }

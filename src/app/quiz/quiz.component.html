@@ -13,17 +13,17 @@
           <ng-container>
             <div *ngFor="let doge of odp; let i = index;">
 
-              <label [ngClass]="{
+              <label for="lable_{{i}}" [ngClass]="{
               'row': true,
               'btn-change': (doge === dobraodp && dogSelected)
               }">
 
                 <div class="col-3">
-                  <input type="radio" value="{{doge}}" name="gender" [readOnly]="dogSelected" formControlName="gender">
+                  <input id="lable_{{i}}" type="radio" value="{{doge}}" name="gender" [readOnly]="dogSelected" formControlName="gender">
                 </div>
 
                 <div class="col-9 d-flex justify-content-start fw-bold fs-5" [ngClass] = "'odp-' + i">
-                  {{doge}}
+                  {{doge | translatebreed}}
                 </div>
 
               </label>
