@@ -125,16 +125,11 @@ export class QuizComponent implements OnInit {
 
     if (!this.tablicaLStorageService.findUser(this.login.value.username))
     {
-
-      //this.tablicaLStorageService.sendData(this.tablicaLStorageService.addRecord(this.login.value.username, this.liczdobre));
-      //this.personalBest = this.tablicaLStorageService.PersonalBest(this.formu.value.gender);
-      console.log("nie znaleziono - component")
-      console.log(this.login.value.username, "personal best is:", this.personalBest);
+      this.tablicaLStorageService.sendData(this.tablicaLStorageService.addRecord(this.login.value.username, this.liczdobre));
     }
     else
     {
-      console.log("uzytkownik", this.login.value.username, "juz istnieje");
-      console.log(this.login.value.username, "personal best is:", this.tablicaLStorageService.PersonalBest(this.login.value.username));
+      this.personalBest = this.tablicaLStorageService.PersonalBest(this.login.value.username);
     }
   }
 }

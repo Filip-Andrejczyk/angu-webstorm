@@ -42,6 +42,7 @@ export class TablicaLstorageService {
 
   }
   findUser(name: string): boolean{
+    //debugger;
     if (this.tablicaRekordow.findIndex((obj => obj.name == name)) == -1) // -1 nie ma 0, 1 tip jest
     {
       console.log("nie znaleziono");
@@ -56,7 +57,7 @@ export class TablicaLstorageService {
 
   PersonalBest(name: string): number{
     this.perIndx = this.tablicaRekordow.findIndex((obj => obj.name == name));
-    return this.tablicaRekordow[this.objIndx].score;
+    return this.tablicaRekordow[this.perIndx].score;
   }
 
   addRecord(name: string, score: number): Rekord[]{

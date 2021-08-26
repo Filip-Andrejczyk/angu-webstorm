@@ -47,9 +47,7 @@ export class DogsRandomService {
   appendAndShuffle(): Observable<string[]>
   {
     return this.tenjedenjedyny$.pipe(
-      // withLatestFrom(this.trzylosowe$),
       switchMap(jeden=>this.trzylosowe$.pipe(map(trzylosowe=>([...trzylosowe, jeden])))),
-      // map(([jedenwlasciwy, trzylosowe ]) => this.shuffleArray([...trzylosowe, jedenwlasciwy]))
       map((czteryOdp) => this.shuffleArray(czteryOdp))
     );
   }
