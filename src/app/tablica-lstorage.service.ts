@@ -33,6 +33,8 @@ export class TablicaLstorageService {
     }
   }
 
+  //ZROBIC SERWIS KTURY TRZYMA NAZWE OBECNIE GRAJACEGO ZAWODNIKA
+
   updateRecord(name: string, newscore: number){
 
     this.objIndx = this.tablicaRekordow.findIndex((obj => obj.name == name));
