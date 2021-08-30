@@ -33,7 +33,7 @@
           <div *ngIf="f.gender.touched && f.gender.invalid" class="alert alert-danger">
           </div>
         </div>
-        <button class="mt-4 btn btn-primary" type="submit" [disabled]="!formu.valid">Submit</button>
+        <button class="mt-4 btn btn-primary" type="submit" [disabled]="!formu.valid || clicked">Submit</button>
       </form>
       <div class="fw-bold mt-5 fs-4">
         wynik: {{liczdobre}}

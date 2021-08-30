@@ -30,6 +30,7 @@ export class QuizComponent implements OnInit {
   public dogSelected: boolean = false;
   public isuserName: boolean = false;
   public przegrana: boolean = false;
+  public clicked: boolean = false;
 
   constructor(
               private infozapicomponent: InfoZApiComponent,
@@ -81,6 +82,7 @@ export class QuizComponent implements OnInit {
 
   submit() {
     this.dogSelected = true;
+    this.clicked = true;
 
     if (this.formu.value.gender == this.poprawny)
     {
@@ -89,6 +91,7 @@ export class QuizComponent implements OnInit {
       setTimeout(() => {
         this.dogSelected = false;
         this.infozapicomponent.nextPieselek();
+        this.clicked = false;
       }, 2000);
     }
     else
@@ -99,6 +102,7 @@ export class QuizComponent implements OnInit {
         () => {
           this.dogSelected = false;
           this.przegrana = true;
+          this.clicked = false;
         }, 1000);
     }
 
