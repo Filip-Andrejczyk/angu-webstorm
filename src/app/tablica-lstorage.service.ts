@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {Rekord} from "./models/rekordy";
-import {BehaviorSubject, Observable, of, Subject} from "rxjs";
+import { Rekord } from "./models/rekordy";
+import { Observable, of } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +41,7 @@ export class TablicaLstorageService {
     return this.tablicaRekordow;
 
   }
+
   findUser(name: string): boolean{
     //debugger;
     if (this.tablicaRekordow.findIndex((obj => obj.name == name)) == -1) // -1 nie ma 0, 1 tip jest
@@ -65,6 +66,11 @@ export class TablicaLstorageService {
       name: name,
       score: score,
     }));
+    return this.tablicaRekordow;
+  }
+
+  removeRecord(indexik: number): Rekord[]{
+    this.tablicaRekordow.splice(indexik, 1);
     return this.tablicaRekordow;
   }
 
