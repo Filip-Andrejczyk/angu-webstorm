@@ -2,17 +2,17 @@
   <table class="table table-hover table-light table-bordered border-dark">
     <thead>
       <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Score</th>
+        <th class="col-1">#</th>
+        <th class="col-1">Name</th>
+        <th class="col-1">Score</th>
       </tr>
     </thead>
 
     <tbody>
       <tr *ngFor="let y = index; let gracz of myData$ | async">
-        <th>{{y + 1}}</th>
-        <th>{{gracz.name}}</th>
-        <th>{{gracz.score}}</th>
+        <td class="col-1">{{y + 1}}</td>
+        <td class="col-1">{{gracz.name}}</td>
+        <td class="col-1">{{gracz.score}}</td>
       </tr>
     </tbody>
 
