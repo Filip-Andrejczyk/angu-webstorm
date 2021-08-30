@@ -17,7 +17,6 @@ import { MenubarComponent } from './menubar/menubar.component';
 import { HttpClientModule } from "@angular/common/http";
 import { InfoZApiComponent } from './info-z-api/info-z-api.component';
 import { QuizComponent } from './quiz/quiz.component';
-import {NgParticlesModule} from "ng-particles";
 import { TablicaRekordowComponent } from './tablica-rekordow/tablica-rekordow.component';
 import { TranslatebreedPipe } from './pipy/translatebreed.pipe';
 
@@ -45,8 +44,7 @@ import { TranslatebreedPipe } from './pipy/translatebreed.pipe';
         ReactiveFormsModule,
         FormsModule,
         NgbModule,
-        HttpClientModule,
-        NgParticlesModule
+        HttpClientModule
     ],
   providers: [],
   bootstrap: [AppComponent]

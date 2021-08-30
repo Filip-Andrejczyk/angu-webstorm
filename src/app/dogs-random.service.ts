@@ -13,6 +13,7 @@ export class DogsRandomService {
   public trzylosowe$: Observable<string[]>;
   public tenjedenjedyny$: Observable<string>;
   public odpowiedzi$: Observable<string[]>;
+  public wszystkieRasyBezWybranego$: Observable<string[]>;
 
   refreshAnswerSrc: ReplaySubject<{ except: string }> = new ReplaySubject(1);
 
@@ -20,6 +21,7 @@ export class DogsRandomService {
   {
     this.tenjedenjedyny$ = this.jedenWybranyPiesService.breed$;
     this.wszystkieRasy$ = this.getBreeds();
+    this.wszystkieRasyBezWybranego$ = this.usunDobraOdpZPuliDoLosowania();
     this.trzylosowe$ = this.wylosujDogs();
     this.odpowiedzi$ = this.appendAndShuffle();
     this.refreshAnswers();
@@ -39,9 +41,15 @@ export class DogsRandomService {
   wylosujDogs(): Observable<string[]>
   {
     return this.refreshAnswerSrc.pipe(
-      switchMap(()=>this.wszystkieRasy$),
+      switchMap(()=>this.wszystkieRasyBezWybranego$),
       map(allBreeds => this.chooseThreedogz(allBreeds))
     );
+  }
+
+  usunDobraOdpZPuliDoLosowania(): Observable<string[]>
+  {
+    return this.tenjedenjedyny$.pipe(
+      switchMap(wybranypiesek => this.wszystkieRasy$.pipe(map(rasy => this.usunZTablicy(rasy, wybranypiesek)))));
   }
 
   appendAndShuffle(): Observable<string[]>
@@ -69,6 +77,12 @@ export class DogsRandomService {
       taken[x] = --len in taken ? taken[len] : len;
     }
     return threeRandomDogs;
+  }
+
+  usunZTablicy(tablica: string[], element: string): string[]{
+    let ind = tablica.indexOf(element);
+    tablica.splice(ind, 1);
+    return tablica;
   }
 
   shuffleArray(array: string[]): string[]
