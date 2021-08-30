@@ -1,9 +1,6 @@
-import { Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
+import { Component, ViewChild, AfterViewInit} from '@angular/core';
 import {GetApiService} from '../get-api.service';
-import {Observable, Subject, of} from "rxjs";
-import {map, shareReplay, switchMap} from "rxjs/operators";
-import {DogRasa} from "../models/rasy";
-import {observableToBeFn} from "rxjs/internal/testing/TestScheduler";
+import {Observable} from "rxjs";
 import {DogsRandomService} from "../dogs-random.service";
 import {QuizComponent} from "../quiz/quiz.component";
 import {JedenWybranyPiesService} from "../jeden-wybrany-pies.service";
@@ -18,31 +15,15 @@ export class InfoZApiComponent implements AfterViewInit {
   doggoImgPath$: Observable<string> | undefined;
   rasa$: Observable<any> | undefined;
 
-  //clickAction: Subject<void> = new Subject();
-  //drawDogs: Subject<void> = new Subject();
+  public zostaloPominiec: number = 3;
+  public koniecPomijania: boolean = false;
 
   @ViewChild(QuizComponent) child: { wylosujPieski: () => any; } | undefined;
 
   constructor(private api: GetApiService,
               private dogsRandomService: DogsRandomService,
               private jedenWybranyPiesService: JedenWybranyPiesService
-              ) {
-
-    // this.allBreeds$ = this.api.allBreeds().pipe(map((rasy) => rasy.message),
-    //   map(breeds => {
-    //     const notFlattenBreeds = Object.entries(breeds).map(([breed, subBreeds])=>{
-    //       return subBreeds.length === 0 ? breed : subBreeds.map(subBreed => `${breed}-${subBreed}`)
-    //     });
-    //     return ([] as string[]).concat(...notFlattenBreeds);
-    //   }));
-
-    // this.threeRandomBreeds$ = this.drawDogs.pipe(switchMap(() => this.allBreeds$.pipe(
-    //   map((allBreeds) =>
-    //     this.getThreeRandom(allBreeds),
-    //   )
-    // )));
-
-  }
+              ) {}
 
   ngAfterViewInit(): void
   {
@@ -53,6 +34,20 @@ export class InfoZApiComponent implements AfterViewInit {
   nextPieselek(): void
   {
     this.jedenWybranyPiesService.changeRandomDog.next();
+  }
+
+  nextPieselekPrzycisk(): void
+  {
+
+    if(this.zostaloPominiec > 0)
+    {
+      this.jedenWybranyPiesService.changeRandomDog.next();
+      this.zostaloPominiec--;
+    }
+    if (this.zostaloPominiec == 0)
+    {
+      this.koniecPomijania = true;
+    }
   }
 
 }
