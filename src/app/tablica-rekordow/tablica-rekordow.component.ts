@@ -15,7 +15,6 @@ export class TablicaRekordowComponent implements OnInit {
   myData$: Observable<Rekord[]> | undefined
   refreshUsers$ = new BehaviorSubject<boolean>(true);
   public kliknietoEdytuj: boolean = false;
-  public numberofKliknietoEdytuj: number = 0;
 
   constructor(private tablicaLStorageServive: TablicaLstorageService) { }
 
@@ -28,7 +27,8 @@ export class TablicaRekordowComponent implements OnInit {
     this.kliknietoEdytuj = !this.kliknietoEdytuj;
   }
 
-  dajZ(nr: number): void{
+  usunRekord(nr: number): void{
+
     return this.tablicaLStorageServive.sendData(this.tablicaLStorageServive.removeRecord(nr));
   }
 

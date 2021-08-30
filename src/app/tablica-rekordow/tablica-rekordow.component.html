@@ -37,7 +37,7 @@
         <tbody>
           <tr *ngFor="let z = index of myData$ | async">
             <td class="col-1 no-border">
-              <button class="btn btn-danger btn-xs kolorIksa" (click)="dajZ(z)">x</button>
+              <button class="btn btn-danger btn-xs kolorIksa" (click)="usunRekord(z)">x</button>
             </td>
           </tr>
         </tbody>
@@ -47,7 +47,8 @@
     </div>
 
   </div>
+</div>
 
-  <button class="btn btn-primary display-flex justify-content-end shadow-none" (click)="edytujClikc()">Edytuj</button>
-
+<div>
+  <button class="btn btn-primary shadow-none float-start" (click)="edytujClikc()">Edytuj</button>
 </div>
