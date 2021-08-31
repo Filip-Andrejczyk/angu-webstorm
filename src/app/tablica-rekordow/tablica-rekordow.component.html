@@ -49,6 +49,15 @@
   </div>
 </div>
 
-<div>
-  <button class="btn btn-primary shadow-none float-start" (click)="edytujClikc()">Edytuj</button>
-</div>
+<ng-container>
+  <div class="col col-3" *ngIf="prawidlowyGracz; else zlyGraczTemplate">
+    <button class="btn btn-primary shadow-none float-start" (click)="edytujClikc()">Edytuj</button>
+  </div>
+</ng-container>
+
+<ng-template #zlyGraczTemplate>
+  <div class="col col-3">
+    <button class="btn btn-primary shadow-none float-start" (click)="edytujClikc()">Edytuj</button>
+    {{statusUsuniecia}}
+  </div>
+</ng-template>

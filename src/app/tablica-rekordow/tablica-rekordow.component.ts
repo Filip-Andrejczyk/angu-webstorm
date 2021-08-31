@@ -17,6 +17,8 @@ export class TablicaRekordowComponent implements OnInit {
   refreshUsers$ = new BehaviorSubject<boolean>(true);
   public kliknietoEdytuj: boolean = false;
   public gracz: string = "";
+  public statusUsuniecia: string = "";
+  public prawidlowyGracz = true;
 
   constructor(private tablicaLStorageServive: TablicaLstorageService,
               private currentPlayaService: CurrentPlayarService)
@@ -31,11 +33,24 @@ export class TablicaRekordowComponent implements OnInit {
   edytujClikc(): void{
 
     this.kliknietoEdytuj = !this.kliknietoEdytuj;
-    console.log("gracz z serwisa: ", this.gracz);
+
   }
 
   usunRekord(nr: number): void{
-    return this.tablicaLStorageServive.sendData(this.tablicaLStorageServive.removeRecord(nr));
+
+    let curentUserName = this.gracz;
+    let usrIndex = this.tablicaLStorageServive.tablicaRekordow.findIndex((obj => obj.name == curentUserName));
+
+    if (usrIndex === nr)
+    {
+      return this.tablicaLStorageServive.sendData(this.tablicaLStorageServive.removeRecord(nr));
+    }
+    else
+    {
+      this.prawidlowyGracz = false;
+      this.statusUsuniecia = "Nie możesz usunąć cudzego rekordu, " + this.gracz;
+    }
+    setTimeout(() => {this.prawidlowyGracz = true}, 1500);
   }
 
 }

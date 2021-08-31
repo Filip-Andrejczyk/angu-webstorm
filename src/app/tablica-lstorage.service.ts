@@ -7,7 +7,6 @@ import { Observable, of } from "rxjs";
 })
 export class TablicaLstorageService {
 
-  //public localStore = JSON.parse(<string>localStorage.getItem('wynik')) as Rekord[];
   public tablicaRekordow = (JSON.parse(<string>localStorage.getItem('wynik'))) as Rekord[];
 
   public brak = [
@@ -15,8 +14,8 @@ export class TablicaLstorageService {
     //{ "name": "Wojtek", "score": 0 },
   ];
 
-  public objIndx: number = 0;
-  public perIndx: number = 0;
+  public objectIndx: number = 0;
+  public personalIndx: number = 0;
 
   constructor() {}
 
@@ -26,27 +25,23 @@ export class TablicaLstorageService {
       return of(this.tablicaRekordow);
     }
     else{
-      // return of(this.tablicaRekordow);
       this.tablicaRekordow = this.brak
       this.sendData(this.tablicaRekordow);
       return of(this.tablicaRekordow);
     }
   }
 
-  //ZROBIC SERWIS KTURY TRZYMA NAZWE OBECNIE GRAJACEGO ZAWODNIKA
-
   updateRecord(name: string, newscore: number){
 
-    this.objIndx = this.tablicaRekordow.findIndex((obj => obj.name == name));
-    this.tablicaRekordow[this.objIndx].score = newscore;
+    this.objectIndx = this.tablicaRekordow.findIndex((obj => obj.name == name));
+    this.tablicaRekordow[this.objectIndx].score = newscore;
     this.sortTab();
     return this.tablicaRekordow;
 
   }
 
   findUser(name: string): boolean{
-    //debugger;
-    if (this.tablicaRekordow.findIndex((obj => obj.name == name)) == -1) // -1 nie ma 0, 1 tip jest
+    if (this.tablicaRekordow.findIndex((obj => obj.name == name)) == -1) // -1 nie ma 0, 1 itp jest
     {
       console.log("nie znaleziono");
       return false;
@@ -59,8 +54,12 @@ export class TablicaLstorageService {
   }
 
   PersonalBest(name: string): number{
-    this.perIndx = this.tablicaRekordow.findIndex((obj => obj.name == name));
-    return this.tablicaRekordow[this.perIndx].score;
+    this.personalIndx = this.tablicaRekordow.findIndex((obj => obj.name == name));
+    return this.tablicaRekordow[this.personalIndx].score;
+  }
+
+  findNameByIndex(numberInArray: number): string{
+    return this.tablicaRekordow[numberInArray].name;
   }
 
   addRecord(name: string, score: number): Rekord[]{
