@@ -11,8 +11,8 @@ export class TablicaLstorageService {
   public tablicaRekordow = (JSON.parse(<string>localStorage.getItem('wynik'))) as Rekord[];
 
   public brak = [
-    { "name": "Filip", "score": 0 },
-    { "name": "Wojtek", "score": 0 },
+    //{ "name": "Filip", "score": 0 },
+    //{ "name": "Wojtek", "score": 0 },
   ];
 
   public objIndx: number = 0;
