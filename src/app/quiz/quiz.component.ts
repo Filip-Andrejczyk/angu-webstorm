@@ -5,6 +5,7 @@ import {Observable} from "rxjs";
 import {DogsRandomService} from "../dogs-random.service";
 import {JedenWybranyPiesService} from "../jeden-wybrany-pies.service";
 import {TablicaLstorageService} from "../tablica-lstorage.service";
+import {CurrentPlayarService} from "../current-playar.service";
 
 
 @Component({
@@ -39,6 +40,7 @@ export class QuizComponent implements OnInit {
               private dogsRandomService: DogsRandomService,
               private jedenWybranyPiesService: JedenWybranyPiesService,
               private tablicaLStorageService: TablicaLstorageService,
+              private currentPlayaService: CurrentPlayarService
               )
   {
     this.goodAnswerBreed$ = this.jedenWybranyPiesService.breed$;
@@ -117,6 +119,7 @@ export class QuizComponent implements OnInit {
   submit2() {
     this.isuserName = true;
     this.liczdobre = 0;
+    this.currentPlayaService.saveData(this.login.value.username);
 
     if (!this.tablicaLStorageService.findUser(this.login.value.username))
     {
