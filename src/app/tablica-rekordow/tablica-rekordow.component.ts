@@ -48,9 +48,9 @@ export class TablicaRekordowComponent implements OnInit {
     else
     {
       this.prawidlowyGracz = false;
-      this.statusUsuniecia = "Nie możesz usunąć cudzego rekordu, " + this.gracz;
+      this.statusUsuniecia = "Nie możesz usunąć cudzego rekordu  " + this.gracz;
     }
-    setTimeout(() => {this.prawidlowyGracz = true}, 1500);
+    setTimeout(() => {this.prawidlowyGracz = true}, 3700);
   }
 
 }

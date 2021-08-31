@@ -37,7 +37,7 @@
         <tbody>
           <tr *ngFor="let z = index of myData$ | async">
             <td class="col-1 no-border">
-              <button class="btn btn-danger btn-xs kolorIksa" (click)="usunRekord(z)">x</button>
+              <button class="btn btn-danger btn-xs kolorIksa shadow-none" (click)="usunRekord(z)">x</button>
             </td>
           </tr>
         </tbody>
@@ -50,14 +50,16 @@
 </div>
 
 <ng-container>
-  <div class="col col-3" *ngIf="prawidlowyGracz; else zlyGraczTemplate">
+  <div class="col col-10 d-flex align-items-center he" *ngIf="prawidlowyGracz; else zlyGraczTemplate">
     <button class="btn btn-primary shadow-none float-start" (click)="edytujClikc()">Edytuj</button>
   </div>
+  <div class="col-2"></div>
 </ng-container>
 
 <ng-template #zlyGraczTemplate>
-  <div class="col col-3">
+  <div class="col col-10 d-flex align-items-center he">
     <button class="btn btn-primary shadow-none float-start" (click)="edytujClikc()">Edytuj</button>
-    {{statusUsuniecia}}
+    <strong>{{statusUsuniecia}}</strong>
   </div>
+  <div class="col-2"></div>
 </ng-template>
