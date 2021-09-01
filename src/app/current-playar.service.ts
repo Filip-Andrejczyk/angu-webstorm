@@ -7,8 +7,12 @@ import { BehaviorSubject } from "rxjs";
 export class CurrentPlayarService {
 
   nazwagracza: string = "";
+  trybHard: boolean = false;
 
   private dataStringSource = new BehaviorSubject<string>("");
+  public dataBoolSource = new BehaviorSubject<boolean>(false);
+
+  public dataBoolean$ = this.dataBoolSource.asObservable();
   dataString$ = this.dataStringSource.asObservable();
 
   constructor() {}

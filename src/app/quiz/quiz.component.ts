@@ -28,11 +28,14 @@ export class QuizComponent implements OnInit {
   public dogForm: FormGroup = this.fb.group({});
   public stringStyle: string = "btn-default";
   public div: string = "";
+
   public dogSelected: boolean = false;
   public isuserName: boolean = false;
   public przegrana: boolean = false;
   public clicked: boolean = false;
-  public isHard: boolean = true;
+  public isHard: boolean = false;
+
+  public inputPlaceholder: string = "";
 
   constructor(
               private infozapicomponent: InfoZApiComponent,
@@ -50,6 +53,7 @@ export class QuizComponent implements OnInit {
 
   ngOnInit(): void {
     this.goodAnswerBreed$?.subscribe(ta => this.poprawny = ta);
+    this.currentPlayaService.dataBoolean$.subscribe(hard => this.isHard = hard);
     this.losowe$ = this.dogsRandomService.trzylosowe$;
     this.czteryodp$ = this.dogsRandomService.odpowiedzi$;
   }
@@ -66,8 +70,9 @@ export class QuizComponent implements OnInit {
   get f() {
     return this.formu.controls;
   }
+
   setDificultyLvl(lvl: boolean){
-    this.isHard = lvl;
+    this.currentPlayaService.dataBoolSource.next(lvl);
   }
 
   newUser(){
@@ -112,27 +117,44 @@ export class QuizComponent implements OnInit {
         }, 1000);
     }
 
-    if (this.liczdobre > this.personalBest)
+    if (!this.isHard)
     {
-    this.tablicaLStorageService.sendData(this.tablicaLStorageService.updateRecord(this.login.value.username, this.liczdobre));
+      if (this.liczdobre > this.personalBest)
+      {
+        this.tablicaLStorageService.sendData(this.tablicaLStorageService.updateRecord(this.login.value.username, this.liczdobre, this.isHard), this.isHard);
+      }
+    }
+    else
+    {
+      this.tablicaLStorageService.sendData(this.tablicaLStorageService.updateRecord(this.login.value.username, this.liczdobre, this.isHard), this.isHard);
     }
 
     this.formu.reset();
   }
 
   submit2() {
-    this.isuserName = true;
-    this.liczdobre = 0;
-    this.currentPlayaService.saveData(this.login.value.username);
 
-    if (!this.tablicaLStorageService.findUser(this.login.value.username))
+    if (this.login.value.username == "")
     {
-      this.tablicaLStorageService.sendData(this.tablicaLStorageService.addRecord(this.login.value.username, this.liczdobre));
+      this.isuserName = false;
+      this.inputPlaceholder = "      UZUPEŁNIJ POLE"
     }
     else
     {
-      this.personalBest = this.tablicaLStorageService.PersonalBest(this.login.value.username);
+      this.isuserName = true;
+      this.liczdobre = 0;
+      this.currentPlayaService.saveData(this.login.value.username);
+
+      if (!this.tablicaLStorageService.findUser(this.login.value.username, this.isHard))
+      {
+        this.tablicaLStorageService.sendData(this.tablicaLStorageService.addRecord(this.login.value.username, this.liczdobre, this.isHard), this.isHard);
+      }
+      else
+      {
+        this.personalBest = this.tablicaLStorageService.PersonalBest(this.login.value.username, this.isHard);
+      }
     }
+
   }
 }
 

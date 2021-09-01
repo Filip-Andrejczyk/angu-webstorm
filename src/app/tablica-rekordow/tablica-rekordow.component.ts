@@ -13,21 +13,28 @@ import { CurrentPlayarService } from "../current-playar.service";
 })
 export class TablicaRekordowComponent implements OnInit {
 
-  myData$: Observable<Rekord[]> | undefined
+  tablicaTrybLatwy$: Observable<Rekord[]> | undefined;
+  tablicaTrybTrudny$: Observable<Rekord[]> | undefined;
+
   refreshUsers$ = new BehaviorSubject<boolean>(true);
   public kliknietoEdytuj: boolean = false;
-  public gracz: string = "";
+
   public statusUsuniecia: string = "";
   public prawidlowyGracz = true;
+
+  public gracz: string = "";
+  public trybHard: boolean = false;
 
   constructor(private tablicaLStorageServive: TablicaLstorageService,
               private currentPlayaService: CurrentPlayarService)
   {
     this.currentPlayaService.dataString$.subscribe(nazwa => this.gracz = nazwa);
+    this.currentPlayaService.dataBoolean$.subscribe(tryb => this.trybHard = tryb);
   }
 
   ngOnInit(): void {
-      this.myData$ = this.refreshUsers$.pipe(switchMap(_ => this.tablicaLStorageServive.getRecords()));
+      this.tablicaTrybLatwy$ = this.refreshUsers$.pipe(switchMap(_ => this.tablicaLStorageServive.getEZRecords()));
+      this.tablicaTrybTrudny$ = this.refreshUsers$.pipe(switchMap(_ => this.tablicaLStorageServive.getHardRecords()));
   }
 
   edytujClikc(): void{
@@ -43,7 +50,7 @@ export class TablicaRekordowComponent implements OnInit {
 
     if (usrIndex === nr)
     {
-      return this.tablicaLStorageServive.sendData(this.tablicaLStorageServive.removeRecord(nr));
+      return this.tablicaLStorageServive.sendData(this.tablicaLStorageServive.removeRecord(nr), this.trybHard);
     }
     else
     {

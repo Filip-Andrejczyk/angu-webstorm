@@ -14,11 +14,13 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let y = index; let gracz of myData$ | async">
+
+          <tr *ngFor="let y = index; let gracz of (trybHard ? tablicaTrybTrudny$ : tablicaTrybLatwy$) | async">
             <td class="col-1">{{y + 1}}</td>
             <td class="col-1">{{gracz.name}}</td>
             <td class="col-1">{{gracz.score}}</td>
           </tr>
+
         </tbody>
 
       </table>
@@ -35,7 +37,7 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let z = index of myData$ | async">
+          <tr *ngFor="let z = index of tablicaTrybLatwy$ | async">
             <td class="col-1 no-border">
               <button class="btn btn-danger btn-xs kolorIksa shadow-none" (click)="usunRekord(z)">x</button>
             </td>

@@ -22,7 +22,7 @@
                   <input id="lable_{{i}}" type="radio" value="{{doge}}" name="gender" [readOnly]="dogSelected" formControlName="gender">
                 </div>
 
-                <div class="col-9 d-flex justify-content-start fw-bold fs-5" [ngClass] = "'odp-' + i">
+                <div class="col-9 d-flex justify-content-start fw-bold fs-5 duza-litera" [ngClass] = "'odp-' + i">
                   {{doge | translatebreed}}
                 </div>
 
@@ -39,7 +39,8 @@
         wynik: {{liczdobre}}
       </div><br>
       <div>
-        <button class="btn btn-primary" routerLink="" (click)="koniecGry()">Zakończ</button>
+        <button class="btn btn-primary" routerLink="" (click)="koniecGry()">Zakończ</button><br>
+        grasz w trybie Hard: {{isHard}}
       </div>
     </div>
   </div>
@@ -53,18 +54,18 @@
     </div>
   <form [formGroup]="login" (ngSubmit)="submit2()">
 
-    <input class="mt-3" type="text" value="" name="username" formControlName="username"><br>
+    <input required class="mt-3" id="nazwaurz" type="text" value="" name="username" formControlName="username" [placeholder]="inputPlaceholder"><br>
 
     <div class="fw-bold mt-2">
       Wybierz poziom trudności:
     </div>
 
     <div>
-      <button [ngClass]="{'m-1 btn': true, 'btn-primary shadow-none': !isHard, 'btn-success shadow': isHard }" type="button" (click)="setDificultyLvl(true)">Łatwy</button>
-      <button [ngClass]="{'m-1 btn': true, 'btn-primary shadow-none': isHard, 'btn-success shadow': !isHard }" type="button" (click)="setDificultyLvl(false)">Trudny</button>
+      <button [ngClass]="{'m-1 btn': true, 'btn-primary shadow-none': isHard, 'btn-success shadow': !isHard }" type="button" (click)="setDificultyLvl(false)">Łatwy</button>
+      <button [ngClass]="{'m-1 btn': true, 'btn-primary shadow-none': !isHard, 'btn-success shadow': isHard }" type="button" (click)="setDificultyLvl(true)">Trudny</button>
     </div>
 
-    <button class="mt-2 btn btn-primary" type="submit">Zapisz</button>
+    <button class="mt-2 btn btn-primary" type="submit" [disabled]="">Zapisz</button>
 
   </form>
   </div>
