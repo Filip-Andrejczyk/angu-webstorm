@@ -32,6 +32,7 @@ export class QuizComponent implements OnInit {
   public isuserName: boolean = false;
   public przegrana: boolean = false;
   public clicked: boolean = false;
+  public isHard: boolean = true;
 
   constructor(
               private infozapicomponent: InfoZApiComponent,
@@ -64,6 +65,9 @@ export class QuizComponent implements OnInit {
 
   get f() {
     return this.formu.controls;
+  }
+  setDificultyLvl(lvl: boolean){
+    this.isHard = lvl;
   }
 
   newUser(){
