@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Rekord } from "./models/rekordy";
 import { Observable, of } from "rxjs";
-import {keyframes} from "@angular/animations";
 
 @Injectable({
   providedIn: 'root'
@@ -73,6 +72,7 @@ export class TablicaLstorageService {
   }
 
   findUser(name: string, isHard: boolean): boolean{
+
     if (!isHard){
       if (this.tablicaRekordow.findIndex((obj => obj.name == name)) == -1) // -1 nie ma 0, 1 itp jest
       {console.log("nie znaleziono");return false;}
@@ -129,10 +129,10 @@ export class TablicaLstorageService {
 
     if(!isHard)
     {
-      localStorage.setItem("wynikHard", JSON.stringify(t));
+      localStorage.setItem("wynik", JSON.stringify(t));
     }else
     {
-      localStorage.setItem("wynik", JSON.stringify(t))
+      localStorage.setItem("wynikHard", JSON.stringify(t))
     }
   }
 
