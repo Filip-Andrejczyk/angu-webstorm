@@ -60,7 +60,7 @@ export class TablicaRekordowComponent implements OnInit {
 
     if (this.usrIndex === nr)
     {
-      return this.tablicaLStorageServive.sendData(this.tablicaLStorageServive.removeRecord(nr), this.trybHard);
+      return this.tablicaLStorageServive.sendData(this.tablicaLStorageServive.removeRecord(nr, isHard), this.trybHard);
     }
     else
     {

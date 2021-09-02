@@ -120,9 +120,15 @@ export class TablicaLstorageService {
 
   }
 
-  removeRecord(indexik: number): Rekord[]{
-    this.tablicaRekordow.splice(indexik, 1);
-    return this.tablicaRekordow;
+  removeRecord(indexik: number, isHard: boolean): Rekord[]{
+    if (!isHard){
+      this.tablicaRekordow.splice(indexik, 1);
+      return this.tablicaRekordow;
+    }else{
+      this.tablicaTrybHARD.splice(indexik, 1);
+      return this.tablicaTrybHARD;
+    }
+
   }
 
   sendData(t: Rekord[], isHard: boolean){
