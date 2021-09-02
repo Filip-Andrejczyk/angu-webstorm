@@ -21,6 +21,7 @@
             <td class="col-1">{{gracz.score}}</td>
           </tr>
 
+
         </tbody>
 
       </table>
@@ -37,7 +38,7 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let z = index of tablicaTrybLatwy$ | async">
+          <tr *ngFor="let z = index of (!trybHard ? tablicaTrybLatwy$: tablicaTrybTrudny$) | async">
             <td class="col-1 no-border">
               <button class="btn btn-danger btn-xs kolorIksa shadow-none" (click)="usunRekord(z)">x</button>
             </td>

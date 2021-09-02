@@ -40,7 +40,7 @@ export class TablicaRekordowComponent implements OnInit {
   edytujClikc(): void{
 
     this.kliknietoEdytuj = !this.kliknietoEdytuj;
-
+    console.log("Wlaczony tryb hard: ", this.trybHard);
   }
 
   usunRekord(nr: number): void{
