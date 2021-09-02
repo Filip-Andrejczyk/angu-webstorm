@@ -85,11 +85,17 @@ export class TablicaLstorageService {
   }
 
   PersonalBest(name: string, isHard: boolean): number{
-    if (!isHard){
+
+    if (!isHard)
+    {
       this.personalIndx = this.tablicaRekordow.findIndex((obj => obj.name == name));
+      console.log("dla jego personal best (tablicaEZ) is: ", this.tablicaRekordow[this.personalIndx].score)
       return this.tablicaRekordow[this.personalIndx].score;
-    }else{
+    }
+    else
+    {
       this.personalIndx = this.tablicaTrybHARD.findIndex((obj => obj.name == name));
+      console.log("dla jego personal best (tablicaHARD) is: ", this.tablicaTrybHARD[this.personalIndx].score)
       return this.tablicaTrybHARD[this.personalIndx].score;
     }
 

@@ -10,11 +10,14 @@
     <div class="col-lg-4 d-flex justify-content-center">
       <div class="obrazekpieska border border-success">
         <img [src]="(doggoImgPath$ | async)" alt=""/>
-        <button class="przycisk btn-success shadow-none" (click)="nextPieselekPrzycisk()" [disabled]="koniecPomijania">Kolejny Piesełek</button><br>
-        <div class="fw-bold mt-1">
-          Zostało pominięć: {{zostaloPominiec}}
-        </div>
-
+        <ng-container>
+          <div *ngIf="!trybTrudny">
+            <button class="przycisk btn-success shadow-none" (click)="nextPieselekPrzycisk()" [disabled]="koniecPomijania">Kolejny Piesełek</button><br>
+            <div class="fw-bold mt-1">
+              Zostało pominięć: {{zostaloPominiec}}
+            </div>
+          </div>
+        </ng-container>
       </div>
     </div>
 

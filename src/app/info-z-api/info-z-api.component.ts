@@ -4,6 +4,8 @@ import {Observable} from "rxjs";
 import {DogsRandomService} from "../dogs-random.service";
 import {QuizComponent} from "../quiz/quiz.component";
 import {JedenWybranyPiesService} from "../jeden-wybrany-pies.service";
+import {CurrentPlayarService} from "../current-playar.service";
+
 
 @Component({
   selector: 'app-info-z-api',
@@ -17,13 +19,17 @@ export class InfoZApiComponent implements AfterViewInit {
 
   public zostaloPominiec: number = 3;
   public koniecPomijania: boolean = false;
+  public trybTrudny: boolean = false;
 
   @ViewChild(QuizComponent) child: { wylosujPieski: () => any; } | undefined;
 
   constructor(private api: GetApiService,
               private dogsRandomService: DogsRandomService,
-              private jedenWybranyPiesService: JedenWybranyPiesService
-              ) {}
+              private jedenWybranyPiesService: JedenWybranyPiesService,
+              private currentPlayaService: CurrentPlayarService
+              ) {
+    this.currentPlayaService.dataBoolean$.subscribe(tryb => this.trybTrudny = tryb);
+  }
 
   ngAfterViewInit(): void
   {

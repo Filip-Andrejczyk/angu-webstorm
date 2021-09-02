@@ -117,11 +117,14 @@ export class QuizComponent implements OnInit {
         }, 1000);
     }
 
+
     if (!this.isHard)
     {
+
       if (this.liczdobre > this.personalBest)
       {
         this.tablicaLStorageService.sendData(this.tablicaLStorageService.updateRecord(this.login.value.username, this.liczdobre, this.isHard), this.isHard);
+        this.personalBest = this.liczdobre;
       }
     }
     else
