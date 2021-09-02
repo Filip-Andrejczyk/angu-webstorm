@@ -35,6 +35,10 @@ export class QuizComponent implements OnInit {
   public clicked: boolean = false;
   public isHard: boolean = false;
 
+  public timeForAnswer: number = 8;
+  public interval: number = 0;
+
+
   public inputPlaceholder: string = "";
 
   constructor(
@@ -71,6 +75,7 @@ export class QuizComponent implements OnInit {
     return this.formu.controls;
   }
 
+
   setDificultyLvl(lvl: boolean){
     this.currentPlayaService.dataBoolSource.next(lvl);
   }
@@ -78,17 +83,70 @@ export class QuizComponent implements OnInit {
   newUser(){
     this.przegrana = false;
     this.isuserName = false;
+    this.login.value.username = "";
     this.infozapicomponent.nextPieselek();
   }
 
   tryAgain(){
     this.przegrana = false;
     this.infozapicomponent.nextPieselek();
+    if (this.isHard){
+      this.startTimer();
+    }
   }
 
   koniecGry(){
     this.isuserName = false;
     this.przegrana = false;
+    this.currentPlayaService.saveData("");
+  }
+
+  udzielonoDobrejOdpowiedzi(){
+    this.liczdobre++;
+    if (this.isHard){
+      this.stopTimer();
+    }
+    setTimeout(() => {
+      this.dogSelected = false;
+      this.infozapicomponent.nextPieselek();
+      this.clicked = false;
+      this.startTimer();
+    }, 2000);
+  }
+
+  udzielonoZlejOdpowiedzi(fast = false){
+    this.liczdobre = 0;
+    if (this.isHard){
+      this.stopTimer();
+    }
+    if (!fast) {
+      setTimeout(
+        () => {
+          this.dogSelected = false;
+          this.przegrana = true;
+          this.clicked = false;
+        }, 1000);
+    } else {
+      this.dogSelected = false;
+      this.przegrana = true;
+      this.clicked = false;
+    }
+  }
+
+  startTimer(){
+    this.timeForAnswer = 8;
+    this.interval = setInterval(() => {
+      if (this.timeForAnswer > 0){
+        this.timeForAnswer--;
+      }else{
+        this.stopTimer();
+        console.log("dupa");
+        this.udzielonoZlejOdpowiedzi(true);
+      }
+    }, 1000)
+  }
+  stopTimer(){
+    clearInterval(this.interval);
   }
 
   submit() {
@@ -97,26 +155,12 @@ export class QuizComponent implements OnInit {
 
     if (this.formu.value.gender == this.poprawny)
     {
-      this.liczdobre++;
-
-      setTimeout(() => {
-        this.dogSelected = false;
-        this.infozapicomponent.nextPieselek();
-        this.clicked = false;
-      }, 2000);
+      this.udzielonoDobrejOdpowiedzi();
     }
     else
     {
-      this.liczdobre = 0;
-
-      setTimeout(
-        () => {
-          this.dogSelected = false;
-          this.przegrana = true;
-          this.clicked = false;
-        }, 1000);
+      this.udzielonoZlejOdpowiedzi();
     }
-
 
     if (!this.isHard)
     {
@@ -156,6 +200,9 @@ export class QuizComponent implements OnInit {
       {
         this.personalBest = this.tablicaLStorageService.PersonalBest(this.login.value.username, this.isHard);
       }
+    }
+    if (this.isHard){
+      this.startTimer();
     }
 
   }

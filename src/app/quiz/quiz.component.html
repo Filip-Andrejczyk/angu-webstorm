@@ -1,5 +1,6 @@
 <ng-container>
 <div *ngIf="(!przegrana); else przegranyTemplate">
+  <h2 *ngIf="isHard && isuserName">Pozostało {{this.timeForAnswer}} s</h2>
   <div class="tlo-quizu" *ngIf="(isuserName); else podajNazweTemplate">
     <div>
       <div class="mt-2 fw-bold fs-4">
