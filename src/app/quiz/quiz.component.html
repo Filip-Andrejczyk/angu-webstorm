@@ -60,8 +60,8 @@
     </div>
 
     <div>
-      <button [ngClass]="{'m-1 btn': true, 'btn-primary shadow-none': isHard, 'btn-success shadow': !isHard }" type="button" (click)="setDificultyLvl(false)">Łatwy</button>
-      <button [ngClass]="{'m-1 btn': true, 'btn-primary shadow-none': !isHard, 'btn-success shadow': isHard }" type="button" (click)="setDificultyLvl(true)">Trudny</button>
+      <button [ngClass]="{'m-1 btn': true, 'btn-danger shadow-none': isHard, 'btn-success shadow': !isHard }" type="button" (click)="setDificultyLvl(false)">Łatwy</button>
+      <button [ngClass]="{'m-1 btn': true, 'btn-danger shadow-none': !isHard, 'btn-success shadow': isHard }" type="button" (click)="setDificultyLvl(true)">Trudny</button>
     </div>
 
     <button class="mt-2 btn btn-primary" type="submit" [disabled]="">Zapisz</button>
