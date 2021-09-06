@@ -115,18 +115,25 @@ export class QuizComponent implements OnInit {
   }
 
   udzielonoZlejOdpowiedzi(fast = false){
+
     this.liczdobre = 0;
-    if (this.isHard){
+
+    if (this.isHard)
+    {
       this.stopTimer();
     }
-    if (!fast) {
+
+    if (!fast)
+    {
       setTimeout(
         () => {
           this.dogSelected = false;
           this.przegrana = true;
           this.clicked = false;
-        }, 1000);
-    } else {
+        }, 2000);
+    }
+    else
+    {
       this.dogSelected = false;
       this.przegrana = true;
       this.clicked = false;
@@ -134,17 +141,23 @@ export class QuizComponent implements OnInit {
   }
 
   startTimer(){
-    this.timeForAnswer = 8;
-    this.interval = setInterval(() => {
-      if (this.timeForAnswer > 0){
-        this.timeForAnswer--;
-      }else{
-        this.stopTimer();
-        console.log("dupa");
-        this.udzielonoZlejOdpowiedzi(true);
-      }
-    }, 1000)
+    if (this.isHard){
+      this.timeForAnswer = 8;
+      this.interval = setInterval(() => {
+
+        if (this.timeForAnswer > 0)
+        {
+          this.timeForAnswer--;
+        }
+        else
+        {
+          this.stopTimer();
+          this.udzielonoZlejOdpowiedzi(true);
+        }
+      }, 1000)
+    }
   }
+
   stopTimer(){
     clearInterval(this.interval);
   }
@@ -164,7 +177,6 @@ export class QuizComponent implements OnInit {
 
     if (!this.isHard)
     {
-
       if (this.liczdobre > this.personalBest)
       {
         this.tablicaLStorageService.sendData(this.tablicaLStorageService.updateRecord(this.login.value.username, this.liczdobre, this.isHard), this.isHard);
