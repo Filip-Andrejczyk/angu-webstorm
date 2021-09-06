@@ -28,6 +28,10 @@ export class ZlozPozewComponent implements OnInit {
   rodzajPisma: string[] = ["Pismo", "Pozew", "Skarga", "Donos", "Zażalenie", "Wniosek"]
 
   ngOnInit(): void {
+    this.initilizePozewForm();
+  }
+
+  initilizePozewForm(): void{
     this.pozewFormularz = this.fb.group({
       autor: "",
       rodzajPisma: this.rodzajPisma[0],
@@ -37,8 +41,8 @@ export class ZlozPozewComponent implements OnInit {
     });
   }
 
-  initilizePozewForm(): void{
-
+  wyslijPozew(){
+    console.log(this.pozewFormularz.get('autor')?.value);
   }
 
 }
