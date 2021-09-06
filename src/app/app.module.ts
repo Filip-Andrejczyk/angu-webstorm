@@ -19,6 +19,7 @@ import { InfoZApiComponent } from './info-z-api/info-z-api.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { TablicaRekordowComponent } from './tablica-rekordow/tablica-rekordow.component';
 import { TranslatebreedPipe } from './pipy/translatebreed.pipe';
+import { ZlozPozewComponent } from './zloz-pozew/zloz-pozew.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { TranslatebreedPipe } from './pipy/translatebreed.pipe';
     QuizComponent,
     TablicaRekordowComponent,
     TranslatebreedPipe,
+    ZlozPozewComponent,
   ],
     imports: [
         BrowserModule,
