@@ -9,6 +9,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 export class ZlozPozewComponent implements OnInit {
 
   public pozewFormularz: FormGroup = this.fb.group({});
+  public zlozonoPismo: boolean = false;
 
   constructor(private fb: FormBuilder) { }
 
@@ -43,7 +44,13 @@ export class ZlozPozewComponent implements OnInit {
   }
 
   wyslijPozew(){
-    console.log(this.pozewFormularz.get('autor')?.value);
+    console.log("dane z formularza: ", this.pozewFormularz.value);
+    //this.zlozonoPismo = true;
+    // setTimeout(
+    //   () => {
+    //     this.zlozonoPismo = false;
+    //   }, 20000);
   }
+
 
 }
