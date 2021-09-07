@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-zloz-pozew',
   templateUrl: './zloz-pozew.component.html',
-  styleUrls: ['./zloz-pozew.component.scss']
+  styleUrls: ['./zloz-pozew.component.scss'],
 })
 export class ZlozPozewComponent implements OnInit {
 
@@ -23,7 +23,8 @@ export class ZlozPozewComponent implements OnInit {
                             "Sąd Rejonowy w Białymstoku",
                             "Sąd Apelacyjny w Białymstoku",
                             "Wojewódzki Sąd Administracyjny w Białymstoku",
-                            "Samodzielny Publiczny Psychiatryczny Zakład Opieki Zdrowotnej w Choroszczy"]
+                            "Samodzielny Publiczny Psychiatryczny Zakład Opieki Zdrowotnej w Choroszczy",
+                            "Minister Budownictwa"]
 
   rodzajPisma: string[] = ["Pismo", "Pozew", "Skarga", "Donos", "Zażalenie", "Wniosek"]
 
@@ -34,7 +35,7 @@ export class ZlozPozewComponent implements OnInit {
   initilizePozewForm(): void{
     this.pozewFormularz = this.fb.group({
       autor: "",
-      rodzajPisma: this.rodzajPisma[0],
+      rodzajPismaform: this.rodzajPisma[0],
       adresat: this.adresatPisma[0],
       sprawaTemat: "",
       opis: ""
