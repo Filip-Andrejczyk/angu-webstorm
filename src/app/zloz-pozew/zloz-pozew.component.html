@@ -19,10 +19,16 @@
           <div class="col-3">
             <div class="form-group float-end">
               <label for="imieiNazwisko" class="float-start">Imie i Nazwisko</label>
-              <input type="text" class="form-control" id="imieiNazwisko"
-                     aria-describedby="emailHelp" placeholder="Imie i Nazwisko"
+              <input type="text"
+                     id="imieiNazwisko"
+                     aria-describedby="emailHelp"
+                     placeholder="Imie i Nazwisko"
+                     class="form-control"
+                     [ngClass]="(pozewFormularz.get('autor')?.touched ||
+                     pozewFormularz.get('autor')?.dirty) &&
+                     pozewFormularz.get('autor')?.errors ? 'is-invalid' : '' "
                      [formControlName]="'autor'">
-              <small id="help" class="form-text text-muted float-start">Wprowadź imię i nazwisko autora pisma</small>
+              <div class="invalid-feedback">Uzupełnij pole!</div>
             </div>
           </div>
 
@@ -80,7 +86,7 @@
         <div class="row ms-2 mt-5">
           <div class="col-11"></div>
           <div class="col-1">
-            <button class="btn btn-primary float-end" type="submit">Wyślij</button>
+            <button class="btn btn-primary float-end" type="submit" [disabled]="pozewFormularz.invalid">Wyślij</button>
           </div>
         </div>
 

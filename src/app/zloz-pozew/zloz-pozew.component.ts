@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-zloz-pozew',
@@ -35,7 +35,7 @@ export class ZlozPozewComponent implements OnInit {
 
   initilizePozewForm(): void{
     this.pozewFormularz = this.fb.group({
-      autor: "",
+      autor: ['', [Validators.required, Validators.pattern('^\\w+?\\s\\w+$')]],
       rodzajPismaform: this.rodzajPisma[0],
       adresat: this.adresatPisma[0],
       sprawaTemat: "",
