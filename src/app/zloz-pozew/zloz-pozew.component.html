@@ -7,7 +7,6 @@
     </div>
   </section>
 
-
   <div [ngClass]="{'pozew p-4': true, 'blur': zlozonoPismo}">
     <div>
       <div class="row">
@@ -15,29 +14,36 @@
           <h2>Dodaj Zgłoszenie</h2>
         </div>
       </div>
-      <form [formGroup]="pozewFormularz" (ngSubmit)="wyslijPozew()">
+      <form class="needs-validation" [formGroup]="pozewFormularz" (ngSubmit)="wyslijPozew()" novalidate>
 
         <div class="row ms-2">
 
           <div class="col-3">
             <div class="form-group float-end">
-              <label for="imieiNazwisko" class="float-start">Imie i Nazwisko</label>
+              <label for="imieiNazwisko" class="form-label float-start">Imie i Nazwisko</label>
               <input type="text"
                      id="imieiNazwisko"
                      aria-describedby="emailHelp"
                      placeholder="Imie i Nazwisko"
                      class="form-control"
-                     [ngClass]="(pozewFormularz.get('autor')?.touched ||
-                     pozewFormularz.get('autor')?.dirty) &&
-                     pozewFormularz.get('autor')?.errors ? 'is-invalid' : '' "
-                     [formControlName]="'autor'">
-              <div class="invalid-feedback">Uzupełnij pole!</div>
+                     formControlName="autor"
+                     [ngClass]="{'is-invalid': autor?.invalid && (autor?.dirty || autor?.touched), 'is-valid': autor?.valid}"
+                     required>
+              <div *ngIf="autor?.invalid && (autor?.dirty || autor?.touched)">
+                <div class="error" *ngIf="autor?.errors?.required">
+                  <small>Uzupełnij pole!</small>
+                </div>
+                <div class="error" *ngIf="autor?.errors?.pattern">
+                  <small>Wprowadź imię oraz nazwisko oddzielone spacją</small>
+                </div>
+              </div>
+
             </div>
           </div>
 
           <div class="col-3">
             <div class="form-group">
-              <label for="rodzajpisma" class="float-start">Rodzaj pisma</label>
+              <label for="rodzajpisma" class="form-label float-start">Rodzaj pisma</label>
               <select [formControlName]="'rodzajPismaform'" class="form-select" id="rodzajpisma">
                 <option *ngFor="let rodzaj of rodzajPisma">{{rodzaj}}</option>
               </select>
@@ -53,7 +59,7 @@
 
           <div class="col-6">
             <div class="form-group">
-              <label for="adresat" class="float-start">Instytucja/Adresat</label>
+              <label for="adresat" class="form-label float-start">Instytucja/Adresat</label>
               <select [formControlName]="'adresat'" class="form-select" id="adresat">
                 <option *ngFor="let adresat of adresatPisma">{{adresat}}</option>
               </select>
@@ -66,14 +72,20 @@
         <div class="row ms-2 mt-3">
           <div class="col-6">
             <div class="form-group">
-              <label for="temat" class="float-start">Temat</label>
+              <label for="temat" class="form-label float-start">Temat</label>
               <input type="text" class="form-control" id="temat"
                      aria-describedby="emailHelp" placeholder="Temat Sprawy"
                      [formControlName]="'sprawaTemat'"
-                     [ngClass]="(pozewFormularz.get('sprawaTemat')?.touched ||
-                     pozewFormularz.get('sprawaTemat')?.dirty) &&
-                     pozewFormularz.get('sprawaTemat')?.errors ? 'is-invalid' : '' ">
-              <div class="invalid-feedback">Uzupełnij pole!</div>
+                     [ngClass]="{'is-invalid': temat?.invalid && (temat?.dirty || temat?.touched), 'is-valid': temat?.valid}"
+                     required>
+              <div *ngIf="temat?.invalid && (temat?.dirty || temat?.touched)">
+                <div class="error" *ngIf="temat?.errors?.required">
+                  <small>Uzupełnij pole!</small>
+                </div>
+                <div class="error" *ngIf="temat?.errors?.pattern">
+                  <small>Wprowadź imię oraz nazwisko oddzielone spacją</small>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -82,13 +94,12 @@
 
           <div class="col-12">
             <div class="form-group">
-              <label for="opisSprawy" class="float-start">Opis Sprawy</label>
+              <label for="opisSprawy" class="form-label float-start">Opis Sprawy</label>
               <textarea type="text-area" class="form-control input-height"
                         id="opisSprawy" aria-describedby="emailHelp"
                         placeholder="" [formControlName]="'opis'"
-                        [ngClass]="(pozewFormularz.get('opis')?.touched ||
-                        pozewFormularz.get('opis')?.dirty) &&
-                        pozewFormularz.get('opis')?.errors ? 'is-invalid' : '' ">
+                        required
+                        [ngClass]="{'is-invalid': opis?.invalid && (opis?.dirty || opis?.touched)}">
               </textarea>
             </div>
           </div>

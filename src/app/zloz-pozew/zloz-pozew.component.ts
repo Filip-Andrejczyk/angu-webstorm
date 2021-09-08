@@ -47,6 +47,10 @@ export class ZlozPozewComponent implements OnInit {
     });
   }
 
+  get autor(){return this.pozewFormularz.get('autor');}
+  get temat(){return this.pozewFormularz.get('sprawaTemat');}
+  get opis(){return this.pozewFormularz.get('opis');}
+
   wyslijPozew(){
     console.log("dane z formularza: ", this.pozewFormularz.value);
     this.zlozonoPismo = true;
