@@ -25,32 +25,34 @@ export class ZlozPozewComponent implements OnInit {
                             "Sąd Apelacyjny w Białymstoku",
                             "Wojewódzki Sąd Administracyjny w Białymstoku",
                             "Samodzielny Publiczny Psychiatryczny Zakład Opieki Zdrowotnej w Choroszczy",
-                            "Minister Budownictwa"]
+                            "Minister Budownictwa"];
 
-  rodzajPisma: string[] = ["Pismo", "Pozew", "Skarga", "Donos", "Zażalenie", "Wniosek"]
+  rodzajPisma: string[] = ["Pismo", "Pozew", "Skarga", "Donos", "Zażalenie", "Wniosek"];
+
+  public url: string[] = ['./assets/checked.png'];
+  public icon = this.url[0];
 
   ngOnInit(): void {
     this.initilizePozewForm();
   }
 
+
   initilizePozewForm(): void{
     this.pozewFormularz = this.fb.group({
-      autor: ['', [Validators.required, Validators.pattern('^\\w+?\\s\\w+$')]],
+      autor: ['', [Validators.required, Validators.pattern('^([a-zA-Z]+)(\\s)([a-zA-Z]+)$')]],
       rodzajPismaform: this.rodzajPisma[0],
       adresat: this.adresatPisma[0],
-      sprawaTemat: "",
-      opis: ""
+      sprawaTemat: ["", Validators.required],
+      opis: ["", Validators.required]
     });
   }
 
   wyslijPozew(){
     console.log("dane z formularza: ", this.pozewFormularz.value);
-    //this.zlozonoPismo = true;
-    // setTimeout(
-    //   () => {
-    //     this.zlozonoPismo = false;
-    //   }, 20000);
+    this.zlozonoPismo = true;
+    setTimeout(
+      () => {
+        this.zlozonoPismo = false;
+      }, 5000);
   }
-
-
 }

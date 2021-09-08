@@ -9,23 +9,7 @@
 .input-height{
   min-height: 360px;
 }
-.blur{
-  //filter: blur(8px);
-  //-webkit-filter: blur(8px);
-  //height: 100%;
-  //background-position: center;
-  //background-repeat: no-repeat;
-  //background-size: contain;
 
-  -webkit-filter: blur(5px);
-  -ms-filter: blur(5px);
-  filter: blur(5px);
-  width: 100%;
-  height: 100%;
- //background-color: rgba(255, 255, 255, 0.7);
-
-
-}
 .rozmiar{
   width: 400px;
   min-height: 250px;
@@ -35,5 +19,60 @@
   background-color: white;
   border: 2px solid black;
   border-radius: 15px;
+}
+section{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+section .box{
+  position: absolute;
+  width: 400px;
+  min-height: 250px;
+  padding: 50px 50px 0px 50px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+  overflow: hidden;
+  color: #000;
+  border: 2px solid dodgerblue;
+  border-radius: 15px;
+  margin-top: 300px;
+}
+section .box:before{
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background: rgba(250, 250, 250, 0.9);
+}
+
+section .box h2{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  padding: 0;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+section .box img{
+  position: relative;
+  margin-top: 5px;
+  max-height: 35px;
+  max-width: 35px;
+}
+
+section .box p{
+  position: relative;
+  margin: 0;
+  font-size: 18px;
+  padding: 0;
+  text-transform: uppercase;
+  z-index: 2;
 }
 

@@ -1,8 +1,11 @@
 <ng-container>
 
-  <div class="rozmiar position-absolute" *ngIf="zlozonoPismo">
-  </div>
-  <h2 class="position-absolute" *ngIf="zlozonoPismo">SIEMA</h2>
+  <section *ngIf="zlozonoPismo">
+    <div class="box">
+      <h2>Twoje zgłoszenie zostało zapisane</h2>
+      <img [src]="icon" alt=""/>
+    </div>
+  </section>
 
 
   <div [ngClass]="{'pozew p-4': true, 'blur': zlozonoPismo}">
@@ -66,7 +69,11 @@
               <label for="temat" class="float-start">Temat</label>
               <input type="text" class="form-control" id="temat"
                      aria-describedby="emailHelp" placeholder="Temat Sprawy"
-                     [formControlName]="'sprawaTemat'">
+                     [formControlName]="'sprawaTemat'"
+                     [ngClass]="(pozewFormularz.get('sprawaTemat')?.touched ||
+                     pozewFormularz.get('sprawaTemat')?.dirty) &&
+                     pozewFormularz.get('sprawaTemat')?.errors ? 'is-invalid' : '' ">
+              <div class="invalid-feedback">Uzupełnij pole!</div>
             </div>
           </div>
         </div>
@@ -76,8 +83,13 @@
           <div class="col-12">
             <div class="form-group">
               <label for="opisSprawy" class="float-start">Opis Sprawy</label>
-              <textarea type="text-area" class="form-control input-height" id="opisSprawy" aria-describedby="emailHelp" placeholder="" [formControlName]="'opis'"></textarea>
-              <small id="help2" class="form-text text-muted float-start">Dokonaj dokładnego opisu bieżącej sprway</small>
+              <textarea type="text-area" class="form-control input-height"
+                        id="opisSprawy" aria-describedby="emailHelp"
+                        placeholder="" [formControlName]="'opis'"
+                        [ngClass]="(pozewFormularz.get('opis')?.touched ||
+                        pozewFormularz.get('opis')?.dirty) &&
+                        pozewFormularz.get('opis')?.errors ? 'is-invalid' : '' ">
+              </textarea>
             </div>
           </div>
 
