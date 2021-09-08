@@ -76,12 +76,6 @@ section .box p{
   z-index: 2;
 }
 
-input.ng-invalid.ng-touched {
-  border: 1.5px solid red;
-}
-input.ng-valid{
-  border: 1.5px solid green;
-}
 .error{
   color: red;
 }

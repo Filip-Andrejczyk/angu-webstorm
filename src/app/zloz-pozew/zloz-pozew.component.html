@@ -76,7 +76,6 @@
               <input type="text" class="form-control" id="temat"
                      aria-describedby="emailHelp" placeholder="Temat Sprawy"
                      [formControlName]="'sprawaTemat'"
-                     [ngClass]="{'is-invalid': temat?.invalid && (temat?.dirty || temat?.touched), 'is-valid': temat?.valid}"
                      required>
               <div *ngIf="temat?.invalid && (temat?.dirty || temat?.touched)">
                 <div class="error" *ngIf="temat?.errors?.required">
@@ -85,6 +84,7 @@
                 <div class="error" *ngIf="temat?.errors?.pattern">
                   <small>Wprowadź imię oraz nazwisko oddzielone spacją</small>
                 </div>
+
               </div>
             </div>
           </div>
@@ -99,7 +99,7 @@
                         id="opisSprawy" aria-describedby="emailHelp"
                         placeholder="" [formControlName]="'opis'"
                         required
-                        [ngClass]="{'is-invalid': opis?.invalid && (opis?.dirty || opis?.touched)}">
+                        >
               </textarea>
             </div>
           </div>
