@@ -6,6 +6,7 @@ import {StronamajoraComponent} from "./stronamajora/stronamajora.component";
 import {KalkulatorComponent} from "./kalkulator/kalkulator.component";
 import {ZlozPozewComponent} from "./zloz-pozew/zloz-pozew.component";
 import {PismaListComponent} from "./pisma-list/pisma-list.component";
+import {PanelUzytkownikaPismaComponent} from "./panel-uzytkownika-pisma/panel-uzytkownika-pisma.component";
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'listujpisma',
     component: PismaListComponent
+  },
+  {
+    path: 'paneluzytkownika',
+    component: PanelUzytkownikaPismaComponent
   }
 ]
 

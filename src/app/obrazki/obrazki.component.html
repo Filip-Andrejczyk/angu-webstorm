@@ -7,7 +7,7 @@
       <ng-container *ngIf="licznik !== 5; else siemaTemplate">
         <ng-container *ngIf="licznik % 2 === 0; else majorTemplate">
           <div class="col-lg konon frame">
-            <img routerLink="/fufuwojtas" [src]="krzycho" alt="">
+            <img routerLink="/paneluzytkownika" [src]="krzycho" alt="">
           </div>
           <div class="col-lg major frame">
             <img routerLink="/krzysztof" [src]="major" alt="">
@@ -20,10 +20,10 @@
 
 <ng-template #majorTemplate>
   <div class="col-lg konon frame">
-    <img routerLink="/fufuwojtas" [src]="major" alt="">
+    <img routerLink="/krzysztof" [src]="major" alt="">
   </div>
   <div class="col-lg major frame">
-    <img routerLink="/krzysztof" [src]="krzycho" alt="">
+    <img routerLink="/paneluzytkownika" [src]="krzycho" alt="">
   </div>
 </ng-template>
 

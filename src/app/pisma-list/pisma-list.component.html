@@ -31,11 +31,22 @@
         <td>{{pismo.rodzajpisma}}</td>
         <td>{{pismo.adresat}}</td>
         <td>{{pismo.temat}}</td>
+
+
+
         <td class="text-center action-block">
-          <span class="mr-2 btn btn-outline-primary btn-sm" routerLink="/edit-student/{{pismo.$key}}">Edit</span>
-          <span class="btn btn-outline-danger btn-sm" (click)="deletePismo(pismo)">Delete</span>
+          <span class="mr-2 btn btn-primary btn-sm" routerLink="/edit-student/{{pismo.$key}}">Edit</span>
+          <span class="btn btn-danger btn-sm" (click)="deletePismo(pismo)">Delete</span>
+          <span class="btn btn-success btn-sm" (click)="rozwinRow(pismo)">{{przycisknapis}}</span>
         </td>
       </tr>
+
+      <ng-container *ngIf="rozwinietyRow">
+        <tr *ngFor="let pismo of Pismo">
+          <td>{{pismo.opis}}</td>
+        </tr>
+      </ng-container>
+
       </tbody>
     </table>
   </div>

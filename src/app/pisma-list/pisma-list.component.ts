@@ -14,6 +14,13 @@ export class PismaListComponent implements OnInit {
   hideWhenNoPismo: boolean = false;
   noData: boolean = false;
   preLoader: boolean = true;
+  rozwinietyRow: boolean = false;
+
+
+  szczegoly: string = "Szczegóły"
+  ukryj: string = "ukryj"
+
+  przycisknapis: string = this.szczegoly
 
   constructor(public crudApi: CrudPismoService) {}
 
@@ -48,6 +55,16 @@ export class PismaListComponent implements OnInit {
       }
     })
   }
+
+  rozwinRow(pismo: Pismo){
+    this.rozwinietyRow = !this.rozwinietyRow;
+    if (!this.rozwinietyRow){
+      this.przycisknapis = this.szczegoly
+    }else {
+      this.przycisknapis = this.ukryj
+    }
+  }
+
   deletePismo(pismo: Pismo) {
     if (window.confirm('Czy na pewno chcesz usunąc to PISMO?')) {
       this.crudApi.deletePismo(pismo.$key)
