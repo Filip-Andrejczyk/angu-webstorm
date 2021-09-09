@@ -18,30 +18,52 @@
 
         <div class="row ms-2">
 
-          <div class="col-3">
+          <div class="col-2">
+
             <div class="form-group float-end">
-              <label for="imieiNazwisko" class="form-label float-start">Imie i Nazwisko</label>
+              <label for="imie" class="form-label float-start">Imie</label>
               <input type="text"
-                     id="imieiNazwisko"
+                     id="imie"
                      aria-describedby="emailHelp"
-                     placeholder="Imie i Nazwisko"
+                     placeholder="Imie"
                      class="form-control"
-                     formControlName="autor"
-                     [ngClass]="{'is-invalid': autor?.invalid && (autor?.dirty || autor?.touched), 'is-valid': autor?.valid}"
+                     formControlName="autorImie"
                      required>
-              <div *ngIf="autor?.invalid && (autor?.dirty || autor?.touched)">
-                <div class="error" *ngIf="autor?.errors?.required">
+              <div *ngIf="autorImie?.invalid && (autorImie?.dirty || autorImie?.touched)">
+                <div class="error" *ngIf="autorImie?.errors?.required">
                   <small>Uzupełnij pole!</small>
                 </div>
-                <div class="error" *ngIf="autor?.errors?.pattern">
+                <div class="error" *ngIf="autorImie?.errors?.pattern">
                   <small>Wprowadź imię oraz nazwisko oddzielone spacją</small>
                 </div>
               </div>
 
             </div>
+
           </div>
 
-          <div class="col-3">
+          <div class="col-2">
+
+            <div class="form-group float-end">
+              <label for="nazwisko" class="form-label float-start">Nazwisko</label>
+              <input type="text"
+                     id="nazwisko"
+                     aria-describedby="emailHelp"
+                     placeholder="Nazwisko"
+                     class="form-control"
+                     formControlName="autorNazwisko"
+                     required>
+              <div *ngIf="autorNazwisko?.invalid && (autorNazwisko?.dirty || autorNazwisko?.touched)">
+                <div class="error" *ngIf="autorNazwisko?.errors?.required">
+                  <small>Uzupełnij pole!</small>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col-2">
             <div class="form-group">
               <label for="rodzajpisma" class="form-label float-start">Rodzaj pisma</label>
               <select [formControlName]="'rodzajPismaform'" class="form-select" id="rodzajpisma">

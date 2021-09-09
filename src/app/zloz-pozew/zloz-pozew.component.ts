@@ -39,7 +39,8 @@ export class ZlozPozewComponent implements OnInit {
 
   initilizePozewForm(): void{
     this.pozewFormularz = this.fb.group({
-      autor: ['', [Validators.required, Validators.pattern('^([a-zA-Z]+)(\\s)([a-zA-Z]+)$')]],
+      autorImie: ['', [Validators.required, Validators.pattern('^([a-zA-Z]+)(\\s)?([a-zA-Z]+)?$')]],
+      autorNazwisko: ['', [Validators.required]],
       rodzajPismaform: this.rodzajPisma[0],
       adresat: this.adresatPisma[0],
       sprawaTemat: ["", Validators.required],
@@ -47,7 +48,8 @@ export class ZlozPozewComponent implements OnInit {
     });
   }
 
-  get autor(){return this.pozewFormularz.get('autor');}
+  get autorImie(){return this.pozewFormularz.get('autorImie');}
+  get autorNazwisko(){return this.pozewFormularz.get('autorNazwisko')}
   get temat(){return this.pozewFormularz.get('sprawaTemat');}
   get opis(){return this.pozewFormularz.get('opis');}
 

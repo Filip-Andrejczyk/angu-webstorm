@@ -21,6 +21,10 @@ import { TablicaRekordowComponent } from './tablica-rekordow/tablica-rekordow.co
 import { TranslatebreedPipe } from './pipy/translatebreed.pipe';
 import { ZlozPozewComponent } from './zloz-pozew/zloz-pozew.component';
 import { BootstrapValidatorDirective } from './dyrectives/bootstrap-validator.directive';
+//do firebase
+import {AngularFireModule} from "@angular/fire/compat";
+import {environment} from "../environments/environment";
+import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
 
 
 @NgModule({
@@ -48,7 +52,9 @@ import { BootstrapValidatorDirective } from './dyrectives/bootstrap-validator.di
         ReactiveFormsModule,
         FormsModule,
         NgbModule,
-        HttpClientModule
+        HttpClientModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireDatabaseModule
     ],
   providers: [],
   bootstrap: [AppComponent]
