@@ -4,6 +4,8 @@ import {NgModule} from "@angular/core";
 import {StronakononaComponent} from "./stronakonona/stronakonona.component";
 import {StronamajoraComponent} from "./stronamajora/stronamajora.component";
 import {KalkulatorComponent} from "./kalkulator/kalkulator.component";
+import {ZlozPozewComponent} from "./zloz-pozew/zloz-pozew.component";
+import {PismaListComponent} from "./pisma-list/pisma-list.component";
 
 const routes: Routes = [
   {
@@ -22,6 +24,14 @@ const routes: Routes = [
     path: 'niuchniuch',
     component: KalkulatorComponent
   },
+  {
+    path: 'dodajpismo',
+    component: ZlozPozewComponent
+  },
+  {
+    path: 'listujpisma',
+    component: PismaListComponent
+  }
 ]
 
 @NgModule({

@@ -1,1 +1,44 @@
-<p>pisma-list works!</p>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h2 class="h2">Lista Pism</h2>
+</div>
+
+<div class="pricing-header mx-auto">
+
+  <div class="no-data text-center" *ngIf="noData">
+    <p class="nodata-msg">Brak pism!</p>
+    <a routerLink="/dodajpismo" class="btn btn-success">
+      Dodaj Pismo
+    </a>
+  </div>
+
+  <div class="table-responsive" *ngIf="hideWhenNoPismo">
+    <table class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg">
+      <thead>
+      <tr>
+        <th scope="col">document Id</th>
+        <th scope="col">Imie i Nazwisko</th>
+        <th scope="col">Rodzaj</th>
+        <th scope="col">Adresat</th>
+        <th scope="col">Temat</th>
+        <th class="text-center" scope="col">Edit</th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <tr *ngFor="let pismo of Pismo | paginate: { itemsPerPage: 7, currentPage: p }; let i = index;">
+        <th scope="row">{{pismo.$key}}</th>
+        <td>{{pismo.imie}} {{pismo.nazwisko}}</td>
+        <td>{{pismo.rodzajpisma}}</td>
+        <td>{{pismo.adresat}}</td>
+        <td>{{pismo.temat}}</td>
+        <td class="text-center action-block">
+          <span class="mr-2 btn btn-outline-primary btn-sm" routerLink="/edit-student/{{pismo.$key}}">Edit</span>
+          <span class="btn btn-outline-danger btn-sm" (click)="deletePismo(pismo)">Delete</span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>

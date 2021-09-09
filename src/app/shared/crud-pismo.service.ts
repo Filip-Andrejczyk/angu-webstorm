@@ -50,7 +50,7 @@ export class CrudPismoService {
 
   deletePismo(id: string) {
     this.pismoRef = this.db.object('pisma-list/'+id);
-    this.pismaRef?.remove();
+    this.pismoRef?.remove();
   }
 
 }

@@ -26,6 +26,8 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
 import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
 import { PismaListComponent } from './pisma-list/pisma-list.component';
+import {NgxPaginationModule} from "ngx-pagination";
+import { PanelUzytkownikaPismaComponent } from './panel-uzytkownika-pisma/panel-uzytkownika-pisma.component';
 
 
 @NgModule({
@@ -47,6 +49,7 @@ import { PismaListComponent } from './pisma-list/pisma-list.component';
     ZlozPozewComponent,
     BootstrapValidatorDirective,
     PismaListComponent,
+    PanelUzytkownikaPismaComponent,
   ],
     imports: [
         BrowserModule,
@@ -56,7 +59,8 @@ import { PismaListComponent } from './pisma-list/pisma-list.component';
         NgbModule,
         HttpClientModule,
         AngularFireModule.initializeApp(environment.firebase),
-        AngularFireDatabaseModule
+        AngularFireDatabaseModule,
+        NgxPaginationModule
     ],
   providers: [],
   bootstrap: [AppComponent]

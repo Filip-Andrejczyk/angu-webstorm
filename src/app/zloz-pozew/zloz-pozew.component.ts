@@ -26,7 +26,8 @@ export class ZlozPozewComponent implements OnInit {
                             "Sąd Apelacyjny w Białymstoku",
                             "Wojewódzki Sąd Administracyjny w Białymstoku",
                             "Samodzielny Publiczny Psychiatryczny Zakład Opieki Zdrowotnej w Choroszczy",
-                            "Minister Budownictwa"];
+                            "Minister Budownictwa",
+                            "Urząd Marszałkowski Województwa Podlaskiego"];
 
   rodzajPisma: string[] = ["Pismo", "Pozew", "Skarga", "Donos", "Zażalenie", "Wniosek"];
 
