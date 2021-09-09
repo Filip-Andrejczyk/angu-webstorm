@@ -25,6 +25,7 @@ import { BootstrapValidatorDirective } from './dyrectives/bootstrap-validator.di
 import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
 import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
+import { PismaListComponent } from './pisma-list/pisma-list.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
     TranslatebreedPipe,
     ZlozPozewComponent,
     BootstrapValidatorDirective,
+    PismaListComponent,
   ],
     imports: [
         BrowserModule,

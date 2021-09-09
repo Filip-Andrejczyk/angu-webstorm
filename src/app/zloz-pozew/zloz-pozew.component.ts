@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {CrudPismoService} from "../shared/crud-pismo.service";
 
 @Component({
   selector: 'app-zloz-pozew',
@@ -11,7 +12,7 @@ export class ZlozPozewComponent implements OnInit {
   public pozewFormularz: FormGroup = this.fb.group({});
   public zlozonoPismo: boolean = false;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, public crudApi: CrudPismoService) {}
 
   adresatPisma: string[] = ["I Komisariat Policji W Białymstoku",
                             "II Komisariat Policji W Białymstoku",
@@ -34,28 +35,33 @@ export class ZlozPozewComponent implements OnInit {
 
   ngOnInit(): void {
     this.initilizePozewForm();
+    this.crudApi.getPismaList()
   }
 
 
   initilizePozewForm(): void{
     this.pozewFormularz = this.fb.group({
-      autorImie: ['', [Validators.required, Validators.pattern('^([a-zA-Z]+)(\\s)?([a-zA-Z]+)?$')]],
-      autorNazwisko: ['', [Validators.required]],
-      rodzajPismaform: this.rodzajPisma[0],
+      imie: ['', [Validators.required, Validators.pattern('^([a-zA-Z]+)(\\s)?([a-zA-Z]+)?$')]],
+      nazwisko: ['', [Validators.required]],
+      rodzajpisma: this.rodzajPisma[0],
       adresat: this.adresatPisma[0],
-      sprawaTemat: ["", Validators.required],
+      temat: ["", Validators.required],
       opis: ["", Validators.required]
     });
   }
 
-  get autorImie(){return this.pozewFormularz.get('autorImie');}
-  get autorNazwisko(){return this.pozewFormularz.get('autorNazwisko')}
+  get imie(){return this.pozewFormularz.get('autorImie');}
+  get nazwisko(){return this.pozewFormularz.get('autorNazwisko')}
   get temat(){return this.pozewFormularz.get('sprawaTemat');}
   get opis(){return this.pozewFormularz.get('opis');}
 
   wyslijPozew(){
-    console.log("dane z formularza: ", this.pozewFormularz.value);
+
+    console.log(this.pozewFormularz.value);
     this.zlozonoPismo = true;
+    this.crudApi.addPismo(this.pozewFormularz.value);
+    this.pozewFormularz.reset({rodzajpisma: this.rodzajPisma[0], adresat: this.adresatPisma[0]});
+
     setTimeout(
       () => {
         this.zlozonoPismo = false;

@@ -27,13 +27,13 @@
                      aria-describedby="emailHelp"
                      placeholder="Imie"
                      class="form-control"
-                     formControlName="autorImie"
+                     formControlName="imie"
                      required>
-              <div *ngIf="autorImie?.invalid && (autorImie?.dirty || autorImie?.touched)">
-                <div class="error" *ngIf="autorImie?.errors?.required">
+              <div *ngIf="imie?.invalid && (imie?.dirty || imie?.touched)">
+                <div class="error" *ngIf="imie?.errors?.required">
                   <small>Uzupełnij pole!</small>
                 </div>
-                <div class="error" *ngIf="autorImie?.errors?.pattern">
+                <div class="error" *ngIf="imie?.errors?.pattern">
                   <small>Wprowadź imię oraz nazwisko oddzielone spacją</small>
                 </div>
               </div>
@@ -51,10 +51,10 @@
                      aria-describedby="emailHelp"
                      placeholder="Nazwisko"
                      class="form-control"
-                     formControlName="autorNazwisko"
+                     formControlName="nazwisko"
                      required>
-              <div *ngIf="autorNazwisko?.invalid && (autorNazwisko?.dirty || autorNazwisko?.touched)">
-                <div class="error" *ngIf="autorNazwisko?.errors?.required">
+              <div *ngIf="nazwisko?.invalid && (nazwisko?.dirty || nazwisko?.touched)">
+                <div class="error" *ngIf="nazwisko?.errors?.required">
                   <small>Uzupełnij pole!</small>
                 </div>
               </div>
@@ -66,7 +66,7 @@
           <div class="col-2">
             <div class="form-group">
               <label for="rodzajpisma" class="form-label float-start">Rodzaj pisma</label>
-              <select [formControlName]="'rodzajPismaform'" class="form-select" id="rodzajpisma">
+              <select [formControlName]="'rodzajpisma'" class="form-select" id="rodzajpisma">
                 <option *ngFor="let rodzaj of rodzajPisma">{{rodzaj}}</option>
               </select>
             </div>
@@ -97,7 +97,7 @@
               <label for="temat" class="form-label float-start">Temat</label>
               <input type="text" class="form-control" id="temat"
                      aria-describedby="emailHelp" placeholder="Temat Sprawy"
-                     [formControlName]="'sprawaTemat'"
+                     [formControlName]="'temat'"
                      required>
               <div *ngIf="temat?.invalid && (temat?.dirty || temat?.touched)">
                 <div class="error" *ngIf="temat?.errors?.required">
