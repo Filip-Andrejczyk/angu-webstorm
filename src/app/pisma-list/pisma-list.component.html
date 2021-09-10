@@ -25,25 +25,23 @@
       </thead>
       <tbody>
 
-      <tr *ngFor="let pismo of Pismo | paginate: { itemsPerPage: 7, currentPage: p }; let i = index;">
-        <th scope="row">{{pismo.$key}}</th>
-        <td>{{pismo.imie}} {{pismo.nazwisko}}</td>
-        <td>{{pismo.rodzajpisma}}</td>
-        <td>{{pismo.adresat}}</td>
-        <td>{{pismo.temat}}</td>
+      <ng-container *ngFor="let pismo of Pismo | paginate: { itemsPerPage: 7, currentPage: p }; let i = index;">
+        <tr>
+          <th scope="row">{{pismo.$key}}</th>
+          <td>{{pismo.imie}} {{pismo.nazwisko}}</td>
+          <td>{{pismo.rodzajpisma}}</td>
+          <td>{{pismo.adresat}}</td>
+          <td>{{pismo.temat}}</td>
 
-
-
-        <td class="text-center action-block">
-          <span class="mr-2 btn btn-primary btn-sm" routerLink="/edit-student/{{pismo.$key}}">Edit</span>
-          <span class="btn btn-danger btn-sm" (click)="deletePismo(pismo)">Delete</span>
-          <span class="btn btn-success btn-sm" (click)="rozwinRow(pismo)">{{przycisknapis}}</span>
-        </td>
-      </tr>
-
-      <ng-container *ngIf="rozwinietyRow">
-        <tr *ngFor="let pismo of Pismo">
-          <td>{{pismo.opis}}</td>
+          <td class="text-center action-block">
+            <span class="mr-2 btn btn-primary btn-sm" routerLink="/edit-student/{{pismo.$key}}">Edit</span>
+            <span class="btn btn-danger btn-sm" (click)="deletePismo(pismo)">Delete</span>
+            <span class="btn btn-success btn-sm " (click)="rozwinRow(pismo.$key)">{{przycisknapis}}</span>
+          </td>
+        </tr>
+        <tr *ngIf="rozwinietyRow && klucz==pismo.$key">
+          <th>OPIS:</th>
+          <td colspan="5">{{pismo.opis}}</td>
         </tr>
       </ng-container>
 

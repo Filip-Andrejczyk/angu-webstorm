@@ -15,6 +15,7 @@ export class PismaListComponent implements OnInit {
   noData: boolean = false;
   preLoader: boolean = true;
   rozwinietyRow: boolean = false;
+  klucz: string = '';
 
 
   szczegoly: string = "Szczegóły"
@@ -56,11 +57,12 @@ export class PismaListComponent implements OnInit {
     })
   }
 
-  rozwinRow(pismo: Pismo){
+  rozwinRow(key: string){
     this.rozwinietyRow = !this.rozwinietyRow;
     if (!this.rozwinietyRow){
       this.przycisknapis = this.szczegoly
     }else {
+      this.klucz = key;
       this.przycisknapis = this.ukryj
     }
   }
@@ -68,7 +70,6 @@ export class PismaListComponent implements OnInit {
   deletePismo(pismo: Pismo) {
     if (window.confirm('Czy na pewno chcesz usunąc to PISMO?')) {
       this.crudApi.deletePismo(pismo.$key)
-      //console.log(pismo.$key)
     }
   }
 
