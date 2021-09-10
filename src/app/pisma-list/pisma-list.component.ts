@@ -19,7 +19,6 @@ export class PismaListComponent implements OnInit {
 
 
   szczegoly: string = "Szczegóły"
-  ukryj: string = "ukryj"
 
   przycisknapis: string = this.szczegoly
 
@@ -58,24 +57,17 @@ export class PismaListComponent implements OnInit {
     })
   }
 
-  rozwinRow(rozwiniete: boolean, kee: string){
+  rozwinRow(kee: string) {
 
-    if (!rozwiniete){
+    if (!this.rozwinietyRow) {
       this.rozwinietyRow = true;
       this.klucz = kee
     }else{
       this.rozwinietyRow = false;
-      this.klucz = kee
     }
-
-
-    // if (!this.rozwinietyRow){
-    //   this.przycisknapis = this.szczegoly
-    // }else {
-    //   this.klucz = key;
-    //   this.przycisknapis = this.ukryj
-    // }
   }
+
+
 
   deletePismo(pismo: Pismo) {
     if (window.confirm('Czy na pewno chcesz usunąc to PISMO?')) {

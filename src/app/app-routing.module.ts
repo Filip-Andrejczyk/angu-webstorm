@@ -7,6 +7,7 @@ import {KalkulatorComponent} from "./kalkulator/kalkulator.component";
 import {ZlozPozewComponent} from "./zloz-pozew/zloz-pozew.component";
 import {PismaListComponent} from "./pisma-list/pisma-list.component";
 import {PanelUzytkownikaPismaComponent} from "./panel-uzytkownika-pisma/panel-uzytkownika-pisma.component";
+import {EditPozewComponent} from "./edit-pozew/edit-pozew.component";
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'paneluzytkownika',
     component: PanelUzytkownikaPismaComponent
+  },
+  {
+    path: 'edytujdokument/:id',
+    component: EditPozewComponent
   }
 ]
 
