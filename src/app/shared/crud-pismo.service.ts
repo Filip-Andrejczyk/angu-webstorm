@@ -21,8 +21,7 @@ export class CrudPismoService {
         rodzajpisma: pismo.rodzajpisma,
         adresat: pismo.adresat,
         temat: pismo.temat,
-        opis: pismo.opis,
-        expanded: false
+        opis: pismo.opis
       })
   }
 

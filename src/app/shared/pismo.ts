@@ -6,5 +6,4 @@ export interface Pismo {
   adresat: string;
   temat: string;
   opis: string;
-  expanded: boolean;
 }

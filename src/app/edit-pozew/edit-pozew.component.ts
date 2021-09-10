@@ -46,7 +46,7 @@ export class EditPozewComponent implements OnInit {
 
   ngOnInit(): void {
     this.updatePismoData();
-    const id = this.actRoute.snapshot.paramMap.get('id') || '';
+    const id = this.actRoute.snapshot.paramMap.get('id') as string;
     this.crudApi.getPismo(id).valueChanges().subscribe(data =>{
       this.editForm.setValue(data)
     })
@@ -60,12 +60,12 @@ export class EditPozewComponent implements OnInit {
 
   updatePismoData(){
     this.editForm = this.fb.group({
-      imie: ['', [Validators.required, Validators.pattern('^([a-zA-Z]+)(\\s)?([a-zA-Z]+)?$')]],
-      nazwisko: ['', [Validators.required]],
+      imie: ['',[Validators.pattern('^([a-zA-Z]+)(\\s)?([a-zA-Z]+)?$')]],
+      nazwisko: [''],
       rodzajpisma: this.rodzajPisma[0],
       adresat: this.adresatPisma[0],
-      temat: ["", Validators.required],
-      opis: ["", Validators.required]
+      temat: [''],
+      opis: ['']
     })
   }
 

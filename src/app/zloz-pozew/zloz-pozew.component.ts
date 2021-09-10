@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CrudPismoService} from "../shared/crud-pismo.service";
+import { ActivatedRoute, Router } from "@angular/router";
+
 
 @Component({
   selector: 'app-zloz-pozew',
@@ -12,7 +14,8 @@ export class ZlozPozewComponent implements OnInit {
   public pozewFormularz: FormGroup = this.fb.group({});
   public zlozonoPismo: boolean = false;
 
-  constructor(private fb: FormBuilder, public crudApi: CrudPismoService) {}
+  constructor(private fb: FormBuilder, public crudApi: CrudPismoService,private actRoute: ActivatedRoute,
+              private router: Router) {}
 
   adresatPisma: string[] = ["I Komisariat Policji W Białymstoku",
                             "II Komisariat Policji W Białymstoku",
@@ -66,6 +69,7 @@ export class ZlozPozewComponent implements OnInit {
     setTimeout(
       () => {
         this.zlozonoPismo = false;
+        this.router.navigate(['paneluzytkownika'])
       }, 5000);
   }
 }
