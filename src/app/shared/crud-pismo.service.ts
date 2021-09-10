@@ -21,8 +21,8 @@ export class CrudPismoService {
         rodzajpisma: pismo.rodzajpisma,
         adresat: pismo.adresat,
         temat: pismo.temat,
-        opis: pismo.opis
-
+        opis: pismo.opis,
+        expanded: false
       })
   }
 
@@ -44,7 +44,6 @@ export class CrudPismoService {
       adresat: pismo.adresat,
       temat: pismo.temat,
       opis: pismo.opis
-
     })
   }
 

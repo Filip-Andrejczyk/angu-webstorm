@@ -44,6 +44,7 @@ export class PismaListComponent implements OnInit {
 
   }
 
+
   dataState() {
     this.crudApi.getPismaList().valueChanges().subscribe(data => {
       this.preLoader = false;
@@ -57,14 +58,23 @@ export class PismaListComponent implements OnInit {
     })
   }
 
-  rozwinRow(key: string){
-    this.rozwinietyRow = !this.rozwinietyRow;
-    if (!this.rozwinietyRow){
-      this.przycisknapis = this.szczegoly
-    }else {
-      this.klucz = key;
-      this.przycisknapis = this.ukryj
+  rozwinRow(rozwiniete: boolean, kee: string){
+
+    if (!rozwiniete){
+      this.rozwinietyRow = true;
+      this.klucz = kee
+    }else{
+      this.rozwinietyRow = false;
+      this.klucz = kee
     }
+
+
+    // if (!this.rozwinietyRow){
+    //   this.przycisknapis = this.szczegoly
+    // }else {
+    //   this.klucz = key;
+    //   this.przycisknapis = this.ukryj
+    // }
   }
 
   deletePismo(pismo: Pismo) {

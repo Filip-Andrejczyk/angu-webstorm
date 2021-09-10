@@ -36,7 +36,7 @@
           <td class="text-center action-block">
             <span class="mr-2 btn btn-primary btn-sm" routerLink="/edit-student/{{pismo.$key}}">Edit</span>
             <span class="btn btn-danger btn-sm" (click)="deletePismo(pismo)">Delete</span>
-            <span class="btn btn-success btn-sm " (click)="rozwinRow(pismo.$key)">{{przycisknapis}}</span>
+            <span class="btn btn-success btn-sm " (click)="rozwinRow(pismo.expanded, pismo.$key)" [attr.aria-expanded]="!rozwinietyRow" aria-controls="collapse">{{przycisknapis}}</span>
           </td>
         </tr>
         <tr *ngIf="rozwinietyRow && klucz==pismo.$key">
