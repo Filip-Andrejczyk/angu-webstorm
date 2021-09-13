@@ -25,11 +25,17 @@ import { BootstrapValidatorDirective } from './dyrectives/bootstrap-validator.di
 import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
 import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
-import { PismaListComponent } from './pisma-list/pisma-list.component';
+import {PismaListComponent} from './pisma-list/pisma-list.component';
 import {NgxPaginationModule} from "ngx-pagination";
-import { PanelUzytkownikaPismaComponent } from './panel-uzytkownika-pisma/panel-uzytkownika-pisma.component';
-import { EditPozewComponent } from './edit-pozew/edit-pozew.component';
-
+import {PanelUzytkownikaPismaComponent} from './panel-uzytkownika-pisma/panel-uzytkownika-pisma.component';
+import {EditPozewComponent} from './edit-pozew/edit-pozew.component';
+import {AngularFireAuthModule} from "@angular/fire/compat/auth";
+import { TologinDashboardComponent } from './tologin-dashboard/tologin-dashboard.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
+import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
 
 @NgModule({
   declarations: [
@@ -52,6 +58,11 @@ import { EditPozewComponent } from './edit-pozew/edit-pozew.component';
     PismaListComponent,
     PanelUzytkownikaPismaComponent,
     EditPozewComponent,
+    TologinDashboardComponent,
+    SignInComponent,
+    SignUpComponent,
+    ForgotPasswordComponent,
+    VerifyEmailComponent,
   ],
     imports: [
         BrowserModule,
@@ -61,6 +72,8 @@ import { EditPozewComponent } from './edit-pozew/edit-pozew.component';
         NgbModule,
         HttpClientModule,
         AngularFireModule.initializeApp(environment.firebase),
+        AngularFirestoreModule,
+        AngularFireAuthModule,
         AngularFireDatabaseModule,
         NgxPaginationModule
     ],
