@@ -71,6 +71,6 @@ export class ZlozPozewComponent implements OnInit {
       () => {
         this.zlozonoPismo = false;
         this.router.navigate(['paneluzytkownika'])
-      }, 5000);
+      }, 2500);
   }
 }

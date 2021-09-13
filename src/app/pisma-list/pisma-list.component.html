@@ -1,5 +1,8 @@
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+<div class="d-flex flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
   <h2 class="h2">Lista Pism</h2>
+  <div *ngIf="!noData" class="ms-3">
+    <a routerLink="/dodajpismo" class="btn btn-primary btn-sm">Dodaj Pismo</a>
+  </div>
 </div>
 
 <div class="pricing-header mx-auto">
@@ -41,7 +44,7 @@
         </tr>
         <tr *ngIf="pismo.expanded">
           <th>OPIS:</th>
-          <td colspan="5">{{pismo.opis}}</td>
+          <td class="" colspan="5">{{pismo.opis}}</td>
         </tr>
       </ng-container>
 
