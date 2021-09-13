@@ -50,7 +50,8 @@ export class ZlozPozewComponent implements OnInit {
       rodzajpisma: this.rodzajPisma[0],
       adresat: this.adresatPisma[0],
       temat: ["", Validators.required],
-      opis: ["", Validators.required]
+      opis: ["", Validators.required],
+      expanded: [false]
     });
   }
 

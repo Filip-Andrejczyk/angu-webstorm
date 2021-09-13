@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { CrudPismoService } from "../shared/crud-pismo.service";
-import { Pismo } from "../shared/pismo";
+import {Component, OnInit} from '@angular/core';
+import {CrudPismoService} from "../shared/crud-pismo.service";
+import {Pismo} from "../shared/pismo";
 
 @Component({
   selector: 'app-pisma-list',
   templateUrl: './pisma-list.component.html',
-  styleUrls: ['./pisma-list.component.scss']
+  styleUrls: ['./pisma-list.component.scss'],
 })
 export class PismaListComponent implements OnInit {
 
@@ -16,7 +16,6 @@ export class PismaListComponent implements OnInit {
   preLoader: boolean = true;
   rozwinietyRow: boolean = false;
   klucz: string = '';
-
 
   szczegoly: string = "Szczegóły"
 
@@ -36,13 +35,11 @@ export class PismaListComponent implements OnInit {
         if (typeof item.key === 'string'){
           a.$key = item.key;
         }
-
         this.Pismo?.push(a as Pismo);
       })
     })
 
   }
-
 
   dataState() {
     this.crudApi.getPismaList().valueChanges().subscribe(data => {
@@ -57,17 +54,9 @@ export class PismaListComponent implements OnInit {
     })
   }
 
-  rozwinRow(kee: string) {
-
-    if (!this.rozwinietyRow) {
-      this.rozwinietyRow = true;
-      this.klucz = kee
-    }else{
-      this.rozwinietyRow = false;
-    }
+  rozwinRow(pismo: Pismo) {
+    pismo.expanded = !pismo.expanded;
   }
-
-
 
   deletePismo(pismo: Pismo) {
     if (window.confirm('Czy na pewno chcesz usunąc to PISMO?')) {

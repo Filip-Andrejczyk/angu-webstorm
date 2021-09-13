@@ -21,11 +21,12 @@ export class CrudPismoService {
         rodzajpisma: pismo.rodzajpisma,
         adresat: pismo.adresat,
         temat: pismo.temat,
-        opis: pismo.opis
+        opis: pismo.opis,
+        expanded: false
       })
   }
 
-  updateExpand(pismo: Pismo, value: boolean) {
+  updateExpand(pismo: Pismo, expanded: boolean) {
     this.pismoRef?.update({
       imie: pismo.imie,
       nazwisko: pismo.nazwisko,
@@ -33,10 +34,21 @@ export class CrudPismoService {
       adresat: pismo.adresat,
       temat: pismo.temat,
       opis: pismo.opis,
-      expanded: value
+      expanded: expanded
     })
   }
 
+  updatePismo(pismo: Pismo) {
+    this.pismoRef?.update({
+      imie: pismo.imie,
+      nazwisko: pismo.nazwisko,
+      rodzajpisma: pismo.rodzajpisma,
+      adresat: pismo.adresat,
+      temat: pismo.temat,
+      opis: pismo.opis,
+      expanded: false
+    })
+  }
 
 
   getPismo(id: string){
@@ -49,16 +61,7 @@ export class CrudPismoService {
     return this.pismaRef;
   }
 
-  updatePismo(pismo: Pismo) {
-    this.pismoRef?.update({
-      imie: pismo.imie,
-      nazwisko: pismo.nazwisko,
-      rodzajpisma: pismo.rodzajpisma,
-      adresat: pismo.adresat,
-      temat: pismo.temat,
-      opis: pismo.opis
-    })
-  }
+
 
   deletePismo(id: string) {
     this.pismoRef = this.db.object('pisma-list/'+id);

@@ -65,7 +65,8 @@ export class EditPozewComponent implements OnInit {
       rodzajpisma: this.rodzajPisma[0],
       adresat: this.adresatPisma[0],
       temat: [''],
-      opis: ['']
+      opis: [''],
+      expanded: [false]
     })
   }
 
