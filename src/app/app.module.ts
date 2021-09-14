@@ -30,12 +30,13 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {PanelUzytkownikaPismaComponent} from './panel-uzytkownika-pisma/panel-uzytkownika-pisma.component';
 import {EditPozewComponent} from './edit-pozew/edit-pozew.component';
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
-import { TologinDashboardComponent } from './tologin-dashboard/tologin-dashboard.component';
-import { SignInComponent } from './sign-in/sign-in.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { VerifyEmailComponent } from './verify-email/verify-email.component';
-import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
+import {TologinDashboardComponent} from './tologin-dashboard/tologin-dashboard.component';
+import {SignInComponent} from './sign-in/sign-in.component';
+import {SignUpComponent} from './sign-up/sign-up.component';
+import {ForgotPasswordComponent} from './forgot-password/forgot-password.component';
+import {VerifyEmailComponent} from './verify-email/verify-email.component';
+import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
+import {AuthServiceService} from "./auth-service.service";
 
 @NgModule({
   declarations: [
@@ -77,7 +78,7 @@ import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
         AngularFireDatabaseModule,
         NgxPaginationModule
     ],
-  providers: [],
+  providers: [AuthServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

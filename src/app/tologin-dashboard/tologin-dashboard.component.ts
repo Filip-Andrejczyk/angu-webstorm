@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthServiceService} from "../auth-service.service";
 
 @Component({
   selector: 'app-tologin-dashboard',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TologinDashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(public authService: AuthServiceService) { }
 
   ngOnInit(): void {
   }
