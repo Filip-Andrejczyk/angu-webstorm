@@ -26,18 +26,6 @@ export class CrudPismoService {
       })
   }
 
-  updateExpand(pismo: Pismo, expanded: boolean) {
-    this.pismoRef?.update({
-      imie: pismo.imie,
-      nazwisko: pismo.nazwisko,
-      rodzajpisma: pismo.rodzajpisma,
-      adresat: pismo.adresat,
-      temat: pismo.temat,
-      opis: pismo.opis,
-      expanded: expanded
-    })
-  }
-
   updatePismo(pismo: Pismo) {
     this.pismoRef?.update({
       imie: pismo.imie,
@@ -60,8 +48,6 @@ export class CrudPismoService {
     this.pismaRef = this.db.list('pisma-list');
     return this.pismaRef;
   }
-
-
 
   deletePismo(id: string) {
     this.pismoRef = this.db.object('pisma-list/'+id);

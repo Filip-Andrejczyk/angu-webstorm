@@ -6,6 +6,9 @@ import {DogsRandomService} from "../dogs-random.service";
 import {JedenWybranyPiesService} from "../jeden-wybrany-pies.service";
 import {TablicaLstorageService} from "../tablica-lstorage.service";
 import {CurrentPlayarService} from "../current-playar.service";
+import {RekordyFirebaseService} from "../shared/rekordy-firebase.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Rekord} from "../models/rekordy";
 
 
 @Component({
@@ -21,6 +24,7 @@ export class QuizComponent implements OnInit {
   czteryodp$: Observable<string[]> | undefined;
 
   public poprawny: string = "";
+  public idCurrentPlayer: string = "";
 
   public liczdobre: number = 0;
   public personalBest: number = 0;
@@ -38,6 +42,8 @@ export class QuizComponent implements OnInit {
   public timeForAnswer: number = 8;
   public interval: number = 0;
 
+  rekordy: Rekord[];
+
 
   public inputPlaceholder: string = "";
 
@@ -48,7 +54,9 @@ export class QuizComponent implements OnInit {
               private dogsRandomService: DogsRandomService,
               private jedenWybranyPiesService: JedenWybranyPiesService,
               private tablicaLStorageService: TablicaLstorageService,
-              private currentPlayaService: CurrentPlayarService
+              private currentPlayaService: CurrentPlayarService,
+              private rekordyAPI: RekordyFirebaseService,
+              private actRoute: ActivatedRoute,
               )
   {
     this.goodAnswerBreed$ = this.jedenWybranyPiesService.breed$;
@@ -60,6 +68,19 @@ export class QuizComponent implements OnInit {
     this.currentPlayaService.dataBoolean$.subscribe(hard => this.isHard = hard);
     this.losowe$ = this.dogsRandomService.trzylosowe$;
     this.czteryodp$ = this.dogsRandomService.odpowiedzi$;
+
+    let rekordyAll = this.rekordyAPI.getWynikiEz();
+    rekordyAll.snapshotChanges().subscribe(data => {
+      this.rekordy = [];
+      data.forEach(item => {
+        let rekord: Rekord = item.payload.toJSON() as Rekord;
+        if (typeof item.key === 'string'){
+          rekord.$key = item.key;
+        }
+        this.rekordy?.push(rekord as Rekord);
+      })
+    })
+
   }
 
   formu = new FormGroup({
@@ -187,6 +208,8 @@ export class QuizComponent implements OnInit {
     {
       this.tablicaLStorageService.sendData(this.tablicaLStorageService.updateRecord(this.login.value.username, this.liczdobre, this.isHard), this.isHard);
     }
+    console.log("gracz: ", this.login.value.username, " liczdobre: ", this.liczdobre);
+    this.rekordyAPI.updateRekord(this.login.value.username, this.liczdobre);
 
     this.formu.reset();
   }
@@ -212,6 +235,11 @@ export class QuizComponent implements OnInit {
       {
         this.personalBest = this.tablicaLStorageService.PersonalBest(this.login.value.username, this.isHard);
       }
+      this.rekordyAPI.addEZRekord(this.login.value.username, this.liczdobre);
+      const id = this.actRoute.snapshot.paramMap.get('id') as string;
+      this.rekordyAPI.getEZRekord(id).valueChanges().subscribe(data =>{
+        console.log(data)
+      })
     }
     if (this.isHard){
       this.startTimer();

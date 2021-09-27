@@ -39,7 +39,7 @@
           <td class="text-center action-block">
             <span class="mr-2 btn btn-primary btn-sm" routerLink="/edytujdokument/{{pismo.$key}}">Edit</span>
             <span class="btn btn-danger btn-sm" (click)="deletePismo(pismo)">Delete</span>
-            <span class="btn btn-success btn-sm " (click)="rozwinRow(pismo)" [attr.aria-expanded]="!rozwinietyRow" aria-controls="collapse">{{przycisknapis}}</span>
+            <span class="btn btn-success btn-sm " (click)="rozwinRow(pismo, Pismo)" [attr.aria-expanded]="!rozwinietyRow" aria-controls="collapse">{{przycisknapis}}</span>
           </td>
         </tr>
         <tr *ngIf="pismo.expanded">
