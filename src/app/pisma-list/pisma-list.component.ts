@@ -56,6 +56,7 @@ export class PismaListComponent implements OnInit {
 
   rozwinRow(pismo: Pismo) {
     pismo.expanded = !pismo.expanded;
+    console.log("to jest pismo: ", pismo);
   }
 
   deletePismo(pismo: Pismo) {
