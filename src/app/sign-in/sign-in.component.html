@@ -1,0 +1,28 @@
+<div class="displayTable">
+  <div class="displayTableCell">
+
+    <div class="authBlock">
+      <h3>Sign In</h3>
+      <div class="formGroup">
+        <input type="text" class="formControl" placeholder="Username" #userName required>
+      </div>
+
+      <div class="formGroup">
+        <input type="password" class="formControl" placeholder="Password" #userPassword required>
+      </div>
+
+      <div class="formGroup p-2">
+        <button class="btn btn-sm btn-success" (click)="authService.signIn(userName.value, userPassword.value)">Log In</button>
+      </div>
+
+      <div class="forgotPassword">
+        <button class="btn btn-sm btn-secondary" routerLink="/forgot-password">Forgot Password?</button>
+      </div>
+    </div>
+
+    <div class="redirectToLogin mt-2">
+      Don't have an account?<button class="btn btn-sm btn-primary ms-1" routerLink="/sign-up-register">Sign up</button>
+    </div>
+
+  </div>
+</div>

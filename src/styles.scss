@@ -1,10 +1,9 @@
-//@import "~bootstrap/dist/css/bootstrap.css";
+//@import './app/overwrites/bootstrap/mixins';
 @import '~bootstrap/scss/bootstrap';
+
 $background-color: red;
 
 body{
   background-color: $background-color;
 }
-
-/* Importing Bootstrap SCSS file. */
 

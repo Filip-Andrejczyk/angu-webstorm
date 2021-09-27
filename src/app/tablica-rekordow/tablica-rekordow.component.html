@@ -1,0 +1,69 @@
+<div>
+  <div class="row">
+
+    <div class="col-10">
+
+      <h3>{{trybHard ? napisTrudny : napisLatwy }}</h3>
+
+      <table class="table table-hover table-light table-bordered border-dark">
+
+        <thead>
+          <tr>
+            <th class="col-1">#</th>
+            <th class="col-1">Name</th>
+            <th class="col-1">Score</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let y = index; let gracz of (trybHard ? tablicaTrybTrudny$ : tablicaTrybLatwy$) | async">
+            <td class="col-1">{{y + 1}}</td>
+            <td class="col-1">{{gracz.name}}</td>
+            <td class="col-1">{{gracz.score}}</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+    </div>
+
+    <div class="col-2">
+      <h3>&nbsp;</h3>
+      <table class="table" *ngIf="kliknietoEdytuj">
+
+        <thead>
+        <tr>
+          <th class="col-1 no-border">&nbsp;</th>
+        </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let z = index of (!trybHard ? tablicaTrybLatwy$: tablicaTrybTrudny$) | async">
+            <td class="col-1 no-border">
+              <button class="btn btn-danger btn-xs kolorIksa shadow-none" (click)="usunRekord(z, this.trybHard)">x</button>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+</div>
+
+<ng-container>
+  <div class="col col-10 d-flex align-items-center he" *ngIf="prawidlowyGracz; else zlyGraczTemplate">
+    <button class="btn btn-primary shadow-none float-start" (click)="edytujClikc()">Edytuj</button>
+  </div>
+  <div class="col-2"></div>
+</ng-container>
+
+<ng-template #zlyGraczTemplate>
+  <div class="col col-10 d-flex align-items-center he">
+    <button class="btn btn-primary shadow-none float-start" (click)="edytujClikc()">Edytuj</button>
+    <strong>{{statusUsuniecia}}</strong>
+  </div>
+  <div class="col-2"></div>
+</ng-template>

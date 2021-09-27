@@ -1,0 +1,142 @@
+<ng-container>
+
+  <section *ngIf="zaktualizowanoPismo">
+    <div class="box">
+      <h2>Twoje zgłoszenie zostało zapisane</h2>
+      <img [src]="icon" alt=""/>
+    </div>
+  </section>
+
+  <div [ngClass]="{'pozew p-4': true}">
+    <div>
+      <div class="row">
+        <div class="col-12">
+          <h2>Dodaj Zgłoszenie</h2>
+        </div>
+      </div>
+      <form class="needs-validation" [formGroup]="editForm" (ngSubmit)="updateForm()" novalidate>
+
+        <div class="row ms-2">
+
+          <div class="col-2">
+
+            <div class="form-group float-end">
+              <label for="imie" class="form-label float-start">Imie</label>
+              <input type="text"
+                     id="imie"
+                     aria-describedby="emailHelp"
+                     placeholder="Imie"
+                     class="form-control"
+                     formControlName="imie"
+                     required>
+              <div *ngIf="imie?.invalid && (imie?.dirty || imie?.touched)">
+                <div class="error" *ngIf="imie?.errors?.required">
+                  <small>Uzupełnij pole!</small>
+                </div>
+                <div class="error" *ngIf="imie?.errors?.pattern">
+                  <small>Wprowadź imię oraz nazwisko oddzielone spacją</small>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col-2">
+
+            <div class="form-group float-end">
+              <label for="nazwisko" class="form-label float-start">Nazwisko</label>
+              <input type="text"
+                     id="nazwisko"
+                     aria-describedby="emailHelp"
+                     placeholder="Nazwisko"
+                     class="form-control"
+                     formControlName="nazwisko"
+                     required>
+              <div *ngIf="nazwisko?.invalid && (nazwisko?.dirty || nazwisko?.touched)">
+                <div class="error" *ngIf="nazwisko?.errors?.required">
+                  <small>Uzupełnij pole!</small>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col-2">
+            <div class="form-group">
+              <label for="rodzajpisma" class="form-label float-start">Rodzaj pisma</label>
+              <select [formControlName]="'rodzajpisma'" class="form-select" id="rodzajpisma">
+                <option *ngFor="let rodzaj of rodzajPisma">{{rodzaj}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-6">
+          </div>
+
+        </div>
+
+        <div class="row ms-2 mt-2">
+
+          <div class="col-6">
+            <div class="form-group">
+              <label for="adresat" class="form-label float-start">Instytucja/Adresat</label>
+              <select [formControlName]="'adresat'" class="form-select" id="adresat">
+                <option *ngFor="let adresat of adresatPisma">{{adresat}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-6"></div>
+        </div>
+
+        <div class="row ms-2 mt-3">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="temat" class="form-label float-start">Temat</label>
+              <input type="text" class="form-control" id="temat"
+                     aria-describedby="emailHelp" placeholder="Temat Sprawy"
+                     [formControlName]="'temat'"
+                     required>
+              <div *ngIf="temat?.invalid && (temat?.dirty || temat?.touched)">
+                <div class="error" *ngIf="temat?.errors?.required">
+                  <small>Uzupełnij pole!</small>
+                </div>
+                <div class="error" *ngIf="temat?.errors?.pattern">
+                  <small>Wprowadź imię oraz nazwisko oddzielone spacją</small>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row ms-2 mt-3">
+
+          <div class="col-12">
+            <div class="form-group">
+              <label for="opisSprawy" class="form-label float-start">Opis Sprawy</label>
+              <textarea type="text-area" class="form-control input-height"
+                        id="opisSprawy" aria-describedby="emailHelp"
+                        placeholder="" [formControlName]="'opis'"
+                        required
+              >
+              </textarea>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row ms-2 mt-5">
+          <div class="col-11"></div>
+          <div class="col-1">
+            <button class="btn btn-primary float-end" type="submit">Aktualizuj</button>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</ng-container>

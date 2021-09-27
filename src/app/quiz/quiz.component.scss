@@ -1,0 +1,49 @@
+.tlo-quizu{
+  width: 400px;
+  height: 270px;
+  background-color: azure;
+  border-radius: 25px;
+  margin-top: 40px;
+}
+.podaj-uzytkownika{
+  width: 350px;
+  height: 220px;
+  background-color: azure;
+  border-radius: 25px;
+  margin-top: 100px;
+}
+
+input[type="radio"] {
+  margin-top: +6px;
+  vertical-align: middle;
+  height: 1.25em;
+}
+
+.btn-change{
+  color: forestgreen;
+}
+.btn-default:not(.btn-change){
+  color: red;
+
+}
+.szerokosc{
+  width: 73.83px;
+}
+
+.margine-top-more{
+  margin-top: 80px;
+}
+
+
+.przegrany{
+  width: 400px;
+  height: 270px;
+  background-color: azure;
+  border-radius: 25px;
+  margin-top: 40px;
+  opacity: 0.9;
+}
+.duza-litera{
+  text-transform: capitalize;
+}
+

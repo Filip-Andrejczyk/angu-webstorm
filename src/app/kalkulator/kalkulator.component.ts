@@ -20,7 +20,6 @@ export class KalkulatorComponent implements OnInit {
   public showPic: boolean = false;
   public licznikChwil: number = 0;
 
-
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -32,7 +31,6 @@ export class KalkulatorComponent implements OnInit {
       iloscLitrow: '',
       rodzajRozpuszczalnika: this.rodzaje[0]
     });
-    this.myForm.valueChanges.subscribe(console.log);
   }
 
   public nr = 1;

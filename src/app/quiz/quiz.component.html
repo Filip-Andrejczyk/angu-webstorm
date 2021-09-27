@@ -1,0 +1,97 @@
+<ng-container>
+<div *ngIf="(!przegrana); else przegranyTemplate">
+  <h2 *ngIf="isHard && isuserName">Pozostało {{this.timeForAnswer}} s</h2>
+  <div class="tlo-quizu" *ngIf="(isuserName); else podajNazweTemplate">
+    <div>
+      <div class="mt-2 fw-bold fs-4">
+        Zgadnij rase piesełka, {{this.login.get('username')?.value}}
+      </div>
+
+      <form [formGroup]="formu" (ngSubmit)="submit()" *let="let dobraodp = dobraodp;
+        of: {dobraodp: goodAnswerBreed$ | async}">
+
+        <div class="mt-4 form-group" *let="let odp = odp; of: {odp: czteryodp$ | async};">
+          <ng-container>
+            <div *ngFor="let doge of odp; let i = index;">
+
+              <label for="lable_{{i}}" [ngClass]="{
+              'row': true,
+              'btn-change': (doge === dobraodp && dogSelected)
+              }">
+
+                <div class="col-3">
+                  <input id="lable_{{i}}" type="radio" value="{{doge}}" name="gender" [readOnly]="dogSelected" formControlName="gender">
+                </div>
+
+                <div class="col-9 d-flex justify-content-start fw-bold fs-5 duza-litera" [ngClass] = "'odp-' + i">
+                  {{doge | translatebreed}}
+                </div>
+
+              </label>
+
+            </div>
+          </ng-container>
+          <div *ngIf="f.gender.touched && f.gender.invalid" class="alert alert-danger">
+          </div>
+        </div>
+        <button class="mt-4 btn btn-primary" type="submit" [disabled]="!formu.valid || clicked">Submit</button>
+      </form>
+      <div class="fw-bold mt-5 fs-4">
+        wynik: {{liczdobre}}
+      </div><br>
+      <div>
+        <button class="btn btn-primary" routerLink="" (click)="koniecGry()">Zakończ</button><br>
+      </div>
+    </div>
+  </div>
+</div>
+</ng-container>
+
+<ng-template #podajNazweTemplate>
+  <div class="podaj-uzytkownika p-2">
+    <div class="fw-bold">
+    Wpisz nazwę użytkownika:
+    </div>
+  <form [formGroup]="login" (ngSubmit)="submit2()">
+
+    <input required class="mt-3" id="nazwaurz" type="text" value="" name="username" formControlName="username" [placeholder]="inputPlaceholder"><br>
+
+    <div class="fw-bold mt-2">
+      Wybierz poziom trudności:
+    </div>
+
+    <div>
+      <button [ngClass]="{'m-1 btn szerokosc': true, 'btn-danger shadow-none': isHard, 'btn-success shadow': !isHard }" type="button" (click)="setDificultyLvl(false)">Łatwy</button>
+      <button [ngClass]="{'m-1 btn szerokosc': true, 'btn-danger shadow-none': !isHard, 'btn-success shadow': isHard }" type="button" (click)="setDificultyLvl(true)">Trudny</button>
+    </div>
+
+    <button class="mt-2 btn btn-primary" type="submit" [disabled]="">Zapisz</button>
+
+  </form>
+  </div>
+</ng-template>
+
+<ng-template #przegranyTemplate>
+  <div class="przegrany">
+    <div class="fw-bold fs-4">
+      PRZEGRALES
+    </div>
+    <div class="row margine-top-more">
+
+      <div class="col">
+        <button class="btn btn-primary" (click)="newUser()">New Player</button>
+      </div>
+
+      <div class="col">
+        <button class="btn btn-primary" (click)="tryAgain()">Try Again</button>
+      </div>
+
+      <div class="col">
+        <button class="btn btn-primary" routerLink="" (click)="koniecGry()">Koniec Gry</button>
+      </div>
+
+    </div>
+  </div>
+</ng-template>
+
+

@@ -1,0 +1,29 @@
+:host{
+  display: block;
+  width: 100%;
+}
+.no-border{
+  border-color: transparent !important;
+}
+.btn-group-xs > .btn, .btn-xs {
+  padding: .25rem .4rem;
+  font-size: .875rem;
+  line-height: .5;
+  border-radius: .2rem;
+}
+
+//th:nth-last-child(1) {
+//  background-color: transparent;
+//  border: none;
+//}
+//
+//td:nth-last-child(1) {
+//  background-color: transparent;
+//  border: none;
+//}
+.he{
+  height: 48px;
+}
+.kolorIksa{
+  color: black;
+}

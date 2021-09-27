@@ -1,0 +1,35 @@
+<ng-container>
+  <div class="row srodkowa" *ngIf="(doggoImgPath$ | async); else brakTemplate">
+
+    <ng-container>
+      <div class="col-lg-4 d-flex justify-content-center">
+      <app-tablica-rekordow></app-tablica-rekordow>
+      </div>
+    </ng-container>
+
+    <div class="col-lg-4 d-flex justify-content-center">
+      <div class="obrazekpieska border border-success">
+        <img [src]="(doggoImgPath$ | async)" alt=""/>
+        <ng-container>
+          <div *ngIf="!trybTrudny">
+            <button class="przycisk btn-success shadow-none" (click)="nextPieselekPrzycisk()" [disabled]="koniecPomijania">Kolejny Piesełek</button><br>
+            <div class="fw-bold mt-1">
+              Zostało pominięć: {{zostaloPominiec}}
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="col-lg-4 d-flex justify-content-start">
+      <app-quiz></app-quiz>
+    </div>
+  </div>
+
+</ng-container>
+
+<ng-template #brakTemplate>
+  <div class="margino">
+    <button class="przycisk btn-success shadow-none btn-lg" (click)="nextPieselek()">Przerwa</button>
+  </div>
+</ng-template>

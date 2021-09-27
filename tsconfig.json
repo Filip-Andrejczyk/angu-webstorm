@@ -16,6 +16,8 @@
     "importHelpers": true,
     "target": "es2017",
     "module": "es2020",
+    "resolveJsonModule": true,
+    "strictPropertyInitialization": false,
     "lib": [
       "es2018",
       "dom"
@@ -25,6 +27,8 @@
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictTemplates": true,
+
+
   }
 }

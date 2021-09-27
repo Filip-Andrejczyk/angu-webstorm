@@ -1,5 +1,4 @@
 <div class="srodek">
-  <!--to jest licznik obrazkow: {{licznik$ | async}}-->
   <div id='tlo' class="container obrazki">
     <div *let="let licznik = licznik;
      of: {
@@ -8,10 +7,10 @@
       <ng-container *ngIf="licznik !== 5; else siemaTemplate">
         <ng-container *ngIf="licznik % 2 === 0; else majorTemplate">
           <div class="col-lg konon frame">
-            <img routerLink="/krzysztof" [src]="krzycho">
+            <img routerLink="/sign-in-login" [src]="krzycho" alt="">
           </div>
           <div class="col-lg major frame">
-            <img routerLink="/fufuwojtas" [src]="major">
+            <img routerLink="/krzysztof" [src]="major" alt="">
           </div>
         </ng-container>
       </ng-container>
@@ -21,15 +20,15 @@
 
 <ng-template #majorTemplate>
   <div class="col-lg konon frame">
-    <img routerLink="/fufuwojtas" [src]="major">
+    <img routerLink="/krzysztof" [src]="major" alt="">
   </div>
   <div class="col-lg major frame">
-    <img routerLink="/krzysztof" [src]="krzycho">
+    <img routerLink="/tologin-dashboard" [src]="krzycho" alt="">
   </div>
 </ng-template>
 
 <ng-template #siemaTemplate>
   <div class="col-lg wyskakuje">
-    <img [src]="siema">
+    <img [src]="siema" alt="">
   </div>
 </ng-template>
