@@ -136,7 +136,7 @@ export class QuizComponent implements OnInit {
   udzielonoZlejOdpowiedzi(fast = false){
 
     this.liczdobre = 0;
-
+    this.currentPlayaService.gameIsRunning(false);
     if (this.isHard) {this.stopTimer();}
 
     if (!fast) {
@@ -209,7 +209,7 @@ export class QuizComponent implements OnInit {
   }
 
   submit2() {
-
+    this.currentPlayaService.gameIsRunning(true);
     if (this.login.value.username == "")
     {
       this.isuserName = false;
@@ -251,6 +251,7 @@ export class QuizComponent implements OnInit {
         this.personalBestFirebase = this.rekordy[ind].score;
       })
     }
+
     if (this.isHard){
       this.startTimer();
     }

@@ -35,6 +35,8 @@ export class TablicaRekordowComponent implements OnInit {
   public napisLatwy: string = "TRYB ŁATWY";
   public napisTrudny: string = "TRYB TRUDNY";
 
+  public graRunning: boolean = false;
+
 
   constructor(private tablicaLStorageServive: TablicaLstorageService,
               private currentPlayaService: CurrentPlayarService,
@@ -43,6 +45,7 @@ export class TablicaRekordowComponent implements OnInit {
   {
     this.currentPlayaService.dataString$.subscribe(nazwa => this.gracz = nazwa);
     this.currentPlayaService.dataBoolean$.subscribe(tryb => this.trybHard = tryb);
+    this.currentPlayaService.gameStatus$.subscribe(status => this.graRunning = status);
   }
 
   ngOnInit(): void {
