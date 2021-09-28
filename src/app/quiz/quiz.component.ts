@@ -170,6 +170,11 @@ export class QuizComponent implements OnInit {
     }
   }
 
+  currentplaya(){
+    console.log("teraz gra: ", this.currentPlayaID);
+    console.log("jego personalbest: ", this.personalBestFirebase);
+  }
+
   stopTimer(){
     clearInterval(this.interval);
   }
@@ -191,7 +196,7 @@ export class QuizComponent implements OnInit {
     {
       if (this.liczdobre > this.personalBestFirebase)
       {
-        this.tablicaLStorageService.sendData(this.tablicaLStorageService.updateRecord(this.login.value.username, this.liczdobre, this.isHard), this.isHard);
+        //this.tablicaLStorageService.sendData(this.tablicaLStorageService.updateRecord(this.login.value.username, this.liczdobre, this.isHard), this.isHard);
         this.rekordyAPI.updateRekord(this.login.value.username, this.liczdobre, this.currentPlayaID);
         this.personalBest = this.liczdobre;
       }
