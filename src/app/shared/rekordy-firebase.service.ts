@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Rekord } from "../models/rekordy";
 import { AngularFireDatabase, AngularFireList, AngularFireObject} from "@angular/fire/compat/database";
-import {Pismo} from "./pismo";
+import {ScoreTab} from "../models/scoreTab";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +8,7 @@ import {Pismo} from "./pismo";
 export class RekordyFirebaseService {
 
   rekordyEZRef: AngularFireList<any> | undefined;
-  rekordyHARDRef: AngularFireList<any> | undefined;
+  tab: ScoreTab[];
 
   pojrekordRef: AngularFireObject<any> | undefined;
 
@@ -22,15 +21,9 @@ export class RekordyFirebaseService {
     })
   }
 
-  addHARDRekord(name: string, score: number){
-    this.rekordyHARDRef?.push({
-      name: name,
-      score: score
-    })
-  }
-
-  updateRekord(imie: string, wynik: number) {
-    this.pojrekordRef?.update({
+  updateRekord(imie: string, wynik: number, id: string) {
+    this.getEZRekord(id).update(
+    {
       name: imie,
       score: wynik
     })
@@ -41,27 +34,15 @@ export class RekordyFirebaseService {
     return this.pojrekordRef;
   }
 
-  getHARDRekord(id: string){
-    this.pojrekordRef = this.db.object('wyniki-hard/' + id);
-    return this.pojrekordRef;
-  }
 
   getWynikiEz(){
     this.rekordyEZRef = this.db.list('wyniki-ez');
     return this.rekordyEZRef;
   }
 
-  // findUser(name: string): boolean{
-  //
-  // }
 
-  getWynikiHard(){
-    this.rekordyHARDRef = this.db.list('wyniki-hard');
-    return this.rekordyHARDRef;
-  }
-
-  deleteRekordEz(id: string, tryb: string){
-    this.pojrekordRef = this.db.object(tryb + '/' + id);
+  deleteRekordEz(id: string){
+    this.pojrekordRef = this.db.object('wyniki-ez/' + id);
     this.pojrekordRef?.remove();
   }
 

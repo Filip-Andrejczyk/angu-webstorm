@@ -5,7 +5,6 @@ import { switchMap } from "rxjs/operators";
 import { BehaviorSubject, Observable } from "rxjs";
 import { CurrentPlayarService } from "../current-playar.service";
 import { RekordyFirebaseService } from "../shared/rekordy-firebase.service";
-import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'app-tablica-rekordow',
@@ -14,7 +13,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class TablicaRekordowComponent implements OnInit {
 
-  tablicaTrybLatwy$: Observable<Rekord[]> | undefined;
+  //tablicaTrybLatwy$: Observable<Rekord[]> | undefined;
   tablicaTrybTrudny$: Observable<Rekord[]> | undefined;
 
   refreshUsers$ = new BehaviorSubject<boolean>(true);
@@ -40,15 +39,14 @@ export class TablicaRekordowComponent implements OnInit {
   constructor(private tablicaLStorageServive: TablicaLstorageService,
               private currentPlayaService: CurrentPlayarService,
               private rekordyApi: RekordyFirebaseService,
-              private actRoute: ActivatedRoute,
-              private router: Router)
+              )
   {
     this.currentPlayaService.dataString$.subscribe(nazwa => this.gracz = nazwa);
     this.currentPlayaService.dataBoolean$.subscribe(tryb => this.trybHard = tryb);
   }
 
   ngOnInit(): void {
-      this.tablicaTrybLatwy$ = this.refreshUsers$.pipe(switchMap(_ => this.tablicaLStorageServive.getEZRecords()));
+      //this.tablicaTrybLatwy$ = this.refreshUsers$.pipe(switchMap(_ => this.tablicaLStorageServive.getEZRecords()));
       this.tablicaTrybTrudny$ = this.refreshUsers$.pipe(switchMap(_ => this.tablicaLStorageServive.getHardRecords()));
 
       this.dataState();
@@ -61,15 +59,11 @@ export class TablicaRekordowComponent implements OnInit {
             rekord.$key = item.key;
           }
           this.rekordy?.push(rekord as Rekord);
+          this.rekordy.sort((a, b) => {return b.score - a.score});
         })
       })
-
-      // const id = this.actRoute.snapshot.paramMap.get('id') as string;
-      // this.rekordyApi.getEZRekord(id).valueChanges().subscribe(data =>{
-      // oguem teraz moge wziac DANE z całego rekordu o danym id
-      // })
-
   }
+
 
   dataState(){
     this.rekordyApi.getWynikiEz().valueChanges().subscribe(data => {
@@ -85,24 +79,22 @@ export class TablicaRekordowComponent implements OnInit {
   }
 
   edytujClikc(): void{
-
     this.kliknietoEdytuj = !this.kliknietoEdytuj;
-    console.log("Wlaczony tryb hard: ", this.trybHard);
   }
 
-  usunRekord(nr: number, isHard: boolean): void{
+  usunRekord(name: string, key: string, isHard: boolean): void{
 
     let curentUserName = this.gracz;
 
-    if (!isHard){
-      this.usrIndex = this.tablicaLStorageServive.tablicaRekordow.findIndex((obj => obj.name == curentUserName));
-    }else{
-      this.usrIndex = this.tablicaLStorageServive.tablicaTrybHARD.findIndex((obj => obj.name == curentUserName));
-    }
-
-    if (this.usrIndex === nr)
+    // if (!isHard){
+    //   this.usrIndex = this.tablicaLStorageServive.tablicaRekordow.findIndex((obj => obj.name == curentUserName));
+    // }else{
+    //   this.usrIndex = this.tablicaLStorageServive.tablicaTrybHARD.findIndex((obj => obj.name == curentUserName));
+    // }
+    if (curentUserName === name)
     {
-      return this.tablicaLStorageServive.sendData(this.tablicaLStorageServive.removeRecord(nr, isHard), this.trybHard);
+       //this.tablicaLStorageServive.sendData(this.tablicaLStorageServive.removeRecord(nr, isHard), this.trybHard);
+      this.rekordyApi.deleteRekordEz(key);
     }
     else
     {
