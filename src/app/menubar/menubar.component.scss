@@ -2,3 +2,19 @@
   color: white;
   font-weight: bold;
 }
+.he{
+  height: 40px;
+}
+.wid{
+  width: 150px;
+  border-bottom-right-radius: 10px;
+}
+.button-wid{
+  width: 150px;
+}
+.mybutton{
+
+  &:hover{
+  background-color: darkgray;
+  }
+}
