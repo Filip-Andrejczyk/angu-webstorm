@@ -8,11 +8,11 @@ export class CurrentPlayarService {
 
   nazwagracza: string = "";
   trybHard: boolean = false;
-  gameInProgress: boolean = false;
+  gameInProgress: boolean = true;
 
   private dataStringSource = new BehaviorSubject<string>("");
   public dataBoolSource = new BehaviorSubject<boolean>(false);
-  public runningGameSubject = new BehaviorSubject<boolean>(false);
+  public runningGameSubject = new BehaviorSubject<boolean>(true);
 
   public dataBoolean$ = this.dataBoolSource.asObservable();
   public dataString$ = this.dataStringSource.asObservable();
@@ -28,5 +28,6 @@ export class CurrentPlayarService {
 
   public gameIsRunning(value: boolean){
     this.gameInProgress = value;
+    this.runningGameSubject.next(this.gameInProgress);
   }
 }

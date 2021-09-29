@@ -39,9 +39,9 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let z of (trybHard ? (tablicaTrybTrudny$ | async) : rekordy)">
+          <tr *ngFor="let nr = index; let z of (trybHard ? (tablicaTrybTrudny$ | async) : rekordy)">
             <td class="col-1 no-border">
-              <button class="btn btn-danger btn-xs kolorIksa shadow-none" (click)="usunRekord(z.name,z.$key, this.trybHard)">x</button>
+              <button class="btn btn-danger btn-xs kolorIksa shadow-none" (click)="usunRekord(z.name,z.$key, this.trybHard, nr)">x</button>
             </td>
           </tr>
         </tbody>

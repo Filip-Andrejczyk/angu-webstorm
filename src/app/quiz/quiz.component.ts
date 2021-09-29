@@ -104,11 +104,13 @@ export class QuizComponent implements OnInit {
     this.isuserName = false;
     this.login.value.username = "";
     this.infozapicomponent.nextPieselek();
+    this.currentPlayaService.gameIsRunning(true);
   }
 
   tryAgain(){
     this.przegrana = false;
     this.infozapicomponent.nextPieselek();
+    this.currentPlayaService.gameIsRunning(true);
     if (this.isHard){
       this.startTimer();
     }
@@ -136,7 +138,6 @@ export class QuizComponent implements OnInit {
   udzielonoZlejOdpowiedzi(fast = false){
 
     this.liczdobre = 0;
-    this.currentPlayaService.gameIsRunning(false);
     if (this.isHard) {this.stopTimer();}
 
     if (!fast) {
@@ -145,6 +146,7 @@ export class QuizComponent implements OnInit {
           this.dogSelected = false;
           this.przegrana = true;
           this.clicked = false;
+          this.currentPlayaService.gameIsRunning(false);
         }, 2000);
     }
     else {
@@ -170,11 +172,6 @@ export class QuizComponent implements OnInit {
     }
   }
 
-  currentplaya(){
-    console.log("teraz gra: ", this.currentPlayaID);
-    console.log("jego personalbest: ", this.personalBestFirebase);
-  }
-
   stopTimer(){
     clearInterval(this.interval);
   }
@@ -196,7 +193,6 @@ export class QuizComponent implements OnInit {
     {
       if (this.liczdobre > this.personalBestFirebase)
       {
-        //this.tablicaLStorageService.sendData(this.tablicaLStorageService.updateRecord(this.login.value.username, this.liczdobre, this.isHard), this.isHard);
         this.rekordyAPI.updateRekord(this.login.value.username, this.liczdobre, this.currentPlayaID);
         this.personalBest = this.liczdobre;
       }
@@ -221,20 +217,22 @@ export class QuizComponent implements OnInit {
       this.liczdobre = 0;
       this.currentPlayaService.saveData(this.login.value.username);
 
-      if(this.rekordy.find(x => x.name == this.login.value.username) !== undefined){
-        console.log("istnieje");
+      if(!this.isHard){
+        if(this.rekordy.find(x => x.name == this.login.value.username) !== undefined){
+          console.log("istnieje");
+        }else{
+          this.rekordyAPI.addEZRekord(this.login.value.username, this.liczdobre);
+        }
       }else{
-        this.rekordyAPI.addEZRekord(this.login.value.username, this.liczdobre);
+        if (!this.tablicaLStorageService.findUser(this.login.value.username, this.isHard))
+        {
+          this.tablicaLStorageService.sendData(this.tablicaLStorageService.addRecord(this.login.value.username, this.liczdobre, this.isHard), this.isHard);
+        }
+        else
+        {
+          this.personalBest = this.tablicaLStorageService.PersonalBest(this.login.value.username, this.isHard);
+        }
       }
-
-      // if (!this.tablicaLStorageService.findUser(this.login.value.username, this.isHard))
-      // {
-      //   this.tablicaLStorageService.sendData(this.tablicaLStorageService.addRecord(this.login.value.username, this.liczdobre, this.isHard), this.isHard);
-      // }
-      // else
-      // {
-      //   this.personalBest = this.tablicaLStorageService.PersonalBest(this.login.value.username, this.isHard);
-      // }
 
       let recordsFromFirebase = this.rekordyAPI.getWynikiEz();
       recordsFromFirebase.snapshotChanges().subscribe(data => {

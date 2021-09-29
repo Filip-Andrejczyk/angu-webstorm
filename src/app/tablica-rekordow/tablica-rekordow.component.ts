@@ -13,7 +13,6 @@ import { RekordyFirebaseService } from "../shared/rekordy-firebase.service";
 })
 export class TablicaRekordowComponent implements OnInit {
 
-  //tablicaTrybLatwy$: Observable<Rekord[]> | undefined;
   tablicaTrybTrudny$: Observable<Rekord[]> | undefined;
 
   refreshUsers$ = new BehaviorSubject<boolean>(true);
@@ -25,7 +24,6 @@ export class TablicaRekordowComponent implements OnInit {
 
   public kliknietoEdytuj: boolean = false;
   public usrIndex: number = 0;
-
   public statusUsuniecia: string = "";
   public prawidlowyGracz = true;
 
@@ -35,7 +33,7 @@ export class TablicaRekordowComponent implements OnInit {
   public napisLatwy: string = "TRYB ŁATWY";
   public napisTrudny: string = "TRYB TRUDNY";
 
-  public graRunning: boolean = false;
+  public graRunning: boolean = true;
 
 
   constructor(private tablicaLStorageServive: TablicaLstorageService,
@@ -85,24 +83,32 @@ export class TablicaRekordowComponent implements OnInit {
     this.kliknietoEdytuj = !this.kliknietoEdytuj;
   }
 
-  usunRekord(name: string, key: string, isHard: boolean): void{
+  usunRekord(name: string, key: string, isHard: boolean, nr: number): void{
 
     let curentUserName = this.gracz;
 
-    // if (!isHard){
-    //   this.usrIndex = this.tablicaLStorageServive.tablicaRekordow.findIndex((obj => obj.name == curentUserName));
-    // }else{
-    //   this.usrIndex = this.tablicaLStorageServive.tablicaTrybHARD.findIndex((obj => obj.name == curentUserName));
-    // }
-    if (curentUserName === name)
-    {
-       //this.tablicaLStorageServive.sendData(this.tablicaLStorageServive.removeRecord(nr, isHard), this.trybHard);
-      this.rekordyApi.deleteRekordEz(key);
+      // this.usrIndex = this.tablicaLStorageServive.tablicaTrybHARD.findIndex((obj => obj.name == curentUserName));
+      // this.tablicaLStorageServive.sendData(this.tablicaLStorageServive.removeRecord(nr, isHard), this.trybHard);
+
+    if(!isHard){
+      if (curentUserName === name)
+      {
+        this.rekordyApi.deleteRekordEz(key);
+      }
+      else{
+        this.prawidlowyGracz = false;
+        this.statusUsuniecia = "Nie możesz usunąć cudzego rekordu  " + this.gracz;
+      }
     }
     else
     {
-      this.prawidlowyGracz = false;
-      this.statusUsuniecia = "Nie możesz usunąć cudzego rekordu  " + this.gracz;
+      if(curentUserName !== "admin69"){
+        this.prawidlowyGracz = false;
+        this.statusUsuniecia = "Nieeemaa usuwania rekordów w trybie hard " + this.gracz + " hamie";
+      }else{
+        this.tablicaLStorageServive.sendData(this.tablicaLStorageServive.removeRecord(nr, isHard), this.trybHard);
+      }
+
     }
     setTimeout(() => {this.prawidlowyGracz = true}, 3700);
   }
