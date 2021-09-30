@@ -21,6 +21,7 @@ import { TablicaRekordowComponent } from './tablica-rekordow/tablica-rekordow.co
 import { TranslatebreedPipe } from './pipy/translatebreed.pipe';
 import { ZlozPozewComponent } from './zloz-pozew/zloz-pozew.component';
 import { BootstrapValidatorDirective } from './dyrectives/bootstrap-validator.directive';
+
 //do firebase
 import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
@@ -37,6 +38,7 @@ import {ForgotPasswordComponent} from './forgot-password/forgot-password.compone
 import {VerifyEmailComponent} from './verify-email/verify-email.component';
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {AuthServiceService} from "./auth-service.service";
+import {PismogameModule} from "./pismogame/pismogame.module";
 
 @NgModule({
   declarations: [
@@ -76,7 +78,8 @@ import {AuthServiceService} from "./auth-service.service";
         AngularFirestoreModule,
         AngularFireAuthModule,
         AngularFireDatabaseModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        PismogameModule
     ],
   providers: [AuthServiceService],
   bootstrap: [AppComponent]

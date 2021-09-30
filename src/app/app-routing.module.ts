@@ -14,6 +14,7 @@ import {TologinDashboardComponent} from "./tologin-dashboard/tologin-dashboard.c
 import {ForgotPasswordComponent} from "./forgot-password/forgot-password.component";
 import {VerifyEmailComponent} from "./verify-email/verify-email.component";
 import {AngularFireAuthGuard} from "@angular/fire/compat/auth-guard";
+import {GameComponent} from "./pismogame/game/game.component";
 
 const routes: Routes = [
   {path: '', component: StartComponent},
@@ -28,7 +29,8 @@ const routes: Routes = [
   {path: 'sign-up-register', component: SignUpComponent},
   {path: 'tologin-dashboard', component: TologinDashboardComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},
-  {path: 'verify-email-address', component: VerifyEmailComponent}
+  {path: 'verify-email-address', component: VerifyEmailComponent},
+  {path: 'game', component: GameComponent},
 ]
 
 @NgModule({
