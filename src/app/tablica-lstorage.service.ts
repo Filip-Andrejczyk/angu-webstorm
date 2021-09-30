@@ -112,12 +112,14 @@ export class TablicaLstorageService {
   addRecord(name: string, score: number, isHard: boolean): Rekord[]{
     if(!isHard){
       this.tablicaRekordow.push(({
+        $key: 'key',
         name: name,
         score: score,
       }));
       return this.tablicaRekordow;
     }else {
       this.tablicaTrybHARD.push(({
+        $key: 'key',
         name: name,
         score: score,
       }));

@@ -6,7 +6,8 @@ import {DogsRandomService} from "../dogs-random.service";
 import {JedenWybranyPiesService} from "../jeden-wybrany-pies.service";
 import {TablicaLstorageService} from "../tablica-lstorage.service";
 import {CurrentPlayarService} from "../current-playar.service";
-
+import {RekordyFirebaseService} from "../shared/rekordy-firebase.service";
+import {Rekord} from "../models/rekordy";
 
 @Component({
   selector: 'app-quiz',
@@ -38,6 +39,10 @@ export class QuizComponent implements OnInit {
   public timeForAnswer: number = 8;
   public interval: number = 0;
 
+  public currentPlayaID: string = "";
+  public personalBestFirebase: number = 0;
+
+  public rekordy: Rekord[];
 
   public inputPlaceholder: string = "";
 
@@ -48,18 +53,34 @@ export class QuizComponent implements OnInit {
               private dogsRandomService: DogsRandomService,
               private jedenWybranyPiesService: JedenWybranyPiesService,
               private tablicaLStorageService: TablicaLstorageService,
-              private currentPlayaService: CurrentPlayarService
+              private currentPlayaService: CurrentPlayarService,
+              private rekordyAPI: RekordyFirebaseService,
               )
-  {
-    this.goodAnswerBreed$ = this.jedenWybranyPiesService.breed$;
-    this.allObservable$ = this.dogsRandomService.wszystkieRasy$;
-  }
+              {
+                this.goodAnswerBreed$ = this.jedenWybranyPiesService.breed$;
+                this.allObservable$ = this.dogsRandomService.wszystkieRasy$;
+              }
 
   ngOnInit(): void {
+
     this.goodAnswerBreed$?.subscribe(ta => this.poprawny = ta);
     this.currentPlayaService.dataBoolean$.subscribe(hard => this.isHard = hard);
+
     this.losowe$ = this.dogsRandomService.trzylosowe$;
     this.czteryodp$ = this.dogsRandomService.odpowiedzi$;
+
+    let recordsFromFirebase = this.rekordyAPI.getWynikiEz();
+    recordsFromFirebase.snapshotChanges().subscribe(data => {
+      this.rekordy = [];
+      data.forEach(item => {
+        let rekord: Rekord = item.payload.toJSON() as Rekord;
+        if (typeof item.key === 'string'){
+          rekord.$key = item.key;
+        }
+        this.rekordy?.push(rekord as Rekord);
+      })
+    })
+
   }
 
   formu = new FormGroup({
@@ -70,11 +91,9 @@ export class QuizComponent implements OnInit {
     username: new FormControl('', Validators.required)
   });
 
-
   get f() {
     return this.formu.controls;
   }
-
 
   setDificultyLvl(lvl: boolean){
     this.currentPlayaService.dataBoolSource.next(lvl);
@@ -85,11 +104,13 @@ export class QuizComponent implements OnInit {
     this.isuserName = false;
     this.login.value.username = "";
     this.infozapicomponent.nextPieselek();
+    this.currentPlayaService.gameIsRunning(true);
   }
 
   tryAgain(){
     this.przegrana = false;
     this.infozapicomponent.nextPieselek();
+    this.currentPlayaService.gameIsRunning(true);
     if (this.isHard){
       this.startTimer();
     }
@@ -117,23 +138,18 @@ export class QuizComponent implements OnInit {
   udzielonoZlejOdpowiedzi(fast = false){
 
     this.liczdobre = 0;
+    if (this.isHard) {this.stopTimer();}
 
-    if (this.isHard)
-    {
-      this.stopTimer();
-    }
-
-    if (!fast)
-    {
+    if (!fast) {
       setTimeout(
         () => {
           this.dogSelected = false;
           this.przegrana = true;
           this.clicked = false;
+          this.currentPlayaService.gameIsRunning(false);
         }, 2000);
     }
-    else
-    {
+    else {
       this.dogSelected = false;
       this.przegrana = true;
       this.clicked = false;
@@ -145,12 +161,10 @@ export class QuizComponent implements OnInit {
       this.timeForAnswer = 8;
       this.interval = setInterval(() => {
 
-        if (this.timeForAnswer > 0)
-        {
+        if (this.timeForAnswer > 0) {
           this.timeForAnswer--;
         }
-        else
-        {
+        else {
           this.stopTimer();
           this.udzielonoZlejOdpowiedzi(true);
         }
@@ -177,9 +191,9 @@ export class QuizComponent implements OnInit {
 
     if (!this.isHard)
     {
-      if (this.liczdobre > this.personalBest)
+      if (this.liczdobre > this.personalBestFirebase)
       {
-        this.tablicaLStorageService.sendData(this.tablicaLStorageService.updateRecord(this.login.value.username, this.liczdobre, this.isHard), this.isHard);
+        this.rekordyAPI.updateRekord(this.login.value.username, this.liczdobre, this.currentPlayaID);
         this.personalBest = this.liczdobre;
       }
     }
@@ -187,12 +201,11 @@ export class QuizComponent implements OnInit {
     {
       this.tablicaLStorageService.sendData(this.tablicaLStorageService.updateRecord(this.login.value.username, this.liczdobre, this.isHard), this.isHard);
     }
-
     this.formu.reset();
   }
 
   submit2() {
-
+    this.currentPlayaService.gameIsRunning(true);
     if (this.login.value.username == "")
     {
       this.isuserName = false;
@@ -204,15 +217,39 @@ export class QuizComponent implements OnInit {
       this.liczdobre = 0;
       this.currentPlayaService.saveData(this.login.value.username);
 
-      if (!this.tablicaLStorageService.findUser(this.login.value.username, this.isHard))
-      {
-        this.tablicaLStorageService.sendData(this.tablicaLStorageService.addRecord(this.login.value.username, this.liczdobre, this.isHard), this.isHard);
+      if(!this.isHard){
+        if(this.rekordy.find(x => x.name == this.login.value.username) !== undefined){
+          console.log("istnieje");
+        }else{
+          this.rekordyAPI.addEZRekord(this.login.value.username, this.liczdobre);
+        }
+      }else{
+        if (!this.tablicaLStorageService.findUser(this.login.value.username, this.isHard))
+        {
+          this.tablicaLStorageService.sendData(this.tablicaLStorageService.addRecord(this.login.value.username, this.liczdobre, this.isHard), this.isHard);
+        }
+        else
+        {
+          this.personalBest = this.tablicaLStorageService.PersonalBest(this.login.value.username, this.isHard);
+        }
       }
-      else
-      {
-        this.personalBest = this.tablicaLStorageService.PersonalBest(this.login.value.username, this.isHard);
-      }
+
+      let recordsFromFirebase = this.rekordyAPI.getWynikiEz();
+      recordsFromFirebase.snapshotChanges().subscribe(data => {
+        this.rekordy = [];
+        data.forEach(item => {
+          let rekord: Rekord = item.payload.toJSON() as Rekord;
+          if (typeof item.key === 'string'){
+            rekord.$key = item.key;
+          }
+          this.rekordy?.push(rekord as Rekord);
+        })
+        let ind = this.rekordy.findIndex(x => x.name == this.login.value.username);
+        this.currentPlayaID = this.rekordy[ind].$key;
+        this.personalBestFirebase = this.rekordy[ind].score;
+      })
     }
+
     if (this.isHard){
       this.startTimer();
     }

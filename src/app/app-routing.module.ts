@@ -28,7 +28,7 @@ const routes: Routes = [
   {path: 'sign-up-register', component: SignUpComponent},
   {path: 'tologin-dashboard', component: TologinDashboardComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},
-  {path: 'verify-email-address', component: VerifyEmailComponent}
+  {path: 'verify-email-address', component: VerifyEmailComponent},
 ]
 
 @NgModule({

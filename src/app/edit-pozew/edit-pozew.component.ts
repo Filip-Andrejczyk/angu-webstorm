@@ -14,7 +14,6 @@ export class EditPozewComponent implements OnInit {
   public editForm: FormGroup = this.fb.group({});
   public zaktualizowanoPismo: boolean = false;
 
-
   constructor(
     private crudApi: CrudPismoService,
     private fb: FormBuilder,
@@ -48,7 +47,8 @@ export class EditPozewComponent implements OnInit {
     this.updatePismoData();
     const id = this.actRoute.snapshot.paramMap.get('id') as string;
     this.crudApi.getPismo(id).valueChanges().subscribe(data =>{
-      this.editForm.setValue(data)
+      this.editForm.setValue(data);
+      console.log(data);
     })
 
   }
