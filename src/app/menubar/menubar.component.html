@@ -1,26 +1,50 @@
-<nav class="navbar navbar-expand-lg bg-danger">
+<!--<nav class="navbar navbar-expand-lg bg-danger">-->
+<!--  <div class="container-fluid">-->
+<!--    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--      <span class="navbar-toggler-icon"></span>-->
+<!--    </button>-->
+<!--    <div class="collapse navbar-collapse" id="navbarNavDropdown">-->
+<!--      <ul class="navbar-nav">-->
+<!--        <li class="nav-item dropdown">-->
+<!--          <a class="nav-link dropdown-toggle koror"  id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--            Menuee-->
+<!--          </a>-->
+<!--          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">-->
+<!--            <li><a class="dropdown-item" routerLink="">Start</a></li>-->
+<!--            <li><a class="dropdown-item" routerLink="/krzysztof">Strona Konona</a></li>-->
+<!--            <li><a class="dropdown-item" routerLink="/fufuwojtas">Strona Majora</a></li>-->
+<!--            <li><a class="dropdown-item" routerLink="/niuchniuch">Klakulator Borzy</a></li>-->
+<!--          </ul>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</nav>-->
+
+<nav class="navbar navbar-dark bg-dark he">
   <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler"
+            type="button"
+            id="trigger"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarToggleExternalContent"
+            aria-controls="navbarToggleExternalContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle koror"  id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Menu
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" routerLink="">Start</a></li>
-            <li><a class="dropdown-item" routerLink="/krzysztof">Strona Konona</a></li>
-            <li><a class="dropdown-item" routerLink="/fufuwojtas">Strona Majora</a></li>
-            <li><a class="dropdown-item" routerLink="/niuchniuch">Klakulator Borzy</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
   </div>
 </nav>
 
+<div [ngClass]="{'collapse position-absolute': true}" id="navbarToggleExternalContent">
+  <div class="bg-light d-grid wid">
+      <button type="button" class="btn btn-light fw-bold mybutton" (click)="toggleRoll()" routerLink="">Start</button>
+      <button type="button" class="btn btn-light fw-bold mybutton" (click)="toggleRoll()" routerLink="/krzysztof">Konon</button>
+      <button type="button" class="btn btn-light fw-bold mybutton" (click)="toggleRoll()" routerLink="/fufuwojtas">Major</button>
+      <button type="button" class="btn btn-light fw-bold mybutton" (click)="toggleRoll()" routerLink="/niuchniuch">Kalkulator</button>
+      <button type="button" class="btn btn-light fw-bold mybutton" (click)="toggleRoll()" routerLink="/listujpisma">Pisma</button>
+  </div>
+</div>
 <!--<nav class="navbar navbar-light bg-danger">-->
 <!--  <div class="container-fluid">-->
 <!--    <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"-->
