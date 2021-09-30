@@ -15,17 +15,6 @@ export class MenubarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
-
-  switchCollaps(){
-    // setTimeout(
-    //   () => {
-    //     // this.clicked = !this.clicked;
-    //     this.collaps = !this.collaps;
-    //   }, 150);
-    this.collaps = !this.collaps;
-  }
-
   toggleRoll(){
     let element:HTMLElement = document.getElementById('trigger') as HTMLElement;
     element.click();
