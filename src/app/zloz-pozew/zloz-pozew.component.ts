@@ -25,6 +25,7 @@ export class ZlozPozewComponent implements OnInit {
                             "Marszałek Sejmu",
                             "Prezydent Miasta Białystok",
                             "Premier",
+                            "Putin",
                             "Sąd Rejonowy w Białymstoku",
                             "Sąd Apelacyjny w Białymstoku",
                             "Wojewódzki Sąd Administracyjny w Białymstoku",

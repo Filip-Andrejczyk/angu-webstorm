@@ -18,7 +18,7 @@
     <table class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg">
       <thead>
       <tr>
-        <th scope="col">document Id</th>
+        <!--<th scope="col">document Id</th>-->
         <th scope="col">Imie i Nazwisko</th>
         <th scope="col">Rodzaj</th>
         <th scope="col">Adresat</th>
@@ -30,7 +30,7 @@
 
       <ng-container *ngFor="let pismo of Pismo | paginate: { itemsPerPage: 7, currentPage: p }; let i = index;">
         <tr>
-          <th scope="row">{{pismo.$key}}</th>
+          <!--<th scope="row">{{pismo.$key}}</th>-->
           <td>{{pismo.imie}} {{pismo.nazwisko}}</td>
           <td>{{pismo.rodzajpisma}}</td>
           <td>{{pismo.adresat}}</td>
