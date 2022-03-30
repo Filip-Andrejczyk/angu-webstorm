@@ -17,10 +17,6 @@ export class PismaListComponent implements OnInit {
   rozwinietyRow: boolean = false;
   klucz: string = '';
 
-  szczegoly: string = "Szczegóły"
-
-  przycisknapis: string = this.szczegoly
-
   constructor(public crudApi: CrudPismoService) {}
 
   ngOnInit(): void {
@@ -54,10 +50,8 @@ export class PismaListComponent implements OnInit {
     })
   }
 
-  rozwinRow(pismo: Pismo, pisma: Pismo[]) {
+  rozwinRow(pismo: Pismo) {
     pismo.expanded = !pismo.expanded;
-    console.log("to jest pismo: ", pismo);
-    console.log("a to sa pisma??: ", pisma);
   }
 
   deletePismo(pismo: Pismo) {
